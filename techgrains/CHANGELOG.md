@@ -1,3 +1,8 @@
+## 1.0.3
+* View
+  * TGView
+    * Custom Theme  
+
 ## 1.0.2
 * Include `android` and `ios` folders with dependencies. 
 

@@ -24,11 +24,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
 
-    dependencies {
-        compileOnly rootProject.findProject(":intl")
-        compileOnly rootProject.findProject(":shared_preferences")
-    }
-
     defaultConfig {
         minSdkVersion 16
     }
