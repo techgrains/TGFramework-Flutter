@@ -1,7 +1,6 @@
 name: techgrains
 description: Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation during every mobile app development.
 version: 1.0.0
-author: Vishal Patel <vishal@techgrains.com>
 homepage: https://github.com/techgrains/TGFramework-Flutter
 
 environment:
@@ -11,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: 0.5.7
   intl: ^0.16.1
+  shared_preferences: ^0.5.7
 
 dev_dependencies:
   flutter_test:
