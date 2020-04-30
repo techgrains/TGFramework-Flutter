@@ -1,3 +1,6 @@
+## 1.0.2
+* Include `android` and `ios` folders with dependencies. 
+
 ## 1.0.1
 * Changed package name. 
 * Improved documentation. 

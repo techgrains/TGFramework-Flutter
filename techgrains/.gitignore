@@ -32,11 +32,10 @@ doc/api/
 build/
 
 # Android related
-android/
-
+#android/
 
 # iOS/XCode related
-ios/
+#ios/
 ios_iphone/
 ios_simulator/
 
