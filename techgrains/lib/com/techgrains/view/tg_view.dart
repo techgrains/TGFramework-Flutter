@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// TGFramework's View related implementation
 class TGView {
-/// Common Scaffold Container
+  /// Common Scaffold Container
   static Scaffold scaffoldContainer(List<Widget> widgets,
       {Container backgroundContainer}) {
     return Scaffold(
@@ -20,12 +20,12 @@ class TGView {
     );
   }
 
-/// Empty Background Container
+  /// Empty Background Container
   static Container emptyContainer() {
     return Container();
   }
 
-/// Customer Scroll View with Sliver List
+  /// Customer Scroll View with Sliver List
   static Container sliverScrollView(List<Widget> widgets) {
     return Container(
       child: CustomScrollView(
@@ -40,7 +40,7 @@ class TGView {
     );
   }
 
-/// Empty Sized Box with given height and/or width
+  /// Empty Sized Box with given height and/or width
   static Widget emptySizedBox({double height, double width}) {
     return SizedBox(
       height: height,
@@ -48,17 +48,17 @@ class TGView {
     );
   }
 
-/// Clears focus of current object. Generally used to hide keyboard
+  /// Clears focus of current object. Generally used to hide keyboard
   static void clearFocus(BuildContext context) {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
 
-/// Snackbar widget
+  /// Snackbar widget
   static Widget snackBar(String text) {
     return SnackBar(content: Text(text));
   }
 
-/// Loading Indicator with given Color code
+  /// Loading Indicator with given Color code
   static Widget loadingIndicator(Color color) {
     return Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
