@@ -5,7 +5,7 @@ Purpose of TGFramework is to provide developer friendly library, that can help t
 1\. Add dependency to your package's `pubspec.yaml`:
 ```
 dependencies:
-  techgrains: ^1.0.1
+  techgrains: ^1.0.2
 ```
 
 2\. Run from the command line:
