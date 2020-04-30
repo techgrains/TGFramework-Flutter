@@ -1,0 +1,24 @@
+enum TGLogLevel { ALL, TAG, DEBUG, INFO, WARN, ERROR, OFF }
+
+extension TGLogLevelExtension on TGLogLevel {
+  int get value {
+    switch (this) {
+      case TGLogLevel.ALL:
+        return 10;
+      case TGLogLevel.TAG:
+        return 5;
+      case TGLogLevel.DEBUG:
+        return 4;
+      case TGLogLevel.INFO:
+        return 3;
+      case TGLogLevel.WARN:
+        return 2;
+      case TGLogLevel.ERROR:
+        return 1;
+      case TGLogLevel.OFF:
+        return 0;
+      default:
+        return 0;
+    }
+  }
+}
