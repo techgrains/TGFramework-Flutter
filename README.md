@@ -1,20 +1,15 @@
 # TGFramework-Flutter
 Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation during every mobile app development. 
 
-## How to use TGFramework?
-1\. Add dependency to your package's `pubspec.yaml`:
+## How to Use
+Add dependency to your package's `pubspec.yaml`
 ```
 dependencies:
-  techgrains: ^1.0.2
+    techgrains: 1.0.3
 ```
 
-2\. Run from the command line:
-```
-$ flutter pub get
-```    
-
-## Sections
-TGFramework includes following areas as part of its framework. Further in document all of them explained with example.
+## Areas
+TGFramework includes following areas as part of its framework. Further in this document, all of them explained with example.
 
 * Common
   * TGLog
@@ -34,6 +29,7 @@ TGFramework includes following areas as part of its framework. Further in docume
     * Validate Email, Alphabets, Numeric, Alphanumeric
 * View
   * TGView
+    * Theme
     * Scaffold Container
     * Custom Scroll View using Sliver List
     * Empty Sized Box
@@ -169,6 +165,40 @@ Validators like email, alphabets, numeric, alphanumeric.
 ## View
 ### TGView
 Common view object creation and helper.
+
+#### Theme
+```
+[main.dart] 
+    @override
+    void initState() {
+        super.initState();
+        TGTheme.loadDark();
+        ...
+    }
+
+[Usage 1: Passing in MaterialApp()]
+    child: MaterialApp(
+        ...
+        theme: TGView.theme(),
+        initialRoute: ...
+    ),
+
+[Usage 2: Give particular color from Theme]
+    IconButton(
+        ...
+        color: TGView.theme().primaryColor,
+        onPressed: ...
+    );
+```
+
+Options to load theme different ways
+```
+    TGTheme.loadLightTheme(); // Default Light
+    TGTheme.loadDarkTheme(); // Default Dark
+    TGTheme.loadThemeByData(...); // ThemeData
+    TGTheme.loadThemeByColors(...); // ColorScheme
+    loadThemeByColorsAndTextScheme(...); // ColorScheme, TextScheme
+```
 
 #### Scaffold Container
 Provide custom background and list of widgets to render.
