@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 
+/// TGFramework's Network related implementation
 class TGNetUtil {
+  /// Check site - going with google as standard
   static const _CHECK_SITE = "google.com";
 
+  /// Checks if internet is available or not
   static Future<bool> isInternetAvailable() async {
     bool isAvailable = false;
     try {

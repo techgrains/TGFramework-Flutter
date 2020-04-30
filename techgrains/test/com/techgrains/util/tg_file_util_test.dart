@@ -9,7 +9,8 @@ void main() {
   tearDown(() {});
 
   test('alphanumeric', () async {
-    String content = await TGFileUtil.readFileAsString("assets/files/company.txt");
+    String content =
+        await TGFileUtil.readFileAsString("assets/files/company.txt");
     expect(content, "Techgrains Technologies");
   });
 }
