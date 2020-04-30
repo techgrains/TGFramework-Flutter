@@ -21,6 +21,6 @@ void main() {
     TGSession.getInstance().set("keyRemove", "value");
     expect(TGSession.getInstance().get("keyRemove"), "value");
     TGSession.getInstance().remove("keyRemove");
-    expect(TGSession.getInstance().get("keyRemove"),null);
+    expect(TGSession.getInstance().get("keyRemove"), null);
   });
 }

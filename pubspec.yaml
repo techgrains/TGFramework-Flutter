@@ -1,7 +1,6 @@
 name: techgrains
-description: Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation during every mobile app development.
-version: 1.0.0
-author: Vishal Patel <vishal@techgrains.com>
+description: Developer friendly app library having various commonly used functionality.
+version: 1.0.1
 homepage: https://github.com/techgrains/TGFramework-Flutter
 
 environment:
@@ -11,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: 0.5.7
   intl: ^0.16.1
+  shared_preferences: ^0.5.7
 
 dev_dependencies:
   flutter_test:
@@ -30,14 +29,14 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.techgrains.techgrains
+        package: com.techgrains
         pluginClass: TechgrainsPlugin
       ios:
         pluginClass: TechgrainsPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:
-     - assets/files/
+    - assets/files/
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages

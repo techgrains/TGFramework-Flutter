@@ -1,3 +1,8 @@
+## 1.0.1
+* Changed package name. 
+* Improved documentation. 
+* Included empty example structure.	
+
 ## 1.0.0 
 * Common
   * TGLog

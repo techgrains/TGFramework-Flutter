@@ -1,6 +1,8 @@
 enum TGLogLevel { ALL, TAG, DEBUG, INFO, WARN, ERROR, OFF }
 
+/// TGFramework's Logging mechanism's extension
 extension TGLogLevelExtension on TGLogLevel {
+  /// Gets valueo of the TGLogLevel
   int get value {
     switch (this) {
       case TGLogLevel.ALL:
