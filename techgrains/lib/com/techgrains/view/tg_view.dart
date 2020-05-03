@@ -22,36 +22,9 @@ class TGView {
     _theme = ThemeData.dark();
   }
 
-  /// Load Theme by custom ThemeData
-  static void loadThemeByData(ThemeData themeData) {
+  /// Load Theme by provided ThemeData
+  static void loadTheme(ThemeData themeData) {
     _theme = themeData;
-  }
-
-  /// Load Theme by ColorScheme
-  static void loadThemeByColors({
-    MaterialColor primarySwatch = Colors.blue,
-    Color primaryColorDark,
-    Color accentColor,
-    Color cardColor,
-    Color backgroundColor,
-    Color errorColor,
-    Brightness brightness = Brightness.light,
-  }) {
-    ColorScheme colorScheme = ColorScheme.fromSwatch(
-        primarySwatch: primarySwatch,
-        primaryColorDark: primaryColorDark,
-        accentColor: accentColor,
-        cardColor: cardColor,
-        backgroundColor: backgroundColor,
-        errorColor: errorColor,
-        brightness: brightness);
-    _theme = ThemeData.from(colorScheme: colorScheme);
-  }
-
-  /// Load Theme by ColorsScheme and TextScheme
-  static void loadThemeByColorsAndTextScheme(
-      {@required ColorScheme colorScheme, TextTheme textTheme}) {
-    _theme = ThemeData.from(colorScheme: colorScheme, textTheme: textTheme);
   }
 
   // ***   Widget   *** //

@@ -32,10 +32,10 @@ techgrains/.pub/
 techgrains/build/
 
 # Android related
-#techgrains/android/
+techgrains/android/
 
 # iOS/XCode related
-#techgrains/ios/
+techgrains/ios/
 techgrains/ios_iphone/
 techgrains/ios_simulator/
 
