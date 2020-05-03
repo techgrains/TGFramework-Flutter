@@ -1,3 +1,7 @@
+## 1.0.4
+* Cleanup
+  * Code, versions, dependencies, documentation
+
 ## 1.0.3
 * View
   * TGView

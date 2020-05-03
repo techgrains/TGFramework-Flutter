@@ -5,7 +5,7 @@ Purpose of TGFramework is to provide developer friendly library, that can help t
 Add dependency to your package's `pubspec.yaml`
 ```
 dependencies:
-    techgrains: 1.0.3
+    techgrains: 1.0.4
 ```
 
 ## Areas
@@ -172,7 +172,7 @@ Common view object creation and helper.
     @override
     void initState() {
         super.initState();
-        TGTheme.loadDark();
+        TGView.loadDark();
         ...
     }
 
@@ -193,11 +193,9 @@ Common view object creation and helper.
 
 Options to load theme different ways
 ```
-    TGTheme.loadLightTheme(); // Default Light
-    TGTheme.loadDarkTheme(); // Default Dark
-    TGTheme.loadThemeByData(...); // ThemeData
-    TGTheme.loadThemeByColors(...); // ColorScheme
-    loadThemeByColorsAndTextScheme(...); // ColorScheme, TextScheme
+    TGView.loadLightTheme(); // Default Light
+    TGView.loadDarkTheme(); // Default Dark
+    TGView.loadTheme(...); // ThemeData
 ```
 
 #### Scaffold Container
