@@ -1,3 +1,9 @@
+## 1.0.6
+* Localization (i18n)
+  * TGLocale: Supported, default and current locale holders with locale related supporting features
+  * TGLocalization: Localization for each locale loads values from json file
+  * TGLocalizationsDelegate: Extended implementation of LocalizationsDelegate which Flutter uses internally
+
 ## 1.0.4
 * Cleanup
   * Code, versions, dependencies, documentation
