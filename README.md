@@ -5,7 +5,7 @@ Purpose of TGFramework is to provide developer friendly library, that can help t
 Add dependency to your package's `pubspec.yaml`
 ```
 dependencies:
-    techgrains: 1.0.4
+    techgrains: 1.0.6
 ```
 
 ## Areas
@@ -17,6 +17,10 @@ TGFramework includes following areas as part of its framework. Further in this d
 * Memory
   * TGSession: In memory Session throughout the app 
   * TGSharedPreference: Shared Preferences (Android), User Defaults (iOS)
+* Localization (i18n)
+  * TGLocale: Supported, default and current locale holders with locale related supporting features
+  * TGLocalization: Localization for each locale loads values from json file
+  * TGLocalizationsDelegate: Extended implementation of LocalizationsDelegate which Flutter uses internally
 * Util
   * TGDateUtil
     * Format DateTime
@@ -105,6 +109,94 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
     TGSharedPreferences.getInstance().set("Designation", "Developer"); // Set
     await TGSharedPreferences.getInstance().get("Designation"); // Get
 ```  
+
+
+## Localization (i18n)
+  ### TGLocale
+  Supported, default and current locale holders with locale related supporting features
+  
+  ### TGLocalization
+  Localization for each locale loads values from json file
+  
+  ### TGLocalizationsDelegate
+  Extended implementation of LocalizationsDelegate which Flutter uses internally
+
+##### Configuration dependencies in pubspec.yaml
+```
+[pubspec.yaml]
+    dependencies:
+      flutter:
+        sdk: flutter
+      flutter_localizations:
+        sdk: flutter
+
+  assets:
+    - assets/locale/
+```
+##### Put locale files at "assets/locale/"
+```
+[assets/locale/en_US.json]
+    {
+      "button.login": "Login"
+    }
+```
+##### Setup locale in your main dart
+```
+[main.dart]
+    @override
+    void initState() {
+      TGLocale.init(
+        defaultLocale:
+          const Locale("en", "US"), // en_US.json
+        otherLocales: [
+          const Locale("gu", "IN"), // gu_IN.json
+          const Locale("hi", "IN")  // hi_IN.json
+        ]
+      );
+    }
+
+    MaterialApp(
+    ...
+      theme: TGView.theme(),
+      supportedLocales: TGLocale.supportedLocales,
+      locale: TGLocale.currentLocale,
+      localizationsDelegates: [TGLocalizationsDelegate(), GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate],
+      localeResolutionCallback: (locale, supportedLocales) => TGLocale.localeResolutionCallback(locale, supportedLocales),
+    ...
+    )
+```
+##### How to get text from locale
+```
+    TGLocale.text(context, "button.login")
+```
+##### How to change locale
+```
+[set locale]
+    setLocale("en_US");
+    ...
+    setLocale(String localeCode) {
+      setState(() {
+        TGLocale.currentLocale = TGLocale.findLocaleByCode(localeCode );
+      });
+    }
+    // -- OR -- //
+    setLocale(Locale locale) {
+      setState(() {
+        TGLocale.currentLocale = locale;
+      });
+    }
+```
+
+##### Helper methods just in case needed anywhere
+```
+[Find locale by code]
+    Locale locale = TGLocale.findLocaleByCode("en_US");
+
+[Generate code by locale]
+    Locale locale = Locale("en", "US");
+    String localeCode = TGLocale.generateCode(locale); // returns "en_US"
+
+```
 
 
 ## Util
