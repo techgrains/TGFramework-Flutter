@@ -167,7 +167,11 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
 ```
 ##### How to get text from locale
 ```
-    TGLocale.text(context, "button.login")
+[Without arguments]
+    TGLocale.text(context, "button.login"); // Having "button.login": "Login"
+
+[With arguments]
+    TGLocale.text(context, "message.hello", args: ["Amit Patel"]); // Having "message.hello": "Welcome {0} to our team!"
 ```
 ##### How to change locale
 ```

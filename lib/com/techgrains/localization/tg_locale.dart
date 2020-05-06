@@ -34,9 +34,20 @@ class TGLocale {
     TGLocale.currentLocale = defaultLocale;
   }
 
-  /// Text value of provided key
-  static String text(final BuildContext context, final String key) {
-    return TGLocalization.of(context).text(key);
+  /// Text value of provided key with optional args which replaces each {index}
+  static String text(final BuildContext context, final String key,
+      {List<String> args}) {
+    String value = TGLocalization.of(context).text(key);
+    if (args == null || args.length == 0) return value;
+    return _replaceArgs(value, args);
+  }
+
+  /// Replaces args in the translated value
+  static String _replaceArgs(String value, List<String> args) {
+    args.forEach((arg) {
+      value = value.replaceAll("{" + args.indexOf(arg).toString() + "}", arg);
+    });
+    return value;
   }
 
   /// Generate code for provided locale
