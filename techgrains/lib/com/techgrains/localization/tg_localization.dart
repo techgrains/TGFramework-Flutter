@@ -21,7 +21,7 @@ class TGLocalization {
   Future<bool> load() async {
     String fileName = _deriveFileName();
     TGLog.d("TGLocalization.load : " + fileName);
-    _entries = await TGFileUtil.readJsonFile(LOCALE_PATH + fileName);
+    _entries = await TGFileUtil.readJsonFileAsMap(LOCALE_PATH + fileName);
     return true;
   }
 

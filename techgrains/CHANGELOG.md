@@ -1,3 +1,13 @@
+## 1.1.0
+* Service
+  * TGService
+    * TGRequest
+    * TGResponse
+    * TGError
+    * Mock
+
+    HTTP wrapper implementation having Request and Response as objects. Custom Error and Mock implementation.
+
 ## 1.0.7
 * Localization (i18n)
   * TGLocale

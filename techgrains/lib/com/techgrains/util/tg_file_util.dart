@@ -13,7 +13,7 @@ class TGFileUtil {
   }
 
   /// Read JSon file as Map
-  static Future<Map<String, dynamic>> readJsonFile(String jsonFile) async {
+  static Future<Map<String, dynamic>> readJsonFileAsMap(String jsonFile) async {
     try {
       String jsonString = await TGFileUtil.readFile(jsonFile);
       return json.decode(jsonString);
@@ -21,6 +21,17 @@ class TGFileUtil {
       TGLog.e("Unable to load " + jsonFile);
     }
     return <String, dynamic>{};
+  }
+
+  /// Read JSon file as List
+  static Future<List<dynamic>> readJsonFileAsList(String jsonFile) async {
+    try {
+      String jsonString = await TGFileUtil.readFile(jsonFile);
+      return json.decode(jsonString);
+    } catch (e) {
+      TGLog.e("Unable to load " + jsonFile);
+    }
+    return [];
   }
 
   /// Read JSon file as Map specifically for provided group and subgroup
