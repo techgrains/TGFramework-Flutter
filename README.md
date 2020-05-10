@@ -1,14 +1,6 @@
 # TGFramework-Flutter
 Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation during every mobile app development. 
 
-## How to Use
-Add dependency to your package's `pubspec.yaml`
-```
-dependencies:
-    techgrains: 1.0.6
-```
-
-## Areas
 TGFramework includes following areas as part of its framework. Further in this document, all of them explained with example.
 
 * Common
@@ -40,6 +32,13 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Clear Focus (Hide Keyboard)
     * Snackbar
     * Loading Indicator
+* Service
+  * TGService
+    * TGRequest
+    * TGResponse
+    * TGError
+    * Mock
+  
   
 ## Common
 ### TGLog
@@ -259,6 +258,7 @@ Validators like email, alphabets, numeric, alphanumeric.
 ```
 
 ## View
+
 ### TGView
 Common view object creation and helper.
 
@@ -334,3 +334,159 @@ To create empty box by providing height, width or both.
     TGView.loadingIndicator(Colors.blue);
 ```
 
+
+## Service
+
+### TGService
+
+HTTP wrapper implementation having Request and Response as objects. JSon is Api standard so converting json string response into provided response object. In case of error, also converting json error string response into provided error object.
+
+#### Initialize
+```
+    await TGService.init(
+      baseUrl: "https://portal.techgrains.com/api",
+      headers: defaultHeaders(),
+      applyMock: true,
+      mockMappingsFile: "assets/mocks/_mappings.json"
+    );
+
+    Map<String, String> defaultHeaders() {
+      Map<String, String> headers = {};
+      headers['Content-Type'] = 'application/json';
+      return headers;
+    }
+```
+#### HTTP Request (Example: Login)
+```
+    TGPostRequest request = LoginRequest(
+      email: _email,
+      password: _password
+    );
+
+    new TGService<LoginResponse, ServiceError>(() => new LoginResponse(), () => new ServiceError())
+      .post(
+        request: request,
+        onSuccess: (response) => _onSuccess(response),
+        onError: (error) => _onError(error)
+    );
+```
+
+#### Request, Response & Error (Example: Login)
+
+##### Request extends type of request TGGetRequest, TGPostRequest, TGPutRequest, TGDeleteRequest
+```
+[login-request.dart]
+    class LoginRequest extends TGPostRequest {
+      String email;
+      String password;
+    
+      LoginRequest({this.email, this.password});
+    
+      Map<String, dynamic> toJson() => {
+        'email': email,
+        'password': password,
+      };
+    
+      @override
+      String getUri() {
+        return "/login";
+      }
+    
+      String body() {
+        return json.encode(toJson());
+      }
+    }
+```
+
+##### Response extends standard TGResponse
+```
+[login-response.dart]
+    class LoginResponse extends TGResponse {
+      String userId;
+      String accessToken;
+      String refreshToken;
+      String email;
+      String name;
+    
+      LoginResponse();
+    
+      LoginResponse.fromJson(dynamic json) {
+        fromJson(json);
+      }
+    
+      @override
+      fromJson(dynamic json) {
+        userId = json['userId'];
+        accessToken = json['accessToken'];
+        refreshToken = json['refreshToken'];
+        name = json['name'];
+        email = json['email'];
+      }
+    }
+```
+
+##### Error represents common service error attributes which can be used common accross all the services which extends TGError
+```
+[service-error.dart]
+    class ServiceError extends TGError {
+      int timestamp;
+      int errorCode;
+      String message;
+      List details;
+    
+      ServiceError({
+        this.timestamp,
+        this.errorCode,
+        this.message,
+        this.details,
+      });
+    
+      @override
+      ServiceError fromJson(dynamic json) {
+        return ServiceError(
+          timestamp: json['timestamp'],
+          errorCode: json['errorCode'],
+          message: json['message'],
+          details: json['details'],
+        );
+      }
+    }
+```
+
+#### Mock Service (Example: Login)
+Mapping file holds all the success and error files for each combination of request uri and method. Framework decides based on httpStatus code weather to take success or error file.
+
+One can simply bypass the entry by making `applyMock` as false which triggers live service call instead of relying on mock.
+
+```
+[assets/mocks/_mappings.json]
+    [
+      {
+        "uri": "/login",
+        "method": "POST",
+        "applyMock": true,
+        "httpStatus": 200,
+        "successFile": "assets/mocks/login_success.json",
+        "errorFile": "assets/mocks/login_error.json"
+      }
+    ]
+
+[assets/mocks/login_success.json]
+    {
+      "userId": "Kmh76tYuH92BvkYt498Gv6FcL0Ut",
+      "accessToken": "Mh9TgfE26Df9vp76Hjk4eDf67GvdS",
+      "refreshToken": "K8gHr4I8tHklM9Hkt6EfDoPkn84dA",
+      "email": "vishal@techgrains.com",
+      "name": "Vishal Patel"
+    }
+
+[assets/mocks/login_error.json]
+    {
+      "timestamp": 1234567890,
+      "errorCode": 2003,
+      "message": "Invalid password",
+      "details": [
+        "Password must be 6 characters long"
+      ],
+    }
+```
