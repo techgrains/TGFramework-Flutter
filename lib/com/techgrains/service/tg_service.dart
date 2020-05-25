@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 import 'package:techgrains/com/techgrains/service/client/tg_client_factory.dart';
+import 'package:techgrains/com/techgrains/service/client/tg_http_client.dart';
 import 'package:techgrains/com/techgrains/service/error/tg_error.dart';
 import 'package:techgrains/com/techgrains/service/mock/tg_mock_service.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_delete_request.dart';
@@ -29,13 +30,18 @@ class TGService<T extends TGResponse, E extends TGError> {
       {String baseUrl,
       Map<String, String> headers,
       String mockMappingsFile,
-      bool applyMock = false}) {
+      bool applyMock = false,
+      bool badCertificateCallbackEnabled = false}) {
+    // For HTTP Request
     TGRequest.defaultBaseUrl = baseUrl;
     TGRequest.defaultHeaders = headers;
 
     // For Mock
     TGMockService.applyMock = applyMock;
     TGMockService.loadMockMappings(mockMappingsFile);
+
+    // For HTTP Client
+    TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
   }
 
   Future<T> get(

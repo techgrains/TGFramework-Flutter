@@ -16,7 +16,7 @@ class TGClientFactory {
     TGMockMappingVO mockMappingVO =
         TGMockService.getMockMappingVO(request.url.toString(), request.method);
     if (mockMappingVO != null) {
-      await new Future.delayed(const Duration(seconds: 2));
+      await new Future.delayed(const Duration(seconds: 1));
       String responseString =
           (mockMappingVO.httpStatus >= 200 && mockMappingVO.httpStatus <= 299)
               ? mockMappingVO.successString

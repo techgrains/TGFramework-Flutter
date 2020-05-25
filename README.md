@@ -94,7 +94,7 @@ Between service and view layer: Just put in service and have it in view. (Easy t
 [Service]
     TGSession.getInstance().put("Person",Person);
 
-[Screen 
+[Screen] 
     Person person = TGSession.getInstance().get("Person");
 ``` 
 Thinking to manage piled up objects in session?
@@ -112,7 +112,7 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
 
 ## Localization (i18n)
   ### TGLocale
-  Supported, default and current locale holders with locale related supporting features
+  Supported, default and current locale holders with a locale related supporting features
   
   ### TGLocalization
   Localization for each locale loads values from json file
@@ -228,7 +228,7 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
 ```
 
 ### TGNetUtil
-#### Check inernet availability
+#### Check internet availability
 ```
     if(await TGNetUtil.isInternetAvailable()) {
         ...
@@ -287,11 +287,19 @@ Common view object creation and helper.
     );
 ```
 
-Options to load theme different ways
+##### Options to load theme different ways
 ```
     TGView.loadLightTheme(); // Default Light
     TGView.loadDarkTheme(); // Default Dark
     TGView.loadTheme(...); // ThemeData
+```
+
+##### Refer Theme references directly
+```
+    TGView.textTheme()... for TextTheme
+    TGView.appBarTheme()... for AppBarTheme
+    TGView.tabBarTheme()... for TabBarTheme
+    TGView.platform()... for TargetPlatform
 ```
 
 #### Scaffold Container
@@ -344,10 +352,11 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
 #### Initialize
 ```
     await TGService.init(
-      baseUrl: "https://portal.techgrains.com/api",
+      baseUrl: "https://api.company.com/v1",
       headers: defaultHeaders(),
       applyMock: true,
-      mockMappingsFile: "assets/mocks/_mappings.json"
+      mockMappingsFile: "assets/mocks/_mappings.json",
+      badCertificateCallbackEnabled: false
     );
 
     Map<String, String> defaultHeaders() {

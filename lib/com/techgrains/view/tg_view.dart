@@ -7,6 +7,7 @@ class TGView {
 
   // ***   Theme   *** //
 
+  /// Reference of Theme
   static ThemeData theme() {
     if (_theme == null) loadLightTheme();
     return _theme;
@@ -25,6 +26,26 @@ class TGView {
   /// Load Theme by provided ThemeData
   static void loadTheme(ThemeData themeData) {
     _theme = themeData;
+  }
+
+  /// Reference of TextTheme
+  static TextTheme textTheme() {
+    return theme().textTheme;
+  }
+
+  /// Reference of AppBarTheme
+  static AppBarTheme appBarTheme() {
+    return theme().appBarTheme;
+  }
+
+  /// Reference of TabBarTheme
+  static TabBarTheme tabBarTheme() {
+    return theme().tabBarTheme;
+  }
+
+  /// Reference of TargetPlatform
+  static TargetPlatform platform() {
+    return theme().platform;
   }
 
   // ***   Widget   *** //

@@ -1,3 +1,10 @@
+## 1.1.1
+* Service
+  * TGService
+    * Support to enable "badCertificateCallback" for HTTPClient
+  * TGView
+    * Additional supportive methods for Theme in TGView
+
 ## 1.1.0
 * Service
   * TGService
@@ -6,7 +13,7 @@
     * TGError
     * Mock
 
-    HTTP wrapper implementation having Request and Response as objects. Custom Error and Mock implementation.
+    HTTP wrapper implementation having Request and Response as objects with custom Error and Mock implementation.
 
 ## 1.0.7
 * Localization (i18n)
