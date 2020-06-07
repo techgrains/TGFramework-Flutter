@@ -1,3 +1,8 @@
+## 1.1.2
+* Service
+  * TGService
+    * Treat as an error if unable to convert json response to given object type.
+
 ## 1.1.1
 * Service
   * TGService
