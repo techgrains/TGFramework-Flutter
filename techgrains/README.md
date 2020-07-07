@@ -23,22 +23,31 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Read Local File
   * TGValidate
     * Validate Email, Alphabets, Numeric, Alphanumeric
-* View
-  * TGView
-    * Theme
-    * Scaffold Container
-    * Custom Scroll View using Sliver List
-    * Empty Sized Box
-    * Clear Focus (Hide Keyboard)
-    * Snackbar
-    * Loading Indicator
 * Service
   * TGService
     * TGRequest
     * TGResponse
     * TGError
     * Mock
-  
+* View
+  * TGView
+    * Theme
+    * Scaffold Container
+    * Custom Scroll View using Sliver List
+    * Empty Sized Box
+    * Row Container
+    * Column Container
+    * Box Container
+    * Clear Focus (Hide Keyboard)
+    * Body Color
+    * Display Color
+    * Divider
+    * App Bar Back Button
+    * Show Snack Bar
+    * Show Alert Dialog
+    * Popup Menu Item
+    * Loading Indicator
+    * Refresh Indicator  
   
 ## Common
 ### TGLog
@@ -257,92 +266,6 @@ Validators like email, alphabets, numeric, alphanumeric.
     TGValidate.alphanumeric("abc123");
 ```
 
-## View
-
-### TGView
-Common view object creation and helper.
-
-#### Theme
-```
-[main.dart] 
-    @override
-    void initState() {
-        super.initState();
-        TGView.loadDark();
-        ...
-    }
-
-[Usage 1: Passing in MaterialApp()]
-    child: MaterialApp(
-        ...
-        theme: TGView.theme(),
-        initialRoute: ...
-    ),
-
-[Usage 2: Give particular color from Theme]
-    IconButton(
-        ...
-        color: TGView.theme().primaryColor,
-        onPressed: ...
-    );
-```
-
-##### Options to load theme different ways
-```
-    TGView.loadLightTheme(); // Default Light
-    TGView.loadDarkTheme(); // Default Dark
-    TGView.loadTheme(...); // ThemeData
-```
-
-##### Refer Theme references directly
-```
-    TGView.textTheme()... for TextTheme
-    TGView.appBarTheme()... for AppBarTheme
-    TGView.tabBarTheme()... for TabBarTheme
-    TGView.platform()... for TargetPlatform
-```
-
-#### Scaffold Container
-Provide custom background and list of widgets to render.
-```
-[Without Background]
-    List<Widget> widgets = ...; // Initialise
-    Scaffold scaffold = TGView.scaffoldContainer(widgets);
-
-[With Background]
-    List<Widget> widgets = ...; // Initialise
-    Container background = ...; // Initialise
-    Scaffold scaffold = TGView.scaffoldContainer(widgets, backgroundContainer: background);
-```
-
-#### Custom Scroll View having Sliver List
-Custom Scroll View 
-```
-    Container container = TGView.sliverScrollView();
-```
-
-#### Empty Sized Box
-To create empty box by providing height, width or both.
-```
-    TGView.emptySizedBox(height: 50);
-```
-
-#### Clear Focus (Hide Keyboard)
-```
-    TGView.clearFocus(context); 
-```
-
-#### Snackbar
-```
-    TGView.snackBar("Email has been sent!");
-```
-
-#### Loading Indicator
-```
-    TGView.loadingIndicator(Colors.blue);
-```
-
-
 ## Service
 
 ### TGService
@@ -498,4 +421,170 @@ One can simply bypass the entry by making `applyMock` as false which triggers li
         "Password must be 6 characters long"
       ],
     }
+```
+
+
+## View
+
+### TGView
+Common view object creation and helper.
+
+#### Theme
+```
+[main.dart] 
+    @override
+    void initState() {
+        super.initState();
+        TGView.loadDark();
+        ...
+    }
+
+[Usage 1: Passing in MaterialApp()]
+    child: MaterialApp(
+        ...
+        theme: TGView.theme(),
+        initialRoute: ...
+    ),
+
+[Usage 2: Give particular color from Theme]
+    IconButton(
+        ...
+        color: TGView.theme().primaryColor,
+        onPressed: ...
+    );
+```
+
+##### Options to load theme different ways
+```
+    TGView.loadLightTheme(); // Default Light
+    TGView.loadDarkTheme(); // Default Dark
+    TGView.loadTheme(...); // ThemeData
+```
+
+##### Refer Theme references directly
+```
+    TGView.textTheme()... for TextTheme
+    TGView.appBarTheme()... for AppBarTheme
+    TGView.tabBarTheme()... for TabBarTheme
+    TGView.platform()... for TargetPlatform
+```
+
+#### Scaffold Container
+Provide custom background and list of widgets to render.
+```
+[Without Background]
+    List<Widget> widgets = ...; // Initialise
+    Scaffold scaffold = TGView.scaffoldContainer(widgets);
+
+[With Background]
+    List<Widget> widgets = ...; // Initialise
+    Container background = ...; // Initialise
+    Scaffold scaffold = TGView.scaffoldContainer(widgets, backgroundContainer: background);
+```
+
+#### Custom Scroll View having Sliver List
+Custom Scroll View 
+```
+    Container container = TGView.sliverScrollView();
+```
+
+#### Empty Sized Box
+To create empty box by providing height, width or both.
+```
+    TGView.emptySizedBox(height: 50);
+```
+
+#### Row Container
+```
+    // Some icon and text as left and right aligned widgets for example
+    TGView.rowContainer (
+    left: [
+       Icon(Icons.done_outline, color: TGView.theme().accentColor),
+       TGView.emptySizedBox(width: 10),
+       Text("Completed", style: TGView.textTheme().bodyText2)
+     ], right: [
+       Icon(Icons.keyboard_arrow_right, color: TGView.theme().dividerColor)
+     ]
+    );
+```
+
+#### Column Container
+```
+    // Some icon and text as children widgets for example
+    TGView.columnContainer (
+      children: [
+       Icon(Icons.done_outline, color: TGView.theme().accentColor),
+       TGView.emptySizedBox(height: 10),
+       Text("Completed", style: TGView.textTheme().bodyText2)
+     ]
+   );
+```
+
+#### Box Container
+```
+    // Some icon and text as children widgets for example
+    TGView.boxContainer(
+      margin: EdgeInsets.all(0),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      children: [
+        Icon(Icons.done_outline, color: TGView.theme().accentColor),
+        TGView.emptySizedBox(height: 10),
+        Text("Completed", style: TGView.textTheme().bodyText2)
+      ]
+    );
+```
+
+#### Clear Focus (Hide Keyboard)
+```
+    TGView.clearFocus(context); 
+```
+
+#### Body Color
+```
+    TGView.bodyColor();
+```
+
+#### Display Color
+```
+    TGView.displayColor();
+```
+
+#### Divider
+```
+    TGView.divider();
+```
+
+#### App Bar Back Button
+```
+    // With standrd icon
+    TGView.appBarBackButton(context: context);
+
+    // With custom icon
+    TGView.appBarBackButton(context: context, icon: Icons.arrow_back_ios);
+```
+
+#### Show Snack Bar
+```
+    // By default it picks theme's accent color as background color.
+    TGView.showSnackBar(context: context, message: "Email has been sent successfully!", backgroundColor: Colors.green, duration: Duration(seconds: 2)); 
+```
+
+#### Show Alert Dialog
+```
+    TGView.showAlertDialog(context: context, actions: actions, onDismiss: onDismiss, content: content, titleRowWidgets: titleRowWidgets);
+```
+
+#### Popup Menu Item
+```
+    TGView.popupMenuItem(icon: Icons.expand_more, value: 1, text: "Expand All");
+```
+
+#### Loading Indicator
+```
+    TGView.loadingIndicator(Colors.blue);
+```
+
+#### Refresh Indicator  
+```
+    TGView.refreshIndicator(widgets: widgets, onRefresh: onRefresh);
 ```

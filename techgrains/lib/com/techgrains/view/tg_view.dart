@@ -48,7 +48,27 @@ class TGView {
     return theme().platform;
   }
 
-  // ***   Widget   *** //
+
+  // ***   Colors   *** //
+
+  /// Body Color: TextTheme applies `bodyColor` to headline5, headline6, subtitle1, subtitle2, button, bodyText1, bodyText2 and overline.
+  static Color bodyColor() {
+    return textTheme().bodyText1.color;
+  }
+
+  /// Display Color: TextTheme applies `displayColor` is applied to headline1, headline2, headline3, headline4 and caption.
+  static Color displayColor() {
+    return textTheme().caption.color;
+  }
+
+  // ***   Divider   *** //
+
+  /// Standard Divider
+  static Widget divider({double height}) {
+    return Divider(height: height, color: theme().dividerColor);
+  }
+
+  // ***   Container   *** //
 
   /// Common Scaffold Container
   static Scaffold scaffoldContainer(List<Widget> widgets,
@@ -95,11 +115,88 @@ class TGView {
     );
   }
 
-  // ***   Status   *** //
+  /// Row container to display widgets row. Left & Right aligned
+  static Container rowContainer({EdgeInsetsGeometry margin, EdgeInsetsGeometry padding, Color color = Colors.transparent, List<Widget> left, List<Widget> right}) {
+    if (margin == null) margin = EdgeInsets.all(0);
+    if (padding == null) padding = EdgeInsets.all(0);
+    List<Widget> children = [];
 
-  /// Snackbar widget
-  static Widget snackBar(String text) {
-    return SnackBar(content: Text(text));
+    if (left != null) {
+      children.add(Expanded(
+        child: Row(
+          children: left,
+        ),
+      ));
+    }
+
+    if (right != null) children.addAll(right);
+
+    return Container(
+      margin: margin,
+      padding: padding,
+      color: color,
+      child: Row(
+        children: children,
+      ),
+    );
+  }
+
+  /// Column container to display
+  static Container columnContainer({EdgeInsetsGeometry margin, EdgeInsetsGeometry padding, Color color = Colors.transparent, CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center, MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start, List<Widget> children}) {
+    if (margin == null) margin = EdgeInsets.all(0);
+    return Container(
+      margin: margin,
+      padding: padding,
+      color: color,
+      child: Column(
+        crossAxisAlignment: crossAxisAlignment,
+        mainAxisAlignment: mainAxisAlignment,
+        children: children,
+      ),
+    );
+  }
+
+  /// Box Container
+  static Container boxContainer({EdgeInsetsGeometry margin, EdgeInsetsGeometry padding, Color color, List<Widget> children, double borderRadius = 10}) {
+    if (margin == null) margin = EdgeInsets.all(0);
+    if (padding == null) padding = EdgeInsets.all(0);
+    if (color == null) color = theme().dividerColor;
+    return Container(
+      margin: margin,
+      padding: padding,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadius),
+        border: Border.all(width: 0.5, color: color, style: BorderStyle.solid),
+      ),
+      child: Column(
+        children: children,
+      ));
+  }
+
+  // ***   App Bar   *** //
+
+  /// App Bar Back Button
+  static IconButton appBarBackButton({@required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
+    return IconButton(
+      icon: Icon(icon),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  // ***   Notifications   *** //
+
+  /// Show Snackbar
+  static void showSnackBar({@required BuildContext context, @required String message, Duration duration, Color backgroundColor, SnackBarBehavior behavior = SnackBarBehavior.floating}) {
+    if (duration == null) duration = Duration(seconds: 2);
+    if (backgroundColor == null) backgroundColor = theme().accentColor;
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      backgroundColor: backgroundColor,
+      behavior: behavior,
+      duration: duration,
+    ));
   }
 
   /// Loading Indicator with given Color code
@@ -109,6 +206,45 @@ class TGView {
         child: Center(
             child: CircularProgressIndicator(
                 valueColor: new AlwaysStoppedAnimation<Color>(color))));
+  }
+
+  /// Show alert dialog with various components
+  static void showAlertDialog({@required BuildContext context, List<Widget> titleRowWidgets, Widget content, List<Widget> actions, Function onDismiss}) {
+    if (titleRowWidgets == null) titleRowWidgets = [];
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: Row(children: titleRowWidgets),
+        content: content,
+        actions: actions,
+      )).then((value) => {
+          if (onDismiss != null) onDismiss()
+          else Navigator.of(context).pop(false)
+        }
+      );
+  }
+
+  /// Popup Menu Item
+  static PopupMenuItem popupMenuItem({IconData icon, String text, dynamic value, Color iconColor, Color textColor}) {
+    return PopupMenuItem(
+      value: value,
+      child: rowContainer(
+        margin: EdgeInsets.all(0),
+        left: [
+          if (icon != null) Icon(icon, color: iconColor),
+          if (icon != null) TGView.emptySizedBox(width: 10),
+          if (text != null) Text(text, style: TextStyle(color: textColor))
+        ]
+      )
+    );
+  }
+
+  /// Refresh Indicator
+  static RefreshIndicator refreshIndicator({List<Widget> widgets, Function onRefresh}) {
+    return RefreshIndicator(
+      child: scaffoldContainer(widgets),
+      onRefresh: onRefresh,
+    );
   }
 
   // ***   Utility Actions   *** //
