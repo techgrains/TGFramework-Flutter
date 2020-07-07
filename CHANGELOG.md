@@ -1,3 +1,16 @@
+## 1.1.3
+* TGView
+  * Body Color
+  * Display Color
+  * Divider
+  * Row Container
+  * Column Container
+  * Box Container
+  * App Bar Back Button
+  * Show Snack Bar
+  * Show Alert Dialog
+  * Popup Menu Item
+
 ## 1.1.2
 * Service
   * TGService
