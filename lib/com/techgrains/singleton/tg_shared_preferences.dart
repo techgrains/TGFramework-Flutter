@@ -1,10 +1,17 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
+import 'package:techgrains/com/techgrains/listener/tg_shared_preferences_listener.dart';
 
 /// TGFramework's Shared Preferences implementation
 class TGSharedPreferences {
   /// Singleton instance
   static TGSharedPreferences _instance;
+
+  /// Holds all TGSharedPreferences listeners
+  Set<TGSharedPreferencesListener> _listeners;
+
+  /// Created At timestamp
+  DateTime _createdAt;
 
   /// Gets TGSharedPreferences's instance reference
   static TGSharedPreferences getInstance() {
@@ -16,7 +23,14 @@ class TGSharedPreferences {
 
   /// Private constructor
   TGSharedPreferences._() {
-    TGLog.d("TGSharedPreferences : Initiated");
+    _init();
+  }
+
+  /// Initialize
+  void _init() {
+    TGLog.d("TGSharedPreferences : init");
+    _createdAt = DateTime.now();
+    _listeners = Set();
   }
 
   /// Gets instance of SharedPreferences
@@ -64,6 +78,9 @@ class TGSharedPreferences {
 
   /// Sets content for given key
   Future<bool> set(String key, dynamic value) async {
+    _listeners.forEach((listener) {
+      listener.keySet(key);
+    });
     return _save(key, value);
   }
 
@@ -74,6 +91,34 @@ class TGSharedPreferences {
 
   /// Removes content for given key
   Future<bool> remove(String key) async {
+    _listeners.forEach((listener) {
+      listener.keyRemove(key);
+    });
     return _remove(key);
+  }
+
+  /// Add listener
+  void addListener(TGSharedPreferencesListener listener) {
+    if (listener != null) _listeners.add(listener);
+  }
+
+  /// Remove listener
+  void removeListener(TGSharedPreferencesListener listener) {
+    if (listener != null) _listeners.remove(listener);
+  }
+
+  /// Remove all listeners
+  void removeAllListeners() {
+    _listeners.clear();
+  }
+
+  /// TGSharedPreferences created at
+  DateTime createdAt() {
+    return _createdAt;
+  }
+
+  /// Number of milliseconds passed since valid TGSharedPreferences has been created
+  Duration validSince() {
+    return DateTime.now().difference(_createdAt);
   }
 }

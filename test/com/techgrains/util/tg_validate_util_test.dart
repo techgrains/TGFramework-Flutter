@@ -8,6 +8,22 @@ void main() {
 
   tearDown(() {});
 
+  test('hasValue', () async {
+    expect(TGValidate.hasValue(null), false);
+    expect(TGValidate.hasValue(false), false);
+    expect(TGValidate.hasValue(""), false);
+    expect(TGValidate.hasValue([]), false);
+    expect(TGValidate.hasValue({}), false);
+    expect(TGValidate.hasValue(0), false);
+    expect(TGValidate.hasValue(0.0), false);
+
+    expect(TGValidate.hasValue("Techgrains"), true);
+    expect(TGValidate.hasValue(["1"]), true);
+    expect(TGValidate.hasValue({"key": "value"}), true);
+    expect(TGValidate.hasValue(1), true);
+    expect(TGValidate.hasValue(1.23), true);
+  });
+
   test('email', () async {
     expect(TGValidate.email("valid@email.com"), true);
     expect(TGValidate.email("a@b"), false);

@@ -23,9 +23,15 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   TGService(this.creatorT, this.creatorE);
 
-  Client _getClient(String url, String method) => TGClientFactory.getClient(url, method);
+  Client _getClient(String url, String method) =>
+      TGClientFactory.getClient(url, method);
 
-  static init({String baseUrl, Map<String, String> headers, String mockMappingsFile, bool applyMock = false, bool badCertificateCallbackEnabled = false}) {
+  static init(
+      {String baseUrl,
+      Map<String, String> headers,
+      String mockMappingsFile,
+      bool applyMock = false,
+      bool badCertificateCallbackEnabled = false}) {
     // For HTTP Request
     TGRequest.defaultBaseUrl = baseUrl;
     TGRequest.defaultHeaders = headers;
@@ -38,14 +44,21 @@ class TGService<T extends TGResponse, E extends TGError> {
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
   }
 
-  Future<T> get({@required TGGetRequest request, Function onSuccess(T), Function onError(T)}) async {
+  Future<T> get(
+      {@required TGGetRequest request,
+      Function onSuccess(T),
+      Function onError(T)}) async {
     String url = request.getUrl();
     TGLog.t("GET", url);
-    final httpRes = await _getClient(request.getUri(), "GET").get(url, headers: request.headers());
+    final httpRes = await _getClient(request.getUri(), "GET")
+        .get(url, headers: request.headers());
     return _performCallback(httpRes, onError, onSuccess);
   }
 
-  Future<T> post({@required TGPostRequest request, Function onSuccess(T), Function onError(T)}) async {
+  Future<T> post(
+      {@required TGPostRequest request,
+      Function onSuccess(T),
+      Function onError(T)}) async {
     String url = request.getUrl();
     TGLog.t("POST", url);
     final httpRes = await _getClient(request.getUri(), "POST").post(
@@ -56,7 +69,10 @@ class TGService<T extends TGResponse, E extends TGError> {
     return _performCallback(httpRes, onError, onSuccess);
   }
 
-  Future<T> put({@required TGPutRequest request, Function onSuccess(T), Function onError(T)}) async {
+  Future<T> put(
+      {@required TGPutRequest request,
+      Function onSuccess(T),
+      Function onError(T)}) async {
     String url = request.getUrl();
     TGLog.t("PUT", url);
     final httpRes = await _getClient(request.getUri(), "PUT").put(
@@ -67,14 +83,19 @@ class TGService<T extends TGResponse, E extends TGError> {
     return _performCallback(httpRes, onError, onSuccess);
   }
 
-  Future<T> delete({@required TGDeleteRequest request, Function onSuccess(T), Function onError(T)}) async {
+  Future<T> delete(
+      {@required TGDeleteRequest request,
+      Function onSuccess(T),
+      Function onError(T)}) async {
     String url = request.getUrl();
     TGLog.t("DELETE", url);
-    final httpRes = await _getClient(request.getUri(), "DELETE").delete(url, headers: request.headers());
+    final httpRes = await _getClient(request.getUri(), "DELETE")
+        .delete(url, headers: request.headers());
     return _performCallback(httpRes, onError, onSuccess);
   }
 
-  T _performCallback(Response httpRes, Function onError(dynamic T), Function onSuccess(dynamic T)) {
+  T _performCallback(Response httpRes, Function onError(dynamic T),
+      Function onSuccess(dynamic T)) {
     T t = _prepareResponse(httpRes);
     t.hasError ? onError(t) : onSuccess(t);
     return t;
@@ -110,8 +131,10 @@ class TGService<T extends TGResponse, E extends TGError> {
           t.fromJson(jsonDecode(t.body));
         }
       } catch (e) {
-        TGLog.e("Unable to prepare - " + (t.hasError ? E.toString() : T.toString()));
-        TGLog.e("Please check 'fromJson(dynamic json)' implementation of - " + (t.hasError ? E.toString() : T.toString()));
+        TGLog.e("Unable to prepare - " +
+            (t.hasError ? E.toString() : T.toString()));
+        TGLog.e("Please check 'fromJson(dynamic json)' implementation of - " +
+            (t.hasError ? E.toString() : T.toString()));
         TGLog.e(e);
         t.hasError = true;
         print(t.body);

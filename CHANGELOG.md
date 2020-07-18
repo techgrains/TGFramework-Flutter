@@ -1,3 +1,11 @@
+## 1.1.4
+* Memory
+  * TGSession: Listener implementation for custom usage 
+  * TGSharedPreference: Listener implementation for custom usage
+* Util
+  * TGValidate
+    * Has Value for any type of object (supports dynamic)
+
 ## 1.1.3
 * TGView
   * Body Color

@@ -48,7 +48,6 @@ class TGView {
     return theme().platform;
   }
 
-
   // ***   Colors   *** //
 
   /// Body Color: TextTheme applies `bodyColor` to headline5, headline6, subtitle1, subtitle2, button, bodyText1, bodyText2 and overline.
@@ -116,7 +115,12 @@ class TGView {
   }
 
   /// Row container to display widgets row. Left & Right aligned
-  static Container rowContainer({EdgeInsetsGeometry margin, EdgeInsetsGeometry padding, Color color = Colors.transparent, List<Widget> left, List<Widget> right}) {
+  static Container rowContainer(
+      {EdgeInsetsGeometry margin,
+      EdgeInsetsGeometry padding,
+      Color color = Colors.transparent,
+      List<Widget> left,
+      List<Widget> right}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (padding == null) padding = EdgeInsets.all(0);
     List<Widget> children = [];
@@ -142,7 +146,13 @@ class TGView {
   }
 
   /// Column container to display
-  static Container columnContainer({EdgeInsetsGeometry margin, EdgeInsetsGeometry padding, Color color = Colors.transparent, CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center, MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start, List<Widget> children}) {
+  static Container columnContainer(
+      {EdgeInsetsGeometry margin,
+      EdgeInsetsGeometry padding,
+      Color color = Colors.transparent,
+      CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+      MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+      List<Widget> children}) {
     if (margin == null) margin = EdgeInsets.all(0);
     return Container(
       margin: margin,
@@ -157,26 +167,33 @@ class TGView {
   }
 
   /// Box Container
-  static Container boxContainer({EdgeInsetsGeometry margin, EdgeInsetsGeometry padding, Color color, List<Widget> children, double borderRadius = 10}) {
+  static Container boxContainer(
+      {EdgeInsetsGeometry margin,
+      EdgeInsetsGeometry padding,
+      Color color,
+      List<Widget> children,
+      double borderRadius = 10}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (padding == null) padding = EdgeInsets.all(0);
     if (color == null) color = theme().dividerColor;
     return Container(
-      margin: margin,
-      padding: padding,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
-        border: Border.all(width: 0.5, color: color, style: BorderStyle.solid),
-      ),
-      child: Column(
-        children: children,
-      ));
+        margin: margin,
+        padding: padding,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius),
+          border:
+              Border.all(width: 0.5, color: color, style: BorderStyle.solid),
+        ),
+        child: Column(
+          children: children,
+        ));
   }
 
   // ***   App Bar   *** //
 
   /// App Bar Back Button
-  static IconButton appBarBackButton({@required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
+  static IconButton appBarBackButton(
+      {@required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
     return IconButton(
       icon: Icon(icon),
       onPressed: () {
@@ -188,7 +205,12 @@ class TGView {
   // ***   Notifications   *** //
 
   /// Show Snackbar
-  static void showSnackBar({@required BuildContext context, @required String message, Duration duration, Color backgroundColor, SnackBarBehavior behavior = SnackBarBehavior.floating}) {
+  static void showSnackBar(
+      {@required BuildContext context,
+      @required String message,
+      Duration duration,
+      Color backgroundColor,
+      SnackBarBehavior behavior = SnackBarBehavior.floating}) {
     if (duration == null) duration = Duration(seconds: 2);
     if (backgroundColor == null) backgroundColor = theme().accentColor;
     Scaffold.of(context).showSnackBar(SnackBar(
@@ -209,38 +231,46 @@ class TGView {
   }
 
   /// Show alert dialog with various components
-  static void showAlertDialog({@required BuildContext context, List<Widget> titleRowWidgets, Widget content, List<Widget> actions, Function onDismiss}) {
+  static void showAlertDialog(
+      {@required BuildContext context,
+      List<Widget> titleRowWidgets,
+      Widget content,
+      List<Widget> actions,
+      Function onDismiss}) {
     if (titleRowWidgets == null) titleRowWidgets = [];
     showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        title: Row(children: titleRowWidgets),
-        content: content,
-        actions: actions,
-      )).then((value) => {
-          if (onDismiss != null) onDismiss()
-          else Navigator.of(context).pop(false)
-        }
-      );
+        context: context,
+        builder: (context) => new AlertDialog(
+              title: Row(children: titleRowWidgets),
+              content: content,
+              actions: actions,
+            )).then((value) => {
+          if (onDismiss != null)
+            onDismiss()
+          else
+            Navigator.of(context).pop(false)
+        });
   }
 
   /// Popup Menu Item
-  static PopupMenuItem popupMenuItem({IconData icon, String text, dynamic value, Color iconColor, Color textColor}) {
+  static PopupMenuItem popupMenuItem(
+      {IconData icon,
+      String text,
+      dynamic value,
+      Color iconColor,
+      Color textColor}) {
     return PopupMenuItem(
-      value: value,
-      child: rowContainer(
-        margin: EdgeInsets.all(0),
-        left: [
+        value: value,
+        child: rowContainer(margin: EdgeInsets.all(0), left: [
           if (icon != null) Icon(icon, color: iconColor),
           if (icon != null) TGView.emptySizedBox(width: 10),
           if (text != null) Text(text, style: TextStyle(color: textColor))
-        ]
-      )
-    );
+        ]));
   }
 
   /// Refresh Indicator
-  static RefreshIndicator refreshIndicator({List<Widget> widgets, Function onRefresh}) {
+  static RefreshIndicator refreshIndicator(
+      {List<Widget> widgets, Function onRefresh}) {
     return RefreshIndicator(
       child: scaffoldContainer(widgets),
       onRefresh: onRefresh,
