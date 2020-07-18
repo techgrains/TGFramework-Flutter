@@ -110,6 +110,9 @@ Thinking to manage piled up objects in session?
 ```
     TGSession.getInstance().remove("Person");
 ```
+##### Custom TGSession Listener 
+Use TGSessionListener with custom implementation to listen whenever any key has been set/removed to/from TGSession.
+
 
 ### TGSharedPreference
 Access local disk storage mechanism through TGSharedPreference. Its uses Shared Preferences for Android, User Defaults for iOS internally. No need to inherit or initialize anything.
@@ -117,6 +120,8 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
     TGSharedPreferences.getInstance().set("Designation", "Developer"); // Set
     await TGSharedPreferences.getInstance().get("Designation"); // Get
 ```  
+##### Custom TGSharedPreferences Listener 
+Use TGSharedPreferencesListener with custom implementation to listen whenever any key has been set/removed to/from TGSharedPreferences.
 
 
 ## Localization (i18n)
@@ -253,8 +258,11 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
 ### TGValidate
 Validators like email, alphabets, numeric, alphanumeric.
 ```
+[Has Value]
+    TGValidate.hasValue(anything);
+
 [Email]
-    TGValidate.email("valid@email.com")
+    TGValidate.email("valid@email.com");
 
 [Alphabets]
     TGValidate.alphabets("AbcPqrXyz");

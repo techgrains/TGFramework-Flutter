@@ -13,6 +13,20 @@ class TGValidate {
   /// Alphanumeric RegEx Pattern
   static const String _ALPHANUMERIC_PATTERN = r'^[a-zA-Z0-9]+$';
 
+  /// Has Value
+  static bool hasValue(dynamic value) {
+    if (value == null) return false;
+    if (value is num) return value != 0;
+    if (value is String || value is Iterable || value is Map)
+      return value.length > 0;
+    if (value is bool) return value;
+    return true;
+  }
+
+  static String nullSafeString(String value, {String defaultValue}) {
+    return value == null ? (defaultValue == null ? "" : defaultValue) : value;
+  }
+
   /// Validate Email
   static bool email(String value) {
     return new RegExp(_EMAIL_PATTERN).hasMatch(value);
