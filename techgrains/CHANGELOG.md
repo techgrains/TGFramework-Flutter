@@ -1,3 +1,8 @@
+## 1.1.5
+* Service
+  * TGRequest 
+    * Introduced TGUploadRequest to upload file
+
 ## 1.1.4
 * Memory
   * TGSession: Listener implementation for custom usage 
