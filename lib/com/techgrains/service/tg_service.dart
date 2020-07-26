@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 import 'package:techgrains/com/techgrains/service/client/tg_client_factory.dart';
@@ -12,6 +13,7 @@ import 'package:techgrains/com/techgrains/service/request/tg_get_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_post_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_put_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_request.dart';
+import 'package:techgrains/com/techgrains/service/request/tg_upload_request.dart';
 import 'package:techgrains/com/techgrains/service/response/tg_response.dart';
 
 typedef T CreatorT<T>();
@@ -94,9 +96,37 @@ class TGService<T extends TGResponse, E extends TGError> {
     return _performCallback(httpRes, onError, onSuccess);
   }
 
+  Future<T> upload(
+      {@required TGUploadRequest request,
+      Function onSuccess(T),
+      Function onError(T)}) async {
+    var multipartRequest = http.MultipartRequest(
+        "POST",
+        Uri.parse(
+            TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
+    if (request.file() != null) multipartRequest.files.add(request.file());
+    StreamedResponse httpRes = await multipartRequest.send();
+    return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
+  }
+
   T _performCallback(Response httpRes, Function onError(dynamic T),
       Function onSuccess(dynamic T)) {
     T t = _prepareResponse(httpRes);
+    t.hasError ? onError(t) : onSuccess(t);
+    return t;
+  }
+
+  T _performCallbackForStreamedResponse(StreamedResponse httpRes,
+      Function onError(dynamic T), Function onSuccess(dynamic T)) {
+    T t = creatorT();
+    try {
+      _populateResponse(t, httpRes);
+      t.body = httpRes.toString();
+      _validateResponse(t);
+    } catch (e) {
+      TGLog.e(e);
+      // Ignores error if not able to populate response, validate response or decode json. Populated response must be returned.
+    }
     t.hasError ? onError(t) : onSuccess(t);
     return t;
   }
@@ -105,6 +135,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
+      t.body = httpRes.body;
       _validateResponse(t);
     } catch (e) {
       TGLog.e(e);
@@ -113,12 +144,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     return t;
   }
 
-  void _populateResponse(T t, Response httpRes) {
+  void _populateResponse(t, http.BaseResponse httpRes) {
     t.timestamp = new DateTime.now().millisecondsSinceEpoch;
     t.httpStatus = httpRes.statusCode;
     t.contentLength = httpRes.contentLength;
     t.headers = httpRes.headers;
-    t.body = httpRes.body;
   }
 
   void _validateResponse(T t) {
