@@ -9,6 +9,7 @@ TGFramework includes following areas as part of its framework. Further in this d
 * Memory
   * TGSession: In memory Session throughout the app 
   * TGSharedPreference: Shared Preferences (Android), User Defaults (iOS)
+  * TGAccessMatrix: In memory Access Matrix based on Access Key with Roles
 * Localization (i18n)
   * TGLocale: Supported, default and current locale holders with locale related supporting features
   * TGLocalization: Localization for each locale loads values from json file
@@ -124,6 +125,26 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
 ##### Custom TGSharedPreferences Listener 
 Use TGSharedPreferencesListener with custom implementation to listen whenever any key has been set/removed to/from TGSharedPreferences.
 
+
+### TGAccessMatrix
+In memory Access Matrix based on Access Key with Roles. No need to put business logic based on Roles in various parts of the application. Centralised common structure of access gives full flexibility to manage with multiple roles from api. 
+
+#### Create access matrix for each role 
+```
+    TGAccessMatrixVO employeAccess = TGAccessMatrixVO(key: "Profile", roleId: 1, read: true, update: true, delete: false, create: false);
+    TGAccessMatrixVO editorAccess = TGAccessMatrixVO(key: "Profile", roleId: 2, read: true, update: true, delete: false, create: false);
+
+    TGAccessMatrix.getInstance().add(employeAccess);
+    TGAccessMatrix.getInstance().add(editorAccess);
+```
+
+#### Use access matrix from anywhere 
+```
+    TGAccessMatrix.getInstance().hasRead("Profile", [1,2]);
+    TGAccessMatrix.getInstance().hasUpdate("Profile", [1,2]);
+    TGAccessMatrix.getInstance().hasDelete("Profile", [1,2]);
+    TGAccessMatrix.getInstance().hasCreate("Profile", [1,2]);
+```  
 
 ## Localization (i18n)
   ### TGLocale

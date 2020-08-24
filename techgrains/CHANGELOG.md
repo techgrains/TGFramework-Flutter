@@ -1,3 +1,7 @@
+## 1.1.6
+* Memory
+  * TGAccessMatrix: In memory Access Matrix based on Access Key with Roles
+
 ## 1.1.5
 * Service
   * TGRequest 
