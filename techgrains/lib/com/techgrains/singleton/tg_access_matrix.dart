@@ -16,6 +16,7 @@ class TGAccessMatrix {
   List<TGAccessMatrixVO> list;
   Map<String, Map<int, bool>>
       flags; // String: key~roleId, int: Flag Type, bool: flag
+  List<int> roleIds;
 
   /// Created At timestamp
   DateTime _createdAt;
@@ -36,6 +37,7 @@ class TGAccessMatrix {
     TGLog.d("TGAccessMatrix : init");
     list = new List();
     flags = new Map();
+    roleIds = new List();
     _createdAt = DateTime.now();
   }
 
@@ -55,7 +57,7 @@ class TGAccessMatrix {
   }
 
   String _mapKey(String key, int roleId) {
-    return key + roleId.toString();
+    return key + "~" + roleId.toString();
   }
 
   Map<int, bool> _mapValue(TGAccessMatrixVO accessMatrixVO) {
@@ -73,29 +75,37 @@ class TGAccessMatrix {
         (element) => element.key == key && element.roleId == roleId);
   }
 
+  /// Apply Roles
+  void applyRoles(List<int> roleIds) {
+    if (roleIds == null) this.roleIds = new List();
+    this.roleIds = roleIds;
+  }
+
   /// Gets Read flag for given key and roles
-  bool hasRead(String key, List<int> roleIds) {
+  bool hasRead(String key, {List<int> roleIds}) {
     return _has(key, roleIds, READ);
   }
 
   /// Gets Update flag for given key and roles
-  bool hasUpdate(String key, List<int> roleIds) {
+  bool hasUpdate(String key, {List<int> roleIds}) {
     return _has(key, roleIds, UPDATE);
   }
 
   /// Gets Delete flag for given key and roles
-  bool hasDelete(String key, List<int> roleIds) {
+  bool hasDelete(String key, {List<int> roleIds}) {
     return _has(key, roleIds, DELETE);
   }
 
   /// Gets Create flag for given key and roles
-  bool hasCreate(String key, List<int> roleIds) {
+  bool hasCreate(String key, {List<int> roleIds}) {
     return _has(key, roleIds, CREATE);
   }
 
   /// Gets flag for given key, roles and flag type
   bool _has(String key, List<int> roleIds, int flagType) {
-    for (int roleId in roleIds) {
+    List<int> checkRoles = roleIds != null ? roleIds : this.roleIds;
+    if (checkRoles.length == 0) return false;
+    for (int roleId in checkRoles) {
       String mapKey = _mapKey(key, roleId);
       if (flags.containsKey(mapKey)) if (flags[mapKey][flagType]) return true;
     }

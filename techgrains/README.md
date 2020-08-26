@@ -129,21 +129,33 @@ Use TGSharedPreferencesListener with custom implementation to listen whenever an
 ### TGAccessMatrix
 In memory Access Matrix based on Access Key with Roles. No need to put business logic based on Roles in various parts of the application. Centralised common structure of access gives full flexibility to manage with multiple roles from api. 
 
-#### Create access matrix for each role 
+#### Create access matrix for each role and add them into TGAccessMatrix
 ```
-    TGAccessMatrixVO employeAccess = TGAccessMatrixVO(key: "Profile", roleId: 1, read: true, update: true, delete: false, create: false);
+    TGAccessMatrixVO employeeAccess = TGAccessMatrixVO(key: "Profile", roleId: 1, read: true, update: true, delete: false, create: false);
     TGAccessMatrixVO editorAccess = TGAccessMatrixVO(key: "Profile", roleId: 2, read: true, update: true, delete: false, create: false);
 
-    TGAccessMatrix.getInstance().add(employeAccess);
-    TGAccessMatrix.getInstance().add(editorAccess);
+    TGAccessMatrix.getInstance().addAll([employeeAccess, editorAccess]);
 ```
 
-#### Use access matrix from anywhere 
+#### Apply roles whenever user login (or scope of change in roles) 
 ```
-    TGAccessMatrix.getInstance().hasRead("Profile", [1,2]);
-    TGAccessMatrix.getInstance().hasUpdate("Profile", [1,2]);
-    TGAccessMatrix.getInstance().hasDelete("Profile", [1,2]);
-    TGAccessMatrix.getInstance().hasCreate("Profile", [1,2]);
+    TGAccessMatrix.getInstance().applyRoles([1,2]);
+```  
+
+#### Use access matrix from anywhere (Uses default applied roles from above)
+```
+    TGAccessMatrix.getInstance().hasRead("Profile");
+    TGAccessMatrix.getInstance().hasUpdate("Profile");
+    TGAccessMatrix.getInstance().hasDelete("Profile");
+    TGAccessMatrix.getInstance().hasCreate("Profile");
+```  
+
+#### How to override default roles by providing roleIds explicitly
+```
+    TGAccessMatrix.getInstance().hasRead("Profile", roleIds: [3]);
+    TGAccessMatrix.getInstance().hasUpdate("Profile", roleIds: [3]);
+    TGAccessMatrix.getInstance().hasDelete("Profile", roleIds: [3]);
+    TGAccessMatrix.getInstance().hasCreate("Profile", roleIds: [3]);
 ```  
 
 ## Localization (i18n)

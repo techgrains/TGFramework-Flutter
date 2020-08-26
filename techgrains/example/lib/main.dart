@@ -1,8 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:techgrains/techgrains.dart';
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/// Please refer "Readme" section for usage examples with explanation
+/// GitHub: https://github.com/techgrains/TGFramework-Flutter (Alternate)
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 void main() {
   runApp(MyApp());
