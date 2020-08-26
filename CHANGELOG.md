@@ -1,3 +1,8 @@
+## 1.1.7
+* Memory
+  * TGAccessMatrix
+    * Apply roles whenever user login (or scope of change in roles)
+
 ## 1.1.6
 * Memory
   * TGAccessMatrix: In memory Access Matrix based on Access Key with Roles
