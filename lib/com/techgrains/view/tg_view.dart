@@ -118,8 +118,10 @@ class TGView {
   static Container rowContainer(
       {EdgeInsetsGeometry margin,
       EdgeInsetsGeometry padding,
+      CrossAxisAlignment crossAxisAlignment: CrossAxisAlignment.start,
       Color color = Colors.transparent,
       List<Widget> left,
+      List<Widget> center,
       List<Widget> right}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (padding == null) padding = EdgeInsets.all(0);
@@ -128,12 +130,25 @@ class TGView {
     if (left != null) {
       children.add(Expanded(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: left,
         ),
       ));
     }
-
-    if (right != null) children.addAll(right);
+    if (center != null) {
+      children.add(Expanded(
+          child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: center,
+      )));
+    }
+    if (right != null) {
+      children.add(Expanded(
+          child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: right,
+      )));
+    }
 
     return Container(
       margin: margin,
@@ -170,8 +185,10 @@ class TGView {
   static Container boxContainer(
       {EdgeInsetsGeometry margin,
       EdgeInsetsGeometry padding,
-      Color color,
+      Color color, // Used for border color
+      Color bgColor = Colors.transparent,
       List<Widget> children,
+      double borderWidth = 0.5,
       double borderRadius = 10}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (padding == null) padding = EdgeInsets.all(0);
@@ -179,10 +196,11 @@ class TGView {
     return Container(
         margin: margin,
         padding: padding,
+        color: bgColor,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
-          border:
-              Border.all(width: 0.5, color: color, style: BorderStyle.solid),
+          border: Border.all(
+              width: borderWidth, color: color, style: BorderStyle.solid),
         ),
         child: Column(
           children: children,

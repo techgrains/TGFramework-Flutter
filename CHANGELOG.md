@@ -1,3 +1,8 @@
+## 1.1.8
+* TGView
+  * Row Container: Supports 3 sections - left, center & right
+  * Box Container: Configure background color and border width
+
 ## 1.1.7
 * Memory
   * TGAccessMatrix

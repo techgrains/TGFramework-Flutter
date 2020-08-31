@@ -544,6 +544,9 @@ To create empty box by providing height, width or both.
        Icon(Icons.done_outline, color: TGView.theme().accentColor),
        TGView.emptySizedBox(width: 10),
        Text("Completed", style: TGView.textTheme().bodyText2)
+     ], center: [
+       Icon(Icons.keyboard_arrow_left, color: TGView.theme().hintColor)
+     ],
      ], right: [
        Icon(Icons.keyboard_arrow_right, color: TGView.theme().dividerColor)
      ]
@@ -567,6 +570,8 @@ To create empty box by providing height, width or both.
     // Some icon and text as children widgets for example
     TGView.boxContainer(
       margin: EdgeInsets.all(0),
+      bgColor: Colors.grey,
+      color: TGView.theme().dividerColor,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       children: [
         Icon(Icons.done_outline, color: TGView.theme().accentColor),
