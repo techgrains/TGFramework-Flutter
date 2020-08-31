@@ -1,3 +1,8 @@
+## 1.1.9
+* TGView
+  * Row Container: Dynamic support of (left, right) & (left, center and right) combination with CrossAxisAlignment
+  * Box Container: Configure border color with default of transparent
+
 ## 1.1.8
 * TGView
   * Row Container: Supports 3 sections - left, center & right

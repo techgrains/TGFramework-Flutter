@@ -118,7 +118,7 @@ class TGView {
   static Container rowContainer(
       {EdgeInsetsGeometry margin,
       EdgeInsetsGeometry padding,
-      CrossAxisAlignment crossAxisAlignment: CrossAxisAlignment.start,
+      CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
       Color color = Colors.transparent,
       List<Widget> left,
       List<Widget> center,
@@ -143,11 +143,15 @@ class TGView {
       )));
     }
     if (right != null) {
-      children.add(Expanded(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: right,
-      )));
+      if (center != null) {
+        children.add(Expanded(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: right,
+        )));
+      } else {
+        children.addAll(right);
+      }
     }
 
     return Container(
@@ -155,6 +159,7 @@ class TGView {
       padding: padding,
       color: color,
       child: Row(
+        crossAxisAlignment: crossAxisAlignment,
         children: children,
       ),
     );
@@ -185,24 +190,25 @@ class TGView {
   static Container boxContainer(
       {EdgeInsetsGeometry margin,
       EdgeInsetsGeometry padding,
-      Color color, // Used for border color
-      Color bgColor = Colors.transparent,
+      CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
+      Color color = Colors.transparent,
+      Color borderColor = Colors.transparent,
       List<Widget> children,
       double borderWidth = 0.5,
       double borderRadius = 10}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (padding == null) padding = EdgeInsets.all(0);
-    if (color == null) color = theme().dividerColor;
     return Container(
         margin: margin,
         padding: padding,
-        color: bgColor,
         decoration: BoxDecoration(
+          color: color,
           borderRadius: BorderRadius.circular(borderRadius),
           border: Border.all(
-              width: borderWidth, color: color, style: BorderStyle.solid),
+              width: borderWidth, color: borderColor, style: BorderStyle.solid),
         ),
         child: Column(
+          crossAxisAlignment: crossAxisAlignment,
           children: children,
         ));
   }
