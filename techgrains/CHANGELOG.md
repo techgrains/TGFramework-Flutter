@@ -1,4 +1,4 @@
-## 1.1.10
+## 1.1.10+1
 * TGView
   * Multiple Column Container: Multiple columns render equally in distance. Supports N number of columns.
   * Refresh Indicator: Configure background color of its container.
