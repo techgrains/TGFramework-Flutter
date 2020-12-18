@@ -1,3 +1,8 @@
+## 1.1.10
+* TGView
+  * Multiple Column Container: Multiple columns render equally in distance. Supports N number of columns.
+  * Refresh Indicator: Configure background color of its container.
+
 ## 1.1.9
 * TGView
   * Row Container: Dynamic support of (left, right) & (left, center and right) combination with CrossAxisAlignment
@@ -37,6 +42,7 @@
   * Divider
   * Row Container
   * Column Container
+  * Columns Container
   * Box Container
   * App Bar Back Button
   * Show Snack Bar

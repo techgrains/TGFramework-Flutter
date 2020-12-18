@@ -170,15 +170,53 @@ class TGView {
       {EdgeInsetsGeometry margin,
       EdgeInsetsGeometry padding,
       Color color = Colors.transparent,
-      CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
-      MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+      CrossAxisAlignment crossAxisAlignment,
+      MainAxisAlignment mainAxisAlignment,
       List<Widget> children}) {
     if (margin == null) margin = EdgeInsets.all(0);
+    if (crossAxisAlignment == null)
+      crossAxisAlignment = CrossAxisAlignment.center;
+    if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
     return Container(
       margin: margin,
       padding: padding,
       color: color,
       child: Column(
+        crossAxisAlignment: crossAxisAlignment,
+        mainAxisAlignment: mainAxisAlignment,
+        children: children,
+      ),
+    );
+  }
+
+  /// Multiple Columns container to display
+  Container columnsContainer({
+    List<List<Widget>> columns,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    Color color = Colors.transparent,
+    MainAxisAlignment mainAxisAlignment,
+    CrossAxisAlignment crossAxisAlignment,
+  }) {
+    if (margin == null) margin = EdgeInsets.all(0);
+    if (crossAxisAlignment == null)
+      crossAxisAlignment = CrossAxisAlignment.center;
+    if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
+    List<Widget> children = [];
+    columns.forEach((column) {
+      children.add(
+        Expanded(
+            child: Column(
+                crossAxisAlignment: crossAxisAlignment,
+                mainAxisAlignment: mainAxisAlignment,
+                children: column)),
+      );
+    });
+    return Container(
+      margin: margin,
+      padding: padding,
+      color: color,
+      child: Row(
         crossAxisAlignment: crossAxisAlignment,
         mainAxisAlignment: mainAxisAlignment,
         children: children,
@@ -294,9 +332,12 @@ class TGView {
 
   /// Refresh Indicator
   static RefreshIndicator refreshIndicator(
-      {List<Widget> widgets, Function onRefresh}) {
+      {List<Widget> widgets,
+      Function onRefresh,
+      Color backgroundContainerColor = Colors.transparent}) {
     return RefreshIndicator(
-      child: scaffoldContainer(widgets),
+      child: scaffoldContainer(widgets,
+          backgroundContainer: Container(color: backgroundContainerColor)),
       onRefresh: onRefresh,
     );
   }

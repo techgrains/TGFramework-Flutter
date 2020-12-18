@@ -39,6 +39,7 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Empty Sized Box
     * Row Container
     * Column Container
+    * Columns Container
     * Box Container
     * Clear Focus (Hide Keyboard)
     * Body Color
@@ -561,6 +562,24 @@ To create empty box by providing height, width or both.
        Icon(Icons.done_outline, color: TGView.theme().accentColor),
        TGView.emptySizedBox(height: 10),
        Text("Completed", style: TGView.textTheme().bodyText2)
+     ]
+   );
+```
+
+#### Columns Container 
+Supports N number of columns.
+```
+    // Some icon and text as children widgets for example
+    TGView.columnsContainer (
+      children: [
+        [
+          Icon(Icons.done),
+          Text("First Column", style: TGView.textTheme().bodyText2)
+        ],
+        [
+          Icon(Icons.done_outline),
+          Text("Second Column", style: TGView.textTheme().bodyText2)
+        ],
      ]
    );
 ```
