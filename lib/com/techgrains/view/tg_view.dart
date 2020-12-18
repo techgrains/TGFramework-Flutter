@@ -190,7 +190,7 @@ class TGView {
   }
 
   /// Multiple Columns container to display
-  Container columnsContainer({
+  static Container columnsContainer({
     List<List<Widget>> columns,
     EdgeInsetsGeometry margin,
     EdgeInsetsGeometry padding,
