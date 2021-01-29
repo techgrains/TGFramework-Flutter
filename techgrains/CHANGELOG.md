@@ -1,3 +1,7 @@
+## 1.1.10+2
+* Localization (i18n)
+  * TGLocale works without referencing context for locale key's value. It's very lightweight call now.
+
 ## 1.1.10+1
 * TGView
   * Multiple Column Container: Multiple columns render equally in distance. Supports N number of columns.
