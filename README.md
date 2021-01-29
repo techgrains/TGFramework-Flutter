@@ -216,10 +216,10 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ##### How to get text from locale
 ```
 [Without arguments]
-    TGLocale.text(context, "button.login"); // Having "button.login": "Login"
+    TGLocale.text("button.login"); // Having "button.login": "Login"
 
 [With arguments]
-    TGLocale.text(context, "message.hello", args: ["Amit Patel"]); // Having "message.hello": "Welcome {0} to our team!"
+    TGLocale.text("message.hello", args: ["Amit Patel"]); // Having "message.hello": "Welcome {0} to our team!"
 ```
 ##### How to change locale
 ```

@@ -8,13 +8,9 @@ import 'tg_locale.dart';
 class TGLocalization {
   final Locale locale;
   static const LOCALE_PATH = "assets/locale/";
-  Map<String, dynamic> _entries;
+  static Map<String, dynamic> _entries;
 
   TGLocalization(this.locale);
-
-  static TGLocalization of(BuildContext context) {
-    return Localizations.of<TGLocalization>(context, TGLocalization);
-  }
 
   /// Load Json File name based on Language Code and Country Code.
   /// Example: "{languageCode}_{countryCode}.json" > "en_us.json"
@@ -30,7 +26,7 @@ class TGLocalization {
   }
 
   /// Text related to localised key. In case of entry won't found, will return back key as text.
-  String text(String key) {
+  static String text(String key) {
     dynamic value = _entries[key];
     return (value != null && value.toString().length > 0) ? value : key;
   }
