@@ -8,7 +8,7 @@ import 'tg_locale.dart';
 class TGLocalization {
   final Locale locale;
   static const LOCALE_PATH = "assets/locale/";
-  static Map<String, dynamic> _entries;
+  Map<String, dynamic> _entries;
 
   TGLocalization(this.locale);
 
@@ -26,7 +26,7 @@ class TGLocalization {
   }
 
   /// Text related to localised key. In case of entry won't found, will return back key as text.
-  static String text(String key) {
+  String text(String key) {
     dynamic value = _entries[key];
     return (value != null && value.toString().length > 0) ? value : key;
   }

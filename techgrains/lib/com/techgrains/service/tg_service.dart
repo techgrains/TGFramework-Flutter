@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -50,10 +51,10 @@ class TGService<T extends TGResponse, E extends TGError> {
       {@required TGGetRequest request,
       Function onSuccess(T),
       Function onError(T)}) async {
-    String url = request.getUrl();
-    TGLog.t("GET", url);
+    Uri uri = Uri.parse(request.getUrl());
+    TGLog.t("GET", uri);
     final httpRes = await _getClient(request.getUri(), "GET")
-        .get(url, headers: request.headers());
+        .get(uri, headers: request.headers());
     return _performCallback(httpRes, onError, onSuccess);
   }
 
@@ -61,10 +62,10 @@ class TGService<T extends TGResponse, E extends TGError> {
       {@required TGPostRequest request,
       Function onSuccess(T),
       Function onError(T)}) async {
-    String url = request.getUrl();
-    TGLog.t("POST", url);
+    Uri uri = Uri.parse(request.getUrl());
+    TGLog.t("POST", uri);
     final httpRes = await _getClient(request.getUri(), "POST").post(
-      url,
+      uri,
       body: request.body(),
       headers: request.headers(),
     );
@@ -75,10 +76,10 @@ class TGService<T extends TGResponse, E extends TGError> {
       {@required TGPutRequest request,
       Function onSuccess(T),
       Function onError(T)}) async {
-    String url = request.getUrl();
-    TGLog.t("PUT", url);
+    Uri uri = Uri.parse(request.getUrl());
+    TGLog.t("PUT", uri);
     final httpRes = await _getClient(request.getUri(), "PUT").put(
-      url,
+      uri,
       body: request.body(),
       headers: request.headers(),
     );
@@ -89,10 +90,10 @@ class TGService<T extends TGResponse, E extends TGError> {
       {@required TGDeleteRequest request,
       Function onSuccess(T),
       Function onError(T)}) async {
-    String url = request.getUrl();
-    TGLog.t("DELETE", url);
+    Uri uri = Uri.parse(request.getUrl());
+    TGLog.t("DELETE", uri);
     final httpRes = await _getClient(request.getUri(), "DELETE")
-        .delete(url, headers: request.headers());
+        .delete(uri, headers: request.headers());
     return _performCallback(httpRes, onError, onSuccess);
   }
 

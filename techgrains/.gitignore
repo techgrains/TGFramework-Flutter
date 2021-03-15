@@ -22,10 +22,10 @@
 #.vscode/
 
 # Flutter/Dart/Pub related
-doc/api/
+**/doc/api/
 .dart_tool/
 .flutter-plugins
-.flutter-plugins-depedencies
+.flutter-plugins-dependencies
 .packages
 .pub-cache/
 .pub/
@@ -39,5 +39,3 @@ ios/
 ios_iphone/
 ios_simulator/
 
-# Exceptions to above rules.
-#!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
