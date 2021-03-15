@@ -7,6 +7,7 @@ class TGLocale {
   static Iterable<Locale> supportedLocales;
   static Locale defaultLocale;
   static Locale currentLocale;
+  static Map<Locale, TGLocalization> localizations = {};
 
   /// Callback for locale resolution
   static Locale localeResolutionCallback(
@@ -36,7 +37,8 @@ class TGLocale {
 
   /// Text value of provided key with optional args which replaces each {index}
   static String text(final String key, {List<String> args}) {
-    String value = TGLocalization.text(key);
+    TGLocalization currentLocalization = localizations[currentLocale];
+    String value = currentLocalization.text(key);
     if (args == null || args.length == 0) return value;
     return _replaceArgs(value, args);
   }

@@ -1,3 +1,7 @@
+## 1.2.0
+* Enabled support for Linux, MacOS & Windows
+* Upgraded versions of dependencies
+
 ## 1.1.10+2
 * Localization (i18n)
   * TGLocale works without referencing context for locale key's value. It's very lightweight call now.
