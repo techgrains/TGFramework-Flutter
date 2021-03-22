@@ -38,13 +38,16 @@ class TGLocale {
   }
 
   static void loadLocales() {
-    supportedLocales.forEach((locale) {TGLocalizationsDelegate().load(locale);});
+    supportedLocales.forEach((locale) {
+      TGLocalizationsDelegate().load(locale);
+    });
   }
 
   /// Text value of provided key with optional args which replaces each {index}
   static String text(final String key, {List<String> args}) {
-    TGLocalization currentLocalization = localizations[currentLocale.toString()];
-    if(currentLocalization==null) return key;
+    TGLocalization currentLocalization =
+        localizations[currentLocale.toString()];
+    if (currentLocalization == null) return key;
     String value = currentLocalization.text(key);
     if (args == null || args.length == 0) return value;
     return _replaceArgs(value, args);
