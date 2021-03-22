@@ -18,6 +18,7 @@ class TGLocalization {
     String fileName = _deriveFileName();
     TGLog.d("TGLocalization.load : " + fileName);
     _entries = await TGFileUtil.readJsonFileAsMap(LOCALE_PATH + fileName);
+    TGLocale.localizations[locale.toString()] = this;
     return true;
   }
 

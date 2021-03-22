@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:techgrains/com/techgrains/localization/tg_localizations_delegate.dart';
 
 import 'tg_localization.dart';
 
@@ -7,7 +8,7 @@ class TGLocale {
   static Iterable<Locale> supportedLocales;
   static Locale defaultLocale;
   static Locale currentLocale;
-  static Map<Locale, TGLocalization> localizations = {};
+  static Map<String, TGLocalization> localizations = {};
 
   /// Callback for locale resolution
   static Locale localeResolutionCallback(
@@ -33,11 +34,20 @@ class TGLocale {
     TGLocale.supportedLocales = supportedLocales;
     TGLocale.defaultLocale = defaultLocale;
     TGLocale.currentLocale = defaultLocale;
+    loadLocales();
+  }
+
+  static void loadLocales() {
+    supportedLocales.forEach((locale) {
+      TGLocalizationsDelegate().load(locale);
+    });
   }
 
   /// Text value of provided key with optional args which replaces each {index}
   static String text(final String key, {List<String> args}) {
-    TGLocalization currentLocalization = localizations[currentLocale];
+    TGLocalization currentLocalization =
+        localizations[currentLocale.toString()];
+    if (currentLocalization == null) return key;
     String value = currentLocalization.text(key);
     if (args == null || args.length == 0) return value;
     return _replaceArgs(value, args);

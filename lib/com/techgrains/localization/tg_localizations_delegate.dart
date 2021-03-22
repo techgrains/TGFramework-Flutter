@@ -18,7 +18,6 @@ class TGLocalizationsDelegate extends LocalizationsDelegate<TGLocalization> {
   Future<TGLocalization> load(Locale locale) async {
     TGLocalization localization = new TGLocalization(locale);
     await localization.load();
-    TGLocale.localizations[locale] = localization;
     return localization;
   }
 

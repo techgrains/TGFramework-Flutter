@@ -1,3 +1,7 @@
+## 1.2.1
+* Localization (i18n)
+  * Initializes locale property files upon startup for better performance
+
 ## 1.2.0
 * Enabled support for Linux, MacOS & Windows
 * Upgraded versions of dependencies
