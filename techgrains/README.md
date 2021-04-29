@@ -22,8 +22,11 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Check Internet Availability
   * TGFileUtil
     * Read Local File
+  * TGPlatformUtil
+    * Check platform related properties like iOS, Android, Mobile, Package Config, Local Host Name, Operating System etc.
   * TGValidate
     * Validate Email, Alphabets, Numeric, Alphanumeric
+
 * Service
   * TGService
     * TGRequest
@@ -288,6 +291,15 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 #### Read File as String
 ```
     String content = await TGFileUtil.readFileAsString("assets/files/company.txt");
+```
+
+### TGPlatformUtil
+#### Check isMobile, isIOS, isMobile, operatingSystem etc
+```
+    bool isAndroid = TGPlatformUtil.isAndroid();
+    bool isIOS = TGPlatformUtil.isIOS();
+    bool isMobile = TGPlatformUtil.isMobile();
+    String operatingSystem = TGPlatformUtil.operatingSystem();
 ```
 
 ### TGValidate
