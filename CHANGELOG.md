@@ -1,3 +1,7 @@
+## 1.2.2
+* Platform
+  * TGPlatformUtil gives quick check for iOS, Android, Mobile, Package Config, Local Host Name, Operating System etc.
+
 ## 1.2.1
 * Localization (i18n)
   * Initializes locale property files upon startup for better performance
