@@ -294,11 +294,13 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 
 ### TGPlatformUtil
-#### Check isMobile, isIOS, isMobile, operatingSystem etc
+#### Check isApp, isDesktop, isWeb, isIOS, isAndroid, operatingSystem etc
 ```
+    bool isApp = TGPlatformUtil.isApp();
+    bool isDesktop = TGPlatformUtil.isDesktop();
+    bool isWeb = TGPlatformUtil.isWeb();
     bool isAndroid = TGPlatformUtil.isAndroid();
     bool isIOS = TGPlatformUtil.isIOS();
-    bool isMobile = TGPlatformUtil.isMobile();
     String operatingSystem = TGPlatformUtil.operatingSystem();
 ```
 
