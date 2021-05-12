@@ -1,4 +1,4 @@
-## 1.2.2
+## 1.2.2+1
 * Platform
   * TGPlatformUtil gives quick check for iOS, Android, Mobile, Package Config, Local Host Name, Operating System etc.
 
