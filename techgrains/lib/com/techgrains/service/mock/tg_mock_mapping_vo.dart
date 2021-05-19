@@ -1,13 +1,13 @@
 class TGMockMappingVO {
-  String uri;
-  final String method;
-  final bool applyMock;
-  final int httpStatus;
-  final String successFile;
-  final String errorFile;
+  String? uri;
+  final String? method;
+  final bool? applyMock;
+  final int? httpStatus;
+  final String? successFile;
+  final String? errorFile;
 
-  String successString;
-  String errorString;
+  late String successString;
+  late String errorString;
 
   TGMockMappingVO(
       {this.uri,

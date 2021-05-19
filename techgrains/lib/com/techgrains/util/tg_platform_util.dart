@@ -90,7 +90,7 @@ class TGPlatformUtil {
     }
   }
 
-  static String packageConfig() {
+  static String? packageConfig() {
     try {
       return Platform.packageConfig;
     } catch (e) {

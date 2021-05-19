@@ -11,7 +11,7 @@ void main() {
   setUp(() {});
 
   tearDown(() {
-    TGAccessMatrix.getInstance().invalidate();
+    TGAccessMatrix.getInstance()!.invalidate();
   });
 
   TGAccessMatrixVO createMatrix(String key, int roleId, bool read, bool update,
@@ -26,104 +26,105 @@ void main() {
   }
 
   test('has on empty ', () async {
-    expect(TGAccessMatrix.getInstance().hasCreate("key1", roleIds: [1]), false);
+    expect(
+        TGAccessMatrix.getInstance()!.hasCreate("key1", roleIds: [1]), false);
   });
 
   test('CRUD check for 1 role', () async {
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 1, true, true, false, false));
-    TGAccessMatrix.getInstance().applyRoles([1]);
-    expect(TGAccessMatrix.getInstance().hasRead("1"), true);
-    expect(TGAccessMatrix.getInstance().hasUpdate("1"), true);
-    expect(TGAccessMatrix.getInstance().hasDelete("1"), false);
-    expect(TGAccessMatrix.getInstance().hasCreate("1"), false);
+    TGAccessMatrix.getInstance()!.applyRoles([1]);
+    expect(TGAccessMatrix.getInstance()!.hasRead("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("1"), false);
 
-    TGAccessMatrix.getInstance().applyRoles([0]);
-    expect(TGAccessMatrix.getInstance().hasRead("0"), false);
-    expect(TGAccessMatrix.getInstance().hasUpdate("0"), false);
-    expect(TGAccessMatrix.getInstance().hasDelete("0"), false);
-    expect(TGAccessMatrix.getInstance().hasCreate("0"), false);
+    TGAccessMatrix.getInstance()!.applyRoles([0]);
+    expect(TGAccessMatrix.getInstance()!.hasRead("0"), false);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("0"), false);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("0"), false);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("0"), false);
   });
 
   test('CRUD check for multiple roles', () async {
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 1, true, true, false, false));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 2, true, false, true, false));
-    TGAccessMatrix.getInstance().applyRoles([1, 2]);
-    expect(TGAccessMatrix.getInstance().hasRead("1"), true);
-    expect(TGAccessMatrix.getInstance().hasUpdate("1"), true);
-    expect(TGAccessMatrix.getInstance().hasDelete("1"), true);
-    expect(TGAccessMatrix.getInstance().hasCreate("1"), false);
+    TGAccessMatrix.getInstance()!.applyRoles([1, 2]);
+    expect(TGAccessMatrix.getInstance()!.hasRead("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("1"), false);
   });
 
   test('Default roles', () async {
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 1, true, true, false, false));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 2, true, false, true, false));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 3, true, false, false, true));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 4, true, false, false, false));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 5, false, true, false, false));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 6, false, false, true, false));
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 7, false, false, false, true));
 
-    expect(TGAccessMatrix.getInstance().hasRead("1"), false);
-    expect(TGAccessMatrix.getInstance().hasUpdate("1"), false);
-    expect(TGAccessMatrix.getInstance().hasDelete("1"), false);
-    expect(TGAccessMatrix.getInstance().hasCreate("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasRead("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("1"), false);
 
-    TGAccessMatrix.getInstance().applyRoles([4, 5, 6, 7]);
-    expect(TGAccessMatrix.getInstance().hasRead("1"), true);
-    expect(TGAccessMatrix.getInstance().hasUpdate("1"), true);
-    expect(TGAccessMatrix.getInstance().hasDelete("1"), true);
-    expect(TGAccessMatrix.getInstance().hasCreate("1"), true);
+    TGAccessMatrix.getInstance()!.applyRoles([4, 5, 6, 7]);
+    expect(TGAccessMatrix.getInstance()!.hasRead("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("1"), true);
 
-    TGAccessMatrix.getInstance().applyRoles([6, 7]);
-    expect(TGAccessMatrix.getInstance().hasRead("1"), false);
-    expect(TGAccessMatrix.getInstance().hasUpdate("1"), false);
-    expect(TGAccessMatrix.getInstance().hasDelete("1"), true);
-    expect(TGAccessMatrix.getInstance().hasCreate("1"), true);
+    TGAccessMatrix.getInstance()!.applyRoles([6, 7]);
+    expect(TGAccessMatrix.getInstance()!.hasRead("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("1"), false);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("1"), true);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("1"), true);
 
-    expect(TGAccessMatrix.getInstance().hasRead("1", roleIds: [1]), true);
-    expect(TGAccessMatrix.getInstance().hasUpdate("1", roleIds: [1]), true);
-    expect(TGAccessMatrix.getInstance().hasDelete("1", roleIds: [1]), false);
-    expect(TGAccessMatrix.getInstance().hasCreate("1", roleIds: [1]), false);
+    expect(TGAccessMatrix.getInstance()!.hasRead("1", roleIds: [1]), true);
+    expect(TGAccessMatrix.getInstance()!.hasUpdate("1", roleIds: [1]), true);
+    expect(TGAccessMatrix.getInstance()!.hasDelete("1", roleIds: [1]), false);
+    expect(TGAccessMatrix.getInstance()!.hasCreate("1", roleIds: [1]), false);
   });
 
   test('remove', () async {
-    TGAccessMatrix.getInstance()
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 1, true, true, false, false));
-    expect(TGAccessMatrix.getInstance().size(), 1);
-    TGAccessMatrix.getInstance().remove("1", 0);
-    expect(TGAccessMatrix.getInstance().size(), 1);
-    TGAccessMatrix.getInstance().remove("0", 1);
-    expect(TGAccessMatrix.getInstance().size(), 1);
-    TGAccessMatrix.getInstance().remove("1", 1);
-    expect(TGAccessMatrix.getInstance().size(), 0);
+    expect(TGAccessMatrix.getInstance()!.size(), 1);
+    TGAccessMatrix.getInstance()!.remove("1", 0);
+    expect(TGAccessMatrix.getInstance()!.size(), 1);
+    TGAccessMatrix.getInstance()!.remove("0", 1);
+    expect(TGAccessMatrix.getInstance()!.size(), 1);
+    TGAccessMatrix.getInstance()!.remove("1", 1);
+    expect(TGAccessMatrix.getInstance()!.size(), 0);
   });
 
   test('invalidate', () async {
-    expect(TGAccessMatrix.getInstance().size(), 0);
-    TGAccessMatrix.getInstance()
+    expect(TGAccessMatrix.getInstance()!.size(), 0);
+    TGAccessMatrix.getInstance()!
         .add(createMatrix("1", 1, true, true, false, false));
-    expect(TGAccessMatrix.getInstance().size(), 1);
-    TGAccessMatrix.getInstance().invalidate();
-    expect(TGAccessMatrix.getInstance().size(), 0);
+    expect(TGAccessMatrix.getInstance()!.size(), 1);
+    TGAccessMatrix.getInstance()!.invalidate();
+    expect(TGAccessMatrix.getInstance()!.size(), 0);
   });
 
   test('timestamp', () async {
     TGLog.d(
-        "createdAt = " + TGAccessMatrix.getInstance().createdAt().toString());
-    TGLog.d(
-        "validSince = " + TGAccessMatrix.getInstance().validSince().toString());
+        "createdAt = " + TGAccessMatrix.getInstance()!.createdAt().toString());
+    TGLog.d("validSince = " +
+        TGAccessMatrix.getInstance()!.validSince().toString());
     sleep(Duration(seconds: 1));
-    TGLog.d(
-        "validSince = " + TGAccessMatrix.getInstance().validSince().toString());
+    TGLog.d("validSince = " +
+        TGAccessMatrix.getInstance()!.validSince().toString());
   });
 }

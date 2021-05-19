@@ -5,19 +5,16 @@ import 'package:techgrains/com/techgrains/listener/tg_shared_preferences_listene
 /// TGFramework's Shared Preferences implementation
 class TGSharedPreferences {
   /// Singleton instance
-  static TGSharedPreferences _instance;
+  static TGSharedPreferences _instance = new TGSharedPreferences._();
 
   /// Holds all TGSharedPreferences listeners
-  Set<TGSharedPreferencesListener> _listeners;
+  late Set<TGSharedPreferencesListener> _listeners;
 
   /// Created At timestamp
-  DateTime _createdAt;
+  DateTime? _createdAt;
 
   /// Gets TGSharedPreferences's instance reference
   static TGSharedPreferences getInstance() {
-    if (_instance == null) {
-      _instance = new TGSharedPreferences._();
-    }
     return _instance;
   }
 
@@ -98,12 +95,12 @@ class TGSharedPreferences {
   }
 
   /// Add listener
-  void addListener(TGSharedPreferencesListener listener) {
+  void addListener(TGSharedPreferencesListener? listener) {
     if (listener != null) _listeners.add(listener);
   }
 
   /// Remove listener
-  void removeListener(TGSharedPreferencesListener listener) {
+  void removeListener(TGSharedPreferencesListener? listener) {
     if (listener != null) _listeners.remove(listener);
   }
 
@@ -113,12 +110,12 @@ class TGSharedPreferences {
   }
 
   /// TGSharedPreferences created at
-  DateTime createdAt() {
+  DateTime? createdAt() {
     return _createdAt;
   }
 
   /// Number of milliseconds passed since valid TGSharedPreferences has been created
   Duration validSince() {
-    return DateTime.now().difference(_createdAt);
+    return DateTime.now().difference(_createdAt!);
   }
 }

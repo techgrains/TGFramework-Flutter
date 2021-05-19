@@ -41,7 +41,10 @@ class TGLog {
   }
 
   /// Print with timestamp
-  static _print(String tag, Object obj) {
-    print(DateTime.now().toString() + "[" + tag + "] " + obj?.toString());
+  static _print(String tag, Object? obj) {
+    StringBuffer sb = StringBuffer(DateTime.now().toString());
+    sb.write("[" + tag + "] ");
+    if (obj != null) sb.write(obj.toString());
+    print(sb.toString());
   }
 }

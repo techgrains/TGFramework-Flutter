@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
@@ -29,9 +28,9 @@ class TGService<T extends TGResponse, E extends TGError> {
       TGClientFactory.getClient(url, method);
 
   static init(
-      {String baseUrl,
-      Map<String, String> headers,
-      String mockMappingsFile,
+      {required String baseUrl,
+      Map<String, String>? headers,
+      String? mockMappingsFile,
       bool applyMock = false,
       bool badCertificateCallbackEnabled = false}) {
     // For HTTP Request
@@ -40,16 +39,17 @@ class TGService<T extends TGResponse, E extends TGError> {
 
     // For Mock
     TGMockService.applyMock = applyMock;
-    TGMockService.loadMockMappings(mockMappingsFile);
+    if (mockMappingsFile != null)
+      TGMockService.loadMockMappings(mockMappingsFile);
 
     // For HTTP Client
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
   }
 
   Future<T> get(
-      {@required TGGetRequest request,
-      Function onSuccess(T),
-      Function onError(T)}) async {
+      {required TGGetRequest request,
+      Function onSuccess(T)?,
+      Function onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("GET", uri);
     final httpRes = await _getClient(request.getUri(), "GET")
@@ -58,9 +58,9 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> post(
-      {@required TGPostRequest request,
-      Function onSuccess(T),
-      Function onError(T)}) async {
+      {required TGPostRequest request,
+      Function onSuccess(T)?,
+      Function onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("POST", uri);
     final httpRes = await _getClient(request.getUri(), "POST").post(
@@ -72,9 +72,9 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> put(
-      {@required TGPutRequest request,
-      Function onSuccess(T),
-      Function onError(T)}) async {
+      {required TGPutRequest request,
+      Function onSuccess(T)?,
+      Function onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("PUT", uri);
     final httpRes = await _getClient(request.getUri(), "PUT").put(
@@ -86,9 +86,9 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> delete(
-      {@required TGDeleteRequest request,
-      Function onSuccess(T),
-      Function onError(T)}) async {
+      {required TGDeleteRequest request,
+      Function onSuccess(T)?,
+      Function onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("DELETE", uri);
     final httpRes = await _getClient(request.getUri(), "DELETE")
@@ -97,27 +97,27 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> upload(
-      {@required TGUploadRequest request,
-      Function onSuccess(T),
-      Function onError(T)}) async {
+      {required TGUploadRequest request,
+      Function onSuccess(T)?,
+      Function onError(T)?}) async {
     var multipartRequest = http.MultipartRequest(
         "POST",
         Uri.parse(
             TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
-    if (request.file() != null) multipartRequest.files.add(request.file());
+    multipartRequest.files.add(request.file());
     StreamedResponse httpRes = await multipartRequest.send();
     return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
   }
 
-  T _performCallback(Response httpRes, Function onError(dynamic T),
-      Function onSuccess(dynamic T)) {
+  T _performCallback(Response httpRes, Function onError(dynamic T)?,
+      Function onSuccess(dynamic T)?) {
     T t = _prepareResponse(httpRes);
-    t.hasError ? onError(t) : onSuccess(t);
+    t.hasError ? onError!(t) : onSuccess!(t);
     return t;
   }
 
   T _performCallbackForStreamedResponse(StreamedResponse httpRes,
-      Function onError(dynamic T), Function onSuccess(dynamic T)) {
+      Function onError(dynamic T)?, Function onSuccess(dynamic T)?) {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
@@ -127,7 +127,7 @@ class TGService<T extends TGResponse, E extends TGError> {
       TGLog.e(e);
       // Ignores error if not able to populate response, validate response or decode json. Populated response must be returned.
     }
-    t.hasError ? onError(t) : onSuccess(t);
+    t.hasError ? onError!(t) : onSuccess!(t);
     return t;
   }
 
@@ -153,12 +153,12 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   void _validateResponse(T t) {
     t.validate(); // Populates hasError based on HTTP Status Code
-    if (t.body != null && t.body.isNotEmpty) {
+    if (t.body != null && t.body!.isNotEmpty) {
       try {
         if (t.hasError) {
-          t.error = creatorE().fromJson(jsonDecode(t.body));
+          t.error = creatorE().fromJson(jsonDecode(t.body!));
         } else {
-          t.fromJson(jsonDecode(t.body));
+          t.fromJson(jsonDecode(t.body!));
         }
       } catch (e) {
         TGLog.e("Unable to prepare - " +

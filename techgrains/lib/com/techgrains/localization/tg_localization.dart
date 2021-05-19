@@ -6,9 +6,9 @@ import 'tg_locale.dart';
 
 /// Localization for each locale loads values from json file.
 class TGLocalization {
-  final Locale locale;
+  final Locale? locale;
   static const LOCALE_PATH = "assets/locale/";
-  Map<String, dynamic> _entries;
+  Map<String, dynamic>? _entries;
 
   TGLocalization(this.locale);
 
@@ -23,12 +23,12 @@ class TGLocalization {
   }
 
   String _deriveFileName() {
-    return TGLocale.generateCode(locale) + ".json";
+    return TGLocale.generateCode(locale!) + ".json";
   }
 
   /// Text related to localised key. In case of entry won't found, will return back key as text.
   String text(String key) {
-    dynamic value = _entries[key];
+    dynamic value = _entries![key];
     return (value != null && value.toString().length > 0) ? value : key;
   }
 }

@@ -1,22 +1,22 @@
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 
 abstract class TGRequest {
-  static Map<String, String> defaultHeaders;
-  static String defaultBaseUrl;
+  static Map<String, String>? defaultHeaders;
+  static String? defaultBaseUrl;
 
-  String getBaseUrl() {
+  String? getBaseUrl() {
     return defaultBaseUrl;
   }
 
   String getUri();
 
-  Map<String, String> headers() {
+  Map<String, String>? headers() {
     return defaultHeaders;
   }
 
   String getUrl() {
     String uri = getUri();
-    String url = defaultBaseUrl;
+    String? url = defaultBaseUrl;
     if (url == null || url.length == 0) {
       TGLog.e(
           "Set baseUrl once: TGService.init(baseUrl: 'https://api.product.com/v1')");
@@ -24,7 +24,7 @@ abstract class TGRequest {
     return prepareUrl(url, uri);
   }
 
-  static String prepareUrl(String url, String uri) {
+  static String prepareUrl(String? url, String? uri) {
     if (url == null) url = "";
     if (uri == null) uri = "";
 
