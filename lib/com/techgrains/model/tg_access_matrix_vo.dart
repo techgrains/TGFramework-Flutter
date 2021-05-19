@@ -1,12 +1,12 @@
 class TGAccessMatrixVO {
-  String key;
-  int roleId;
-  String module;
-  String access;
-  bool create;
-  bool delete;
-  bool update;
-  bool read;
+  String? key;
+  int? roleId;
+  String? module;
+  String? access;
+  bool? create;
+  bool? delete;
+  bool? update;
+  bool? read;
 
   TGAccessMatrixVO(
       {this.key,
@@ -43,5 +43,5 @@ class TGAccessMatrixVO {
   bool operator ==(o) =>
       o is TGAccessMatrixVO && key == o.key && roleId == o.roleId;
 
-  int get hashCode => (key + roleId.toString()).hashCode;
+  int get hashCode => (key! + roleId.toString()).hashCode;
 }

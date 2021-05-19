@@ -14,7 +14,7 @@ class TGValidate {
   static const String _ALPHANUMERIC_PATTERN = r'^[a-zA-Z0-9]+$';
 
   /// Has Value
-  static bool hasValue(dynamic value) {
+  static bool? hasValue(dynamic value) {
     if (value == null) return false;
     if (value is num) return value != 0;
     if (value is String || value is Iterable || value is Map)
@@ -23,7 +23,7 @@ class TGValidate {
     return true;
   }
 
-  static String nullSafeString(String value, {String defaultValue}) {
+  static String nullSafeString(String? value, {String? defaultValue}) {
     return value == null ? (defaultValue == null ? "" : defaultValue) : value;
   }
 

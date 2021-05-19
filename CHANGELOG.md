@@ -1,3 +1,7 @@
+## 1.3.0+1
+* Migrating to null safety
+* Upgraded flutter environment version 
+
 ## 1.2.2+1
 * Platform
   * TGPlatformUtil gives quick check for iOS, Android, Mobile, Package Config, Local Host Name, Operating System etc.

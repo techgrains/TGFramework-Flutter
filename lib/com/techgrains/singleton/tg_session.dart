@@ -4,20 +4,19 @@ import 'package:techgrains/com/techgrains/listener/tg_session_listener.dart';
 /// TGFramework's Session implementation
 class TGSession {
   /// Singleton instance
-  static TGSession _instance;
+  static TGSession _instance = new TGSession._();
 
   /// Holds all key-values as Map
-  Map<String, Object> _map;
+  late Map<String, Object> _map;
 
   /// Holds all TGSession listeners
-  Set<TGSessionListener> _listeners;
+  late Set<TGSessionListener> _listeners;
 
   /// Created At timestamp
-  DateTime _createdAt;
+  DateTime? _createdAt;
 
   /// Gets TGSession's instance reference
   static TGSession getInstance() {
-    if (_instance == null) _instance = new TGSession._();
     return _instance;
   }
 
@@ -64,12 +63,12 @@ class TGSession {
   }
 
   /// Add listener
-  void addListener(TGSessionListener listener) {
+  void addListener(TGSessionListener? listener) {
     if (listener != null) _listeners.add(listener);
   }
 
   /// Remove listener
-  void removeListener(TGSessionListener listener) {
+  void removeListener(TGSessionListener? listener) {
     if (listener != null) _listeners.remove(listener);
   }
 
@@ -79,12 +78,12 @@ class TGSession {
   }
 
   /// TGSession created at
-  DateTime createdAt() {
+  DateTime? createdAt() {
     return _createdAt;
   }
 
   /// Number of milliseconds passed since valid TGSession has been created
   Duration validSince() {
-    return DateTime.now().difference(_createdAt);
+    return DateTime.now().difference(_createdAt!);
   }
 }

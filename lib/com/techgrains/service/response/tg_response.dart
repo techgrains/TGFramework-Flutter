@@ -1,9 +1,9 @@
 abstract class TGResponse {
-  int timestamp;
-  int httpStatus;
-  int contentLength;
-  Map<String, String> headers;
-  String body;
+  int? timestamp;
+  late int httpStatus;
+  int? contentLength;
+  Map<String, String>? headers;
+  String? body;
 
   bool hasError = false;
   dynamic error;

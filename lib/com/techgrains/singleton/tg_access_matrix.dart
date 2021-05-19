@@ -4,7 +4,7 @@ import 'package:techgrains/com/techgrains/model/tg_access_matrix_vo.dart';
 /// TGFramework's Access Matrix implementation
 class TGAccessMatrix {
   /// Singleton instance
-  static TGAccessMatrix _instance;
+  static TGAccessMatrix _instance = new TGAccessMatrix._();
 
   /// Flag Types
   static const int READ = 1;
@@ -13,17 +13,16 @@ class TGAccessMatrix {
   static const int CREATE = 8;
 
   /// Holds all Access Matrix as List
-  List<TGAccessMatrixVO> list;
-  Map<String, Map<int, bool>>
-      flags; // String: key~roleId, int: Flag Type, bool: flag
-  List<int> roleIds;
+  late List<TGAccessMatrixVO> list = [];
+  late Map<String, Map<int, bool?>> flags =
+      {}; // String: key~roleId, int: Flag Type, bool: flag
+  List<int>? roleIds = [];
 
   /// Created At timestamp
-  DateTime _createdAt;
+  DateTime? _createdAt = DateTime.now();
 
   /// Gets TGAccessMatrix's instance reference
   static TGAccessMatrix getInstance() {
-    if (_instance == null) _instance = new TGAccessMatrix._();
     return _instance;
   }
 
@@ -35,10 +34,6 @@ class TGAccessMatrix {
   /// Initialize
   void _init() {
     TGLog.d("TGAccessMatrix : init");
-    list = new List();
-    flags = new Map();
-    roleIds = new List();
-    _createdAt = DateTime.now();
   }
 
   /// Add to Access Matrix list
@@ -51,16 +46,16 @@ class TGAccessMatrix {
   /// Add individual Access Matrix
   void add(TGAccessMatrixVO accessMatrixVO) {
     list.add(accessMatrixVO);
-    String mapKey = _mapKey(accessMatrixVO.key, accessMatrixVO.roleId);
+    String mapKey = _mapKey(accessMatrixVO.key!, accessMatrixVO.roleId);
     if (flags.containsKey(mapKey)) flags.remove(mapKey);
     flags.putIfAbsent(mapKey, () => _mapValue(accessMatrixVO));
   }
 
-  String _mapKey(String key, int roleId) {
+  String _mapKey(String key, int? roleId) {
     return key + "~" + roleId.toString();
   }
 
-  Map<int, bool> _mapValue(TGAccessMatrixVO accessMatrixVO) {
+  Map<int, bool?> _mapValue(TGAccessMatrixVO accessMatrixVO) {
     return {
       READ: accessMatrixVO.read,
       UPDATE: accessMatrixVO.update,
@@ -76,38 +71,38 @@ class TGAccessMatrix {
   }
 
   /// Apply Roles
-  void applyRoles(List<int> roleIds) {
-    if (roleIds == null) this.roleIds = new List();
+  void applyRoles(List<int>? roleIds) {
+    if (roleIds == null) this.roleIds = [];
     this.roleIds = roleIds;
   }
 
   /// Gets Read flag for given key and roles
-  bool hasRead(String key, {List<int> roleIds}) {
+  bool hasRead(String key, {List<int>? roleIds}) {
     return _has(key, roleIds, READ);
   }
 
   /// Gets Update flag for given key and roles
-  bool hasUpdate(String key, {List<int> roleIds}) {
+  bool hasUpdate(String key, {List<int>? roleIds}) {
     return _has(key, roleIds, UPDATE);
   }
 
   /// Gets Delete flag for given key and roles
-  bool hasDelete(String key, {List<int> roleIds}) {
+  bool hasDelete(String key, {List<int>? roleIds}) {
     return _has(key, roleIds, DELETE);
   }
 
   /// Gets Create flag for given key and roles
-  bool hasCreate(String key, {List<int> roleIds}) {
+  bool hasCreate(String key, {List<int>? roleIds}) {
     return _has(key, roleIds, CREATE);
   }
 
   /// Gets flag for given key, roles and flag type
-  bool _has(String key, List<int> roleIds, int flagType) {
-    List<int> checkRoles = roleIds != null ? roleIds : this.roleIds;
+  bool _has(String key, List<int>? roleIds, int flagType) {
+    List<int> checkRoles = roleIds != null ? roleIds : this.roleIds!;
     if (checkRoles.length == 0) return false;
     for (int roleId in checkRoles) {
       String mapKey = _mapKey(key, roleId);
-      if (flags.containsKey(mapKey)) if (flags[mapKey][flagType]) return true;
+      if (flags.containsKey(mapKey)) if (flags[mapKey]![flagType]!) return true;
     }
     return false;
   }
@@ -123,12 +118,12 @@ class TGAccessMatrix {
   }
 
   /// TGAccessMatrix created at
-  DateTime createdAt() {
+  DateTime? createdAt() {
     return _createdAt;
   }
 
   /// Number of milliseconds passed since valid TGAccessMatrix has been created
   Duration validSince() {
-    return DateTime.now().difference(_createdAt);
+    return DateTime.now().difference(_createdAt!);
   }
 }

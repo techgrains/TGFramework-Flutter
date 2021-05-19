@@ -5,14 +5,14 @@ import 'tg_localization.dart';
 
 /// Supported, default and current locale holders with locale related supporting features
 class TGLocale {
-  static Iterable<Locale> supportedLocales;
-  static Locale defaultLocale;
-  static Locale currentLocale;
+  static late Iterable<Locale> supportedLocales = [];
+  static Locale defaultLocale = const Locale("en", "US");
+  static Locale currentLocale = defaultLocale;
   static Map<String, TGLocalization> localizations = {};
 
   /// Callback for locale resolution
-  static Locale localeResolutionCallback(
-      Locale locale, Iterable<Locale> supportedLocales) {
+  static Locale? localeResolutionCallback(
+      Locale? locale, Iterable<Locale> supportedLocales) {
     if (locale != null)
       for (var supportedLocale in supportedLocales)
         if (supportedLocale.languageCode == locale.languageCode) {
@@ -26,7 +26,7 @@ class TGLocale {
 
   /// Initialize Localization (i18n) implementation
   static void init(
-      {@required Locale defaultLocale, List<Locale> otherLocales}) {
+      {required Locale defaultLocale, List<Locale>? otherLocales}) {
     List<Locale> supportedLocales = [];
     supportedLocales.add(defaultLocale);
     if (otherLocales != null && otherLocales.length > 0)
@@ -44,8 +44,8 @@ class TGLocale {
   }
 
   /// Text value of provided key with optional args which replaces each {index}
-  static String text(final String key, {List<String> args}) {
-    TGLocalization currentLocalization =
+  static String text(final String key, {List<String>? args}) {
+    TGLocalization? currentLocalization =
         localizations[currentLocale.toString()];
     if (currentLocalization == null) return key;
     String value = currentLocalization.text(key);
@@ -64,14 +64,15 @@ class TGLocale {
   /// Generate code for provided locale
   static String generateCode(Locale locale) {
     return locale.languageCode +
-        ((locale.countryCode != null && locale.countryCode.length > 0)
-            ? "_" + locale.countryCode
+        ((locale.countryCode != null && locale.countryCode!.length > 0)
+            ? "_" + locale.countryCode!
             : "");
   }
 
   /// Find locale from supported list based on provided code. i.e. Locale ("en", "US") = "en_US"
   static Locale findLocaleByCode(String code) {
-    return supportedLocales.firstWhere((locale) => code == generateCode(locale),
-        orElse: () => defaultLocale);
+    for (Locale locale in supportedLocales)
+      if (code == generateCode(locale)) return locale;
+    return defaultLocale;
   }
 }

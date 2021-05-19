@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 /// TGFramework's View related implementation
 class TGView {
-  static ThemeData _theme;
+  static ThemeData? _theme;
 
   // ***   Theme   *** //
 
   /// Reference of Theme
-  static ThemeData theme() {
+  static ThemeData? theme() {
     if (_theme == null) loadLightTheme();
     return _theme;
   }
@@ -30,48 +30,48 @@ class TGView {
 
   /// Reference of TextTheme
   static TextTheme textTheme() {
-    return theme().textTheme;
+    return theme()!.textTheme;
   }
 
   /// Reference of AppBarTheme
   static AppBarTheme appBarTheme() {
-    return theme().appBarTheme;
+    return theme()!.appBarTheme;
   }
 
   /// Reference of TabBarTheme
   static TabBarTheme tabBarTheme() {
-    return theme().tabBarTheme;
+    return theme()!.tabBarTheme;
   }
 
   /// Reference of TargetPlatform
   static TargetPlatform platform() {
-    return theme().platform;
+    return theme()!.platform;
   }
 
   // ***   Colors   *** //
 
   /// Body Color: TextTheme applies `bodyColor` to headline5, headline6, subtitle1, subtitle2, button, bodyText1, bodyText2 and overline.
-  static Color bodyColor() {
-    return textTheme().bodyText1.color;
+  static Color? bodyColor() {
+    return textTheme().bodyText1!.color;
   }
 
   /// Display Color: TextTheme applies `displayColor` is applied to headline1, headline2, headline3, headline4 and caption.
-  static Color displayColor() {
-    return textTheme().caption.color;
+  static Color? displayColor() {
+    return textTheme().caption!.color;
   }
 
   // ***   Divider   *** //
 
   /// Standard Divider
-  static Widget divider({double height}) {
-    return Divider(height: height, color: theme().dividerColor);
+  static Widget divider({double? height}) {
+    return Divider(height: height, color: theme()!.dividerColor);
   }
 
   // ***   Container   *** //
 
   /// Common Scaffold Container
   static Scaffold scaffoldContainer(List<Widget> widgets,
-      {Container backgroundContainer}) {
+      {Container? backgroundContainer}) {
     return Scaffold(
       body: Container(
         child: new Stack(
@@ -107,7 +107,7 @@ class TGView {
   }
 
   /// Empty Sized Box with given height and/or width
-  static Widget emptySizedBox({double height, double width}) {
+  static Widget emptySizedBox({double? height, double? width}) {
     return SizedBox(
       height: height,
       width: width,
@@ -116,13 +116,13 @@ class TGView {
 
   /// Row container to display widgets row. Left & Right aligned
   static Container rowContainer(
-      {EdgeInsetsGeometry margin,
-      EdgeInsetsGeometry padding,
+      {EdgeInsetsGeometry? margin,
+      EdgeInsetsGeometry? padding,
       CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
       Color color = Colors.transparent,
-      List<Widget> left,
-      List<Widget> center,
-      List<Widget> right}) {
+      List<Widget>? left,
+      List<Widget>? center,
+      List<Widget>? right}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (padding == null) padding = EdgeInsets.all(0);
     List<Widget> children = [];
@@ -167,12 +167,12 @@ class TGView {
 
   /// Column container to display
   static Container columnContainer(
-      {EdgeInsetsGeometry margin,
-      EdgeInsetsGeometry padding,
+      {EdgeInsetsGeometry? margin,
+      EdgeInsetsGeometry? padding,
       Color color = Colors.transparent,
-      CrossAxisAlignment crossAxisAlignment,
-      MainAxisAlignment mainAxisAlignment,
-      List<Widget> children}) {
+      CrossAxisAlignment? crossAxisAlignment,
+      MainAxisAlignment? mainAxisAlignment,
+      required List<Widget> children}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (crossAxisAlignment == null)
       crossAxisAlignment = CrossAxisAlignment.center;
@@ -191,12 +191,12 @@ class TGView {
 
   /// Multiple Columns container to display
   static Container columnsContainer({
-    List<List<Widget>> columns,
-    EdgeInsetsGeometry margin,
-    EdgeInsetsGeometry padding,
+    required List<List<Widget>> columns,
+    EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding,
     Color color = Colors.transparent,
-    MainAxisAlignment mainAxisAlignment,
-    CrossAxisAlignment crossAxisAlignment,
+    MainAxisAlignment? mainAxisAlignment,
+    CrossAxisAlignment? crossAxisAlignment,
   }) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (crossAxisAlignment == null)
@@ -207,8 +207,8 @@ class TGView {
       children.add(
         Expanded(
             child: Column(
-                crossAxisAlignment: crossAxisAlignment,
-                mainAxisAlignment: mainAxisAlignment,
+                crossAxisAlignment: crossAxisAlignment!,
+                mainAxisAlignment: mainAxisAlignment!,
                 children: column)),
       );
     });
@@ -226,12 +226,12 @@ class TGView {
 
   /// Box Container
   static Container boxContainer(
-      {EdgeInsetsGeometry margin,
-      EdgeInsetsGeometry padding,
+      {EdgeInsetsGeometry? margin,
+      EdgeInsetsGeometry? padding,
       CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
       Color color = Colors.transparent,
       Color borderColor = Colors.transparent,
-      List<Widget> children,
+      required List<Widget> children,
       double borderWidth = 0.5,
       double borderRadius = 10}) {
     if (margin == null) margin = EdgeInsets.all(0);
@@ -255,7 +255,7 @@ class TGView {
 
   /// App Bar Back Button
   static IconButton appBarBackButton(
-      {@required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
+      {required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
     return IconButton(
       icon: Icon(icon),
       onPressed: () {
@@ -268,14 +268,14 @@ class TGView {
 
   /// Show Snackbar
   static void showSnackBar(
-      {@required BuildContext context,
-      @required String message,
-      Duration duration,
-      Color backgroundColor,
+      {required BuildContext context,
+      required String message,
+      Duration? duration,
+      Color? backgroundColor,
       SnackBarBehavior behavior = SnackBarBehavior.floating}) {
     if (duration == null) duration = Duration(seconds: 2);
-    if (backgroundColor == null) backgroundColor = theme().accentColor;
-    Scaffold.of(context).showSnackBar(SnackBar(
+    if (backgroundColor == null) backgroundColor = theme()!.accentColor;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       backgroundColor: backgroundColor,
       behavior: behavior,
@@ -294,16 +294,16 @@ class TGView {
 
   /// Show alert dialog with various components
   static void showAlertDialog(
-      {@required BuildContext context,
-      List<Widget> titleRowWidgets,
-      Widget content,
-      List<Widget> actions,
-      Function onDismiss}) {
+      {required BuildContext context,
+      List<Widget>? titleRowWidgets,
+      Widget? content,
+      List<Widget>? actions,
+      Function? onDismiss}) {
     if (titleRowWidgets == null) titleRowWidgets = [];
     showDialog(
         context: context,
         builder: (context) => new AlertDialog(
-              title: Row(children: titleRowWidgets),
+              title: Row(children: titleRowWidgets!),
               content: content,
               actions: actions,
             )).then((value) => {
@@ -316,11 +316,11 @@ class TGView {
 
   /// Popup Menu Item
   static PopupMenuItem popupMenuItem(
-      {IconData icon,
-      String text,
+      {IconData? icon,
+      String? text,
       dynamic value,
-      Color iconColor,
-      Color textColor}) {
+      Color? iconColor,
+      Color? textColor}) {
     return PopupMenuItem(
         value: value,
         child: rowContainer(margin: EdgeInsets.all(0), left: [
@@ -332,13 +332,13 @@ class TGView {
 
   /// Refresh Indicator
   static RefreshIndicator refreshIndicator(
-      {List<Widget> widgets,
-      Function onRefresh,
+      {required List<Widget> widgets,
+      required Function onRefresh,
       Color backgroundContainerColor = Colors.transparent}) {
     return RefreshIndicator(
       child: scaffoldContainer(widgets,
           backgroundContainer: Container(color: backgroundContainerColor)),
-      onRefresh: onRefresh,
+      onRefresh: onRefresh as Future<void> Function(),
     );
   }
 

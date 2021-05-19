@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
@@ -36,16 +37,17 @@ class TGFileUtil {
 
   /// Read JSon file as Map specifically for provided group and subgroup
   static Future<Map<String, dynamic>> readYamlFile(String yamlFile,
-      {String group, String subGroup}) async {
+      {String? group, String? subGroup}) async {
     try {
       String fileAsString = await TGFileUtil.readFile(yamlFile);
-      final Map map = loadYaml(fileAsString);
+      final Map? map = loadYaml(fileAsString);
 
-      if (group == null || group.length == 0) return map;
+      if (group == null || group.length == 0)
+        return map as FutureOr<Map<String, dynamic>>;
 
       // Group entries
       Map<String, dynamic> groupMap = <String, dynamic>{};
-      for (MapEntry<String, dynamic> entry in map[group].entries)
+      for (MapEntry<String, dynamic> entry in map![group].entries)
         groupMap[entry.key] = entry.value;
 
       if (subGroup == null || subGroup.length == 0) return groupMap;
@@ -57,7 +59,7 @@ class TGFileUtil {
 
       return subGroupMap;
     } catch (e) {
-      TGLog.e("Unable to load " + group + " from file " + yamlFile);
+      TGLog.e("Unable to load " + group! + " from file " + yamlFile);
       TGLog.e(e.toString());
     }
     return <String, dynamic>{};
