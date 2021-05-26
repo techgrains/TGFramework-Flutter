@@ -1,6 +1,12 @@
+## 1.3.1
+* Resolved null safety type casting exception for Function
+
 ## 1.3.0+1
+* Ease out null safety from some utilities 
+
+## 1.3.0
 * Migrating to null safety
-* Upgraded flutter environment version 
+* Upgraded flutter environment version
 
 ## 1.2.2+1
 * Platform
