@@ -47,9 +47,7 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> get(
-      {required TGGetRequest request,
-      Function onSuccess(T)?,
-      Function onError(T)?}) async {
+      {required TGGetRequest request, onSuccess(T)?, onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("GET", uri);
     final httpRes = await _getClient(request.getUri(), "GET")
@@ -58,9 +56,7 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> post(
-      {required TGPostRequest request,
-      Function onSuccess(T)?,
-      Function onError(T)?}) async {
+      {required TGPostRequest request, onSuccess(T)?, onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("POST", uri);
     final httpRes = await _getClient(request.getUri(), "POST").post(
@@ -72,9 +68,7 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> put(
-      {required TGPutRequest request,
-      Function onSuccess(T)?,
-      Function onError(T)?}) async {
+      {required TGPutRequest request, onSuccess(T)?, onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("PUT", uri);
     final httpRes = await _getClient(request.getUri(), "PUT").put(
@@ -86,9 +80,7 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> delete(
-      {required TGDeleteRequest request,
-      Function onSuccess(T)?,
-      Function onError(T)?}) async {
+      {required TGDeleteRequest request, onSuccess(T)?, onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("DELETE", uri);
     final httpRes = await _getClient(request.getUri(), "DELETE")
@@ -97,9 +89,7 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> upload(
-      {required TGUploadRequest request,
-      Function onSuccess(T)?,
-      Function onError(T)?}) async {
+      {required TGUploadRequest request, onSuccess(T)?, onError(T)?}) async {
     var multipartRequest = http.MultipartRequest(
         "POST",
         Uri.parse(
@@ -109,15 +99,15 @@ class TGService<T extends TGResponse, E extends TGError> {
     return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
   }
 
-  T _performCallback(Response httpRes, Function onError(dynamic T)?,
-      Function onSuccess(dynamic T)?) {
+  T _performCallback(
+      Response httpRes, onError(dynamic T)?, onSuccess(dynamic T)?) {
     T t = _prepareResponse(httpRes);
     t.hasError ? onError!(t) : onSuccess!(t);
     return t;
   }
 
-  T _performCallbackForStreamedResponse(StreamedResponse httpRes,
-      Function onError(dynamic T)?, Function onSuccess(dynamic T)?) {
+  T _performCallbackForStreamedResponse(
+      StreamedResponse httpRes, onError(dynamic T)?, onSuccess(dynamic T)?) {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);

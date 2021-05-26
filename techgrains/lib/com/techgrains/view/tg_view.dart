@@ -298,7 +298,7 @@ class TGView {
       List<Widget>? titleRowWidgets,
       Widget? content,
       List<Widget>? actions,
-      Function? onDismiss}) {
+      onDismiss}) {
     if (titleRowWidgets == null) titleRowWidgets = [];
     showDialog(
         context: context,
@@ -333,7 +333,7 @@ class TGView {
   /// Refresh Indicator
   static RefreshIndicator refreshIndicator(
       {required List<Widget> widgets,
-      required Function onRefresh,
+      required onRefresh,
       Color backgroundContainerColor = Colors.transparent}) {
     return RefreshIndicator(
       child: scaffoldContainer(widgets,
