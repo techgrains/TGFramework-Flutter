@@ -1,8 +1,8 @@
+## 1.3.2
+* Added configurations params for TG view objects
+
 ## 1.3.1
 * Resolved null safety type casting exception for Function
-
-## 1.3.0+1
-* Ease out null safety from some utilities 
 
 ## 1.3.0
 * Migrating to null safety

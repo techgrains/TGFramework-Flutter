@@ -119,6 +119,7 @@ class TGView {
       {EdgeInsetsGeometry? margin,
       EdgeInsetsGeometry? padding,
       CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
+      MainAxisSize mainAxisSize = MainAxisSize.max,
       Color color = Colors.transparent,
       List<Widget>? left,
       List<Widget>? center,
@@ -131,6 +132,7 @@ class TGView {
       children.add(Expanded(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: mainAxisSize,
           children: left,
         ),
       ));
@@ -139,6 +141,7 @@ class TGView {
       children.add(Expanded(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: mainAxisSize,
         children: center,
       )));
     }
@@ -147,6 +150,7 @@ class TGView {
         children.add(Expanded(
             child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: mainAxisSize,
           children: right,
         )));
       } else {
@@ -160,6 +164,7 @@ class TGView {
       color: color,
       child: Row(
         crossAxisAlignment: crossAxisAlignment,
+        mainAxisSize: mainAxisSize,
         children: children,
       ),
     );
@@ -172,11 +177,13 @@ class TGView {
       Color color = Colors.transparent,
       CrossAxisAlignment? crossAxisAlignment,
       MainAxisAlignment? mainAxisAlignment,
+      MainAxisSize mainAxisSize = MainAxisSize.max,
       required List<Widget> children}) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (crossAxisAlignment == null)
       crossAxisAlignment = CrossAxisAlignment.center;
     if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
+
     return Container(
       margin: margin,
       padding: padding,
@@ -184,6 +191,7 @@ class TGView {
       child: Column(
         crossAxisAlignment: crossAxisAlignment,
         mainAxisAlignment: mainAxisAlignment,
+        mainAxisSize: mainAxisSize,
         children: children,
       ),
     );
@@ -197,11 +205,13 @@ class TGView {
     Color color = Colors.transparent,
     MainAxisAlignment? mainAxisAlignment,
     CrossAxisAlignment? crossAxisAlignment,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
   }) {
     if (margin == null) margin = EdgeInsets.all(0);
     if (crossAxisAlignment == null)
       crossAxisAlignment = CrossAxisAlignment.center;
     if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
+
     List<Widget> children = [];
     columns.forEach((column) {
       children.add(
@@ -209,6 +219,7 @@ class TGView {
             child: Column(
                 crossAxisAlignment: crossAxisAlignment!,
                 mainAxisAlignment: mainAxisAlignment!,
+                mainAxisSize: mainAxisSize,
                 children: column)),
       );
     });
@@ -219,6 +230,7 @@ class TGView {
       child: Row(
         crossAxisAlignment: crossAxisAlignment,
         mainAxisAlignment: mainAxisAlignment,
+        mainAxisSize: mainAxisSize,
         children: children,
       ),
     );
