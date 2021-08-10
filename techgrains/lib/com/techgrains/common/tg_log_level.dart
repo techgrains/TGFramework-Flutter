@@ -23,4 +23,12 @@ extension TGLogLevelExtension on TGLogLevel {
         return 0;
     }
   }
+
+  TGLogLevel fromString(String value) {
+    return TGLogLevel.values.firstWhere(
+        (logLevel) =>
+            logLevel.toString().split('.')[1].toUpperCase() ==
+            value.toUpperCase(),
+        orElse: () => TGLogLevel.OFF);
+  }
 }
