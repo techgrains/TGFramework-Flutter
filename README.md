@@ -15,6 +15,8 @@ TGFramework includes following areas as part of its framework. Further in this d
   * TGLocalization: Localization for each locale loads values from json file
   * TGLocalizationsDelegate: Extended implementation of LocalizationsDelegate which Flutter uses internally
 * Util
+  * TGFlavor
+    * Supports flavor, baseUrl, logLevel, applyMock, mockMappingsFile & custom params as part of configuration
   * TGDateUtil
     * Format DateTime
     * Parse DateTime
@@ -255,6 +257,59 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 
 
 ## Util
+
+### TGFlavor
+
+#### Initialize
+```
+  TGFlavor.init("assets/config/flavors.json");
+```
+
+#### flavors.json
+```
+[
+  {
+    "flavor": "dev",
+    "baseUrl": "https://dev.api.tgportal.com",
+    "logLevel": "DEBUG",
+    "applyMock": true,
+    "mockMappingsFile": "assets/mocks/_mappings.json",
+    "params": {
+      "productListMaxCount": 10
+    }
+  },
+  {
+    "flavor": "stage",
+    "baseUrl": "https://stage.api.tgportal.com",
+    "logLevel": "INFO",
+    "applyMock": false,
+    "params": {
+      "productListMaxCount": 15
+    }
+  },
+  {
+    "flavor": "prod",
+    "baseUrl": "https://api.tgportal.com",
+    "logLevel": "ERROR",
+    "applyMock": false,
+    "params": {
+      "productListMaxCount": 20
+    }
+  }
+]
+```
+#### Access
+```
+    TGFlavor.baseUrl();
+    TGFlavor.applyMock();
+    TGFlavor.mockMappingsFile();
+    TGFlavor.param("key");
+```
+
+#### Run app with flavor name
+```
+  flutter run --dart-define=flavor=dev
+```
 
 ### TGDateUtil
 

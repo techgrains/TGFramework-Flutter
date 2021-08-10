@@ -1,3 +1,8 @@
+## 1.3.3
+* TGFlavor
+  * Implemented flavor with dart define route as suggested from Flutter 2.2 onwards.
+  * Supports flavor, baseUrl, logLevel, applyMock, mockMappingsFile & custom params as part of configuration
+
 ## 1.3.2
 * Added configurations params for TG view objects
 
