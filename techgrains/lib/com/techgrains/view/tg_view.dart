@@ -372,12 +372,12 @@ class TGView {
 
   /// Create Banner
   static Directionality banner(
-      Widget child, {
-        String message = "Banner",
-        Color bannerColor = Colors.orange,
-        Color textColor = Colors.white,
-        BannerLocation bannerLocation = BannerLocation.bottomEnd,
-      }) {
+    Widget child, {
+    String message = "Banner",
+    Color bannerColor = Colors.orange,
+    Color textColor = Colors.white,
+    BannerLocation bannerLocation = BannerLocation.bottomEnd,
+  }) {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Banner(

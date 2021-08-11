@@ -52,7 +52,8 @@ class TGFlavor {
   /// Load Current Flavor
   static void _loadCurrentFlavor() {
     TGLog.d("TGFlavor._loadCurrentFlavor");
-    String paramFlavor = TGEnvConfig.ENV_FLAVOR.length > 0 ? TGEnvConfig.ENV_FLAVOR : "";
+    String paramFlavor =
+        TGEnvConfig.ENV_FLAVOR.length > 0 ? TGEnvConfig.ENV_FLAVOR : "";
     TGLog.d("Argument for flavor = $paramFlavor");
 
     if (paramFlavor.length == 0) {
@@ -124,5 +125,4 @@ class TGFlavor {
     if (params == null) return null;
     return params[key];
   }
-
 }
