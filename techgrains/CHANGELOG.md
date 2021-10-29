@@ -1,3 +1,7 @@
+## 1.3.5
+* TGNetUtil
+  * Check reachability of site with dynamically provided URL
+
 ## 1.3.4
 * TGView 
   * Banner & clear focus with Gesture implemented in TGView 
