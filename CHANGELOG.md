@@ -1,3 +1,12 @@
+## 1.3.5
+* TGNetUtil
+  * Check reachability of site with dynamically provided URL
+
+## 1.3.4
+* TGView 
+  * Banner & clear focus with Gesture implemented in TGView 
+* Refactored TGFlavor naming and access
+
 ## 1.3.3
 * TGFlavor
   * Implemented flavor with dart define route as suggested from Flutter 2.2 onwards.

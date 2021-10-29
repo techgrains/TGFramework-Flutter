@@ -5,8 +5,7 @@ import 'package:techgrains/com/techgrains/util/tg_file_util.dart';
 
 /// Environment Config
 class TGEnvConfig {
-  static const String APP_FLAVOR = String.fromEnvironment('app.flavor');
-  static const String FLAVOR = String.fromEnvironment('flavor');
+  static const String ENV_FLAVOR = String.fromEnvironment('flavor');
 }
 
 /// TGFramework's Flavor implementation
@@ -53,7 +52,8 @@ class TGFlavor {
   /// Load Current Flavor
   static void _loadCurrentFlavor() {
     TGLog.d("TGFlavor._loadCurrentFlavor");
-    String paramFlavor = _prepareParamFlavor();
+    String paramFlavor =
+        TGEnvConfig.ENV_FLAVOR.length > 0 ? TGEnvConfig.ENV_FLAVOR : "";
     TGLog.d("Argument for flavor = $paramFlavor");
 
     if (paramFlavor.length == 0) {
@@ -61,7 +61,7 @@ class TGFlavor {
     } else {
       // Iterate flavors and match it with provided app flavor
       _flavors!.forEach((flavor) {
-        if (paramFlavor.toUpperCase() == flavor.flavor!.toUpperCase())
+        if (paramFlavor.toUpperCase() == flavor.name!.toUpperCase())
           _current = flavor;
       });
 
@@ -74,7 +74,7 @@ class TGFlavor {
     // Set logLevel to TGLog
     if (_current != null) {
       TGLog.i("- - - - - - - - - - - - - - - - - - - - - - -");
-      TGLog.i(" flavor = " + _current!.flavor.toString());
+      TGLog.i(" flavor = " + _current!.name.toString());
       TGLog.i(" baseUrl = " + _current!.baseUrl.toString());
       TGLog.i(" logLevel = " + _current!.logLevel.toString());
       TGLog.i(" applyMock = " + _current!.applyMock.toString());
@@ -90,29 +90,22 @@ class TGFlavor {
     }
   }
 
-  static String _prepareParamFlavor() {
-    if (TGEnvConfig.APP_FLAVOR.length > 0) return TGEnvConfig.APP_FLAVOR;
-    if (TGEnvConfig.FLAVOR.length > 0) return TGEnvConfig.FLAVOR;
-    return "";
+  /// Gets Base Url
+  static String name() {
+    String? name = _current?.name;
+    return name != null ? name : "";
   }
 
   /// Gets Base Url
   static String baseUrl() {
     String? baseUrl = _current?.baseUrl;
-    return baseUrl == null ? "" : baseUrl;
+    return baseUrl != null ? baseUrl : "";
   }
 
   /// Gets Base Url
   static TGLogLevel? logLevel() {
     TGLogLevel? logLevel = _current?.logLevel;
-    return logLevel == null ? TGLogLevel.DEBUG : logLevel;
-  }
-
-  /// Gets param value for given key
-  static dynamic param(String key) {
-    Map<String, dynamic>? params = _current!.params;
-    if (params == null) return null;
-    return params[key];
+    return logLevel != null ? logLevel : TGLogLevel.DEBUG;
   }
 
   /// Gets Apply Mock
@@ -123,6 +116,13 @@ class TGFlavor {
   /// Gets Base Url
   static String mockMappingsFile() {
     String? mockMappingsFile = _current?.mockMappingsFile;
-    return mockMappingsFile == null ? "" : mockMappingsFile;
+    return mockMappingsFile != null ? mockMappingsFile : "";
+  }
+
+  /// Gets param value for given key
+  static dynamic param(String key) {
+    Map<String, dynamic>? params = _current!.params;
+    if (params == null) return null;
+    return params[key];
   }
 }

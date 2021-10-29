@@ -16,7 +16,7 @@ TGFramework includes following areas as part of its framework. Further in this d
   * TGLocalizationsDelegate: Extended implementation of LocalizationsDelegate which Flutter uses internally
 * Util
   * TGFlavor
-    * Supports flavor, baseUrl, logLevel, applyMock, mockMappingsFile & custom params as part of configuration
+    * Supports name, baseUrl, logLevel, applyMock, mockMappingsFile & custom params as part of configuration
   * TGDateUtil
     * Format DateTime
     * Parse DateTime
@@ -46,7 +46,9 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Column Container
     * Columns Container
     * Box Container
-    * Clear Focus (Hide Keyboard)
+    * Clear Focus
+    * Clear Focus with Gesture
+    * Banner
     * Body Color
     * Display Color
     * Divider
@@ -269,38 +271,40 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 [
   {
-    "flavor": "dev",
+    "name": "dev",
     "baseUrl": "https://dev.api.tgportal.com",
     "logLevel": "DEBUG",
     "applyMock": true,
     "mockMappingsFile": "assets/mocks/_mappings.json",
     "params": {
-      "productListMaxCount": 10
+      "key": "dev value"
     }
   },
   {
-    "flavor": "stage",
+    "name": "stage",
     "baseUrl": "https://stage.api.tgportal.com",
     "logLevel": "INFO",
     "applyMock": false,
     "params": {
-      "productListMaxCount": 15
+      "key": "stage value"
     }
   },
   {
-    "flavor": "prod",
+    "name": "prod",
     "baseUrl": "https://api.tgportal.com",
     "logLevel": "ERROR",
     "applyMock": false,
     "params": {
-      "productListMaxCount": 20
+      "key": "prod value"
     }
   }
 ]
 ```
 #### Access
 ```
+    TGFlavor.name();
     TGFlavor.baseUrl();
+    TGFlavor.logLevel();
     TGFlavor.applyMock();
     TGFlavor.mockMappingsFile();
     TGFlavor.param("key");
@@ -666,6 +670,23 @@ Supports N number of columns.
         TGView.emptySizedBox(height: 10),
         Text("Completed", style: TGView.textTheme().bodyText2)
       ]
+    );
+```
+
+#### Clear Focus Gesture
+```
+    GestureDetector gestureDetector = TGView.clearFocusGesture(context, child);
+    // ... Utilize gestureDetector in appropriate heirarchy of widgets
+```
+
+#### Banner
+```
+    GestureDetector gestureDetector = TGView.banner(
+      child, // Material App in most of the cases
+      message: "Banner",
+      bannerColor: Colors.orange,
+      textColor: Colors.white,
+      bannerLocation: BannerLocation.startEnd,
     );
 ```
 

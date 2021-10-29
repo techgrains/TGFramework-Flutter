@@ -354,10 +354,44 @@ class TGView {
     );
   }
 
-  // ***   Utility Actions   *** //
+  // ***   Utility   *** //
 
   /// Clears focus of current object. Generally used to hide keyboard
   static void clearFocus(BuildContext context) {
     FocusScope.of(context).requestFocus(new FocusNode());
+  }
+
+  /// Create gesture detector with clear focus
+  static GestureDetector clearFocusGesture(BuildContext context, Widget child) {
+    return GestureDetector(
+        onTap: () {
+          clearFocus(context);
+        },
+        child: child);
+  }
+
+  /// Create Banner
+  static Directionality banner(
+    Widget child, {
+    String message = "Banner",
+    Color bannerColor = Colors.orange,
+    Color textColor = Colors.white,
+    BannerLocation bannerLocation = BannerLocation.bottomEnd,
+  }) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Banner(
+        color: bannerColor,
+        message: message,
+        location: bannerLocation,
+        child: child,
+        textStyle: TextStyle(
+          color: textColor,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+          height: 1.0,
+        ),
+      ),
+    );
   }
 }
