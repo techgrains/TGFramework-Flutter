@@ -1,3 +1,6 @@
+## 1.3.6
+* Upgraded flutter environment version
+
 ## 1.3.5
 * TGNetUtil
   * Check reachability of site with dynamically provided URL
