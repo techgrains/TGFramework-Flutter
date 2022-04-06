@@ -1,3 +1,7 @@
+## 1.3.7
+* Localization (i18n)
+  * TGLocale: Supports Locale files from dynamically provided path
+
 ## 1.3.6
 * Upgraded flutter environment version
 

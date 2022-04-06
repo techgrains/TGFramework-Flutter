@@ -9,7 +9,7 @@ class TGLocale {
   static Locale defaultLocale = const Locale("en", "US");
   static Locale currentLocale = defaultLocale;
   static Map<String, TGLocalization> localizations = {};
-  static String localeFolderPath = "";
+  static String customPath = "";
 
   /// Callback for locale resolution
   static Locale? localeResolutionCallback(
@@ -27,7 +27,9 @@ class TGLocale {
 
   /// Initialize Localization (i18n) implementation
   static void init(
-      {required Locale defaultLocale, List<Locale>? otherLocales, String localeFolderPath = ""}) {
+      {required Locale defaultLocale,
+      List<Locale>? otherLocales,
+      String customPath = ""}) {
     List<Locale> supportedLocales = [];
     supportedLocales.add(defaultLocale);
     if (otherLocales != null && otherLocales.length > 0)
@@ -35,7 +37,7 @@ class TGLocale {
     TGLocale.supportedLocales = supportedLocales;
     TGLocale.defaultLocale = defaultLocale;
     TGLocale.currentLocale = defaultLocale;
-    TGLocale.localeFolderPath = localeFolderPath;
+    TGLocale.customPath = customPath;
     loadLocales();
   }
 

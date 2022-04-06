@@ -16,27 +16,26 @@ class TGLocalization {
   /// Example: "{languageCode}_{countryCode}.json" > "en_us.json"
   Future<bool> load() async {
     String fileName = _deriveFileName();
-    String localeFolderPath = "";
-    if (TGLocale.localeFolderPath.isNotEmpty) {
-      if (TGLocale.localeFolderPath.endsWith("/")) {
-        localeFolderPath = TGLocale.localeFolderPath;
-      } else {
-        localeFolderPath = "${TGLocale.localeFolderPath}/";
-      }
-    }
-    else {
-      localeFolderPath = TGLocalization.LOCALE_PATH;
-    }
+    String localeCustomPath = prepareLocaleCustomPath();
     TGLog.d("TGLocalization.load : " + fileName);
-    if (localeFolderPath == TGLocalization.LOCALE_PATH) {
-      _entries =
-      await TGFileUtil.readJsonFileAsMap("${localeFolderPath}${fileName}");
+    if (localeCustomPath == TGLocalization.LOCALE_PATH) {
+      _entries = await TGFileUtil.readJsonFileAsMap("${localeCustomPath}${fileName}");
     } else {
-      _entries = await TGFileUtil.readJsonFileAsMapFromPath(
-          "${localeFolderPath}${fileName}");
+      _entries = await TGFileUtil.readJsonFileAsMapFromUrl("${localeCustomPath}${fileName}");
     }
     TGLocale.localizations[locale.toString()] = this;
     return true;
+  }
+
+  String prepareLocaleCustomPath() {
+    if (TGLocale.customPath.isNotEmpty) {
+      if (TGLocale.customPath.endsWith("/")) {
+        return TGLocale.customPath;
+      } else {
+        return "${TGLocale.customPath}/";
+      }
+    }
+    return TGLocalization.LOCALE_PATH;
   }
 
   String _deriveFileName() {
