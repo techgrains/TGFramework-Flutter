@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:core';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
@@ -20,6 +22,21 @@ class TGFileUtil {
       return json.decode(jsonString);
     } catch (e) {
       TGLog.e("Unable to load " + jsonFile);
+    }
+    return <String, dynamic>{};
+  }
+
+
+  /// Read JSon file as Map From Locale Folder Path
+  static Future<Map<String, dynamic>> readJsonFileAsMapFromPath(
+      String jsonFileUrl) async {
+    try {
+      File file = await File(jsonFileUrl);
+      var jsonString = await json.decode(await file.readAsString());
+      return jsonString;
+    } catch (e) {
+      TGLog.e("Unable to load $jsonFileUrl");
+      TGLog.e("Error : $e");
     }
     return <String, dynamic>{};
   }

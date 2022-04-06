@@ -16,8 +16,25 @@ class TGLocalization {
   /// Example: "{languageCode}_{countryCode}.json" > "en_us.json"
   Future<bool> load() async {
     String fileName = _deriveFileName();
+    String localeFolderPath = "";
+    if (TGLocale.localeFolderPath.isNotEmpty) {
+      if (TGLocale.localeFolderPath.endsWith("/")) {
+        localeFolderPath = TGLocale.localeFolderPath;
+      } else {
+        localeFolderPath = "${TGLocale.localeFolderPath}/";
+      }
+    }
+    else {
+      localeFolderPath = TGLocalization.LOCALE_PATH;
+    }
     TGLog.d("TGLocalization.load : " + fileName);
-    _entries = await TGFileUtil.readJsonFileAsMap(LOCALE_PATH + fileName);
+    if (localeFolderPath == TGLocalization.LOCALE_PATH) {
+      _entries =
+      await TGFileUtil.readJsonFileAsMap("${localeFolderPath}${fileName}");
+    } else {
+      _entries = await TGFileUtil.readJsonFileAsMapFromPath(
+          "${localeFolderPath}${fileName}");
+    }
     TGLocale.localizations[locale.toString()] = this;
     return true;
   }
