@@ -207,7 +207,7 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
           const Locale("gu", "IN"), // gu_IN.json
           const Locale("hi", "IN")  // hi_IN.json
         ],
-        localeFolderPath: "/data/user/0/com.test.test/files/" // Locale files folder path
+        customPath: "/data/user/0/com.test.test/files/" // Locale files custom path if provided else load files from 'assets/locale/'
       );
     }
 
@@ -220,14 +220,6 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
       localeResolutionCallback: (locale, supportedLocales) => TGLocale.localeResolutionCallback(locale, supportedLocales),
     ...
     )
-```
-##### How to use locale files from custom path
-```
-[Without localeFolderPath]
-    TGLocale.init(defaultLocale:Locale("en", "US"), otherLocales: []); // Locale files will be used from "assets/locale/" 
-
-[With localeFolderPath]
-    TGLocale.init(defaultLocale:Locale("en", "US"), otherLocales: [], localeFolderPath: "/data/user/0/com.test.test/files/"); // Locale files will be used from provided folder path
 ```
 ##### How to get text from locale
 ```
