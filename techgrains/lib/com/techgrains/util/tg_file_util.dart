@@ -27,7 +27,8 @@ class TGFileUtil {
   }
 
   /// Read file as String from provided path and return as Map
-  static Future<Map<String, dynamic>> readJsonFileAsMapFromUrl(String jsonFileUrl) async {
+  static Future<Map<String, dynamic>> readJsonFileAsMapFromUrl(
+      String jsonFileUrl) async {
     try {
       File file = File(jsonFileUrl);
       var jsonString = await json.decode(await file.readAsString());
@@ -57,7 +58,8 @@ class TGFileUtil {
       String fileAsString = await TGFileUtil.readFile(yamlFile);
       final Map? map = loadYaml(fileAsString);
 
-      if (group == null || group.length == 0) return map as FutureOr<Map<String, dynamic>>;
+      if (group == null || group.length == 0)
+        return map as FutureOr<Map<String, dynamic>>;
 
       // Group entries
       Map<String, dynamic> groupMap = <String, dynamic>{};

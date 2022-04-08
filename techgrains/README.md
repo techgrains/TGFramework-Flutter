@@ -207,7 +207,7 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
           const Locale("gu", "IN"), // gu_IN.json
           const Locale("hi", "IN")  // hi_IN.json
         ],
-        customPath: "/data/user/0/com.test.test/files/" // Locale files custom path if provided else load files from 'assets/locale/'
+        customPath: "/data/user/0/com.test.test/files/" // Locale folder custom path if provided else load files from 'assets/locale/'
       );
     }
 
