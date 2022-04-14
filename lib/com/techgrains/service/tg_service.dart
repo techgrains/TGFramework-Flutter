@@ -12,6 +12,7 @@ import 'package:techgrains/com/techgrains/service/request/tg_get_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_post_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_put_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_request.dart';
+import 'package:techgrains/com/techgrains/service/request/tg_upload_file_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_upload_request.dart';
 import 'package:techgrains/com/techgrains/service/response/tg_response.dart';
 
@@ -83,8 +84,11 @@ class TGService<T extends TGResponse, E extends TGError> {
       {required TGDeleteRequest request, onSuccess(T)?, onError(T)?}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("DELETE", uri);
-    final httpRes = await _getClient(request.getUri(), "DELETE")
-        .delete(uri, headers: request.headers());
+    final httpRes = await _getClient(request.getUri(), "DELETE").delete(
+      uri,
+      body: request.body(),
+      headers: request.headers(),
+    );
     return _performCallback(httpRes, onError, onSuccess);
   }
 
@@ -97,6 +101,21 @@ class TGService<T extends TGResponse, E extends TGError> {
     multipartRequest.files.add(request.file());
     StreamedResponse httpRes = await multipartRequest.send();
     return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
+  }
+
+  Future<T> uploadFile(
+      {required TGUploadFileRequest request,
+      onSuccess(T)?,
+      onError(E)?}) async {
+    var multipartRequest = http.MultipartRequest(
+        "POST",
+        Uri.parse(
+            TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
+    multipartRequest.headers.addAll(request.headers()!);
+    multipartRequest.fields.addAll(request.body());
+    multipartRequest.files.add(request.file());
+    StreamedResponse httpRes = await multipartRequest.send();
+    return _performCallbackForUploadFileResponse(httpRes, onError, onSuccess);
   }
 
   T _performCallback(
@@ -118,6 +137,34 @@ class TGService<T extends TGResponse, E extends TGError> {
       // Ignores error if not able to populate response, validate response or decode json. Populated response must be returned.
     }
     t.hasError ? onError!(t) : onSuccess!(t);
+    return t;
+  }
+
+  Future<T> _performCallbackForUploadFileResponse(StreamedResponse httpRes,
+      onError(dynamic E)?, onSuccess(dynamic T)?) async {
+    T t = creatorT();
+    try {
+      _populateResponse(t, httpRes);
+      await httpRes.stream.transform(utf8.decoder).listen((value) {
+        t.body = value;
+      });
+      _validateResponse(t);
+    } catch (e) {
+      TGLog.e(e);
+      // Ignores error if not able to populate response, validate response or decode json. Populated response must be returned.
+    }
+    if (t.hasError) {
+      E e = creatorE();
+      final timestamp = new DateTime.now().millisecondsSinceEpoch;
+      final errorResponse = {
+        "httpStatus": httpRes.statusCode,
+        "timestamp": timestamp,
+        "message": t.body!
+      };
+      onError!(e.fromJson(errorResponse));
+    } else {
+      onSuccess!(t);
+    }
     return t;
   }
 
