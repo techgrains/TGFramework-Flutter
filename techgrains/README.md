@@ -32,7 +32,7 @@ TGFramework includes following areas as part of its framework. Further in this d
 * Service
   * TGService
     * TGRequest
-      * TGPostRequest, TGGetRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest
+      * TGPostRequest, TGGetRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest, TGUploadFileRequest
     * TGResponse
     * TGError
     * Mock
@@ -422,7 +422,7 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
 
 #### Request, Response & Error (Example: Login)
 
-##### Request extends type of request TGGetRequest, TGPostRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest
+##### Request extends type of request TGGetRequest, TGPostRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest, TGUploadFileRequest
 ```
 [login-request.dart]
     class LoginRequest extends TGPostRequest {

@@ -1,3 +1,10 @@
+## 1.3.8
+* Service
+  * TGRequest
+    * Introduced TGUploadFileRequest to upload file
+  * TGService
+    * Introduced "uploadFile" method to upload file
+  
 ## 1.3.7
 * Localization (i18n)
   * TGLocale: Supports Locale files from dynamically provided path
