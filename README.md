@@ -22,6 +22,7 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Parse DateTime
   * TGNetUtil
     * Check Internet Availability
+    * Check Api Endpoint Health
   * TGFileUtil
     * Read Local File
   * TGPlatformUtil

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:http/http.dart' as http;
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 
 /// TGFramework's Network related implementation
@@ -21,8 +22,24 @@ class TGNetUtil {
     } on SocketException catch (_) {
       isAvailable = false;
     }
-    TGLog.d(
-        "TGNetUtil.isReachable('" + site + "') = " + isAvailable.toString());
+    TGLog.d("TGNetUtil.isReachable('" + site + "') = " + isAvailable.toString());
     return isAvailable;
+  }
+
+  /// Check weather api endpoint is healthy
+  Future<bool> apiHealthCheck(String site, {int timeout = 5}) async {
+    if (site.indexOf("?") > -1)
+      site = site + "&";
+    else
+      site = site + "?";
+
+    site = site + "t=" + DateTime.now().millisecondsSinceEpoch.toString();
+    http.Response response = await http.get(Uri.parse(site)).timeout(
+      Duration(seconds: timeout),
+      onTimeout: () {
+        return http.Response('Error', 408);
+      },
+    );
+    return (response.statusCode >= 200 && response.statusCode < 300);
   }
 }
