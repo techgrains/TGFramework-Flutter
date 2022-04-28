@@ -26,20 +26,24 @@ class TGNetUtil {
     return isAvailable;
   }
 
-  /// Check weather api endpoint is healthy
-  Future<bool> apiHealthCheck(String site, {int timeout = 5}) async {
-    if (site.indexOf("?") > -1)
-      site = site + "&";
-    else
-      site = site + "?";
+  /// Checks internet and api health
+  static Future<bool> apiHealthCheck(String site, {int timeout = 5}) async {
+    try {
+      if (site.indexOf("?") > -1)
+        site = site + "&";
+      else
+        site = site + "?";
 
-    site = site + "t=" + DateTime.now().millisecondsSinceEpoch.toString();
-    http.Response response = await http.get(Uri.parse(site)).timeout(
-      Duration(seconds: timeout),
-      onTimeout: () {
-        return http.Response('Error', 408);
-      },
-    );
-    return (response.statusCode >= 200 && response.statusCode < 300);
+      site = site + "t=" + DateTime.now().millisecondsSinceEpoch.toString();
+      http.Response response = await http.get(Uri.parse(site)).timeout(
+        Duration(seconds: timeout),
+        onTimeout: () {
+          return http.Response('Error', 408);
+        },
+      );
+      return (response.statusCode >= 200 && response.statusCode < 300);
+    } catch (error) {
+      return false;
+    }
   }
 }
