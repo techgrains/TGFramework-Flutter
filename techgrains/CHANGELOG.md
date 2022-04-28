@@ -1,3 +1,7 @@
+## 1.3.9
+* TGNetUtil
+  * Check Api Endpoint Health
+  
 ## 1.3.8
 * Service
   * TGRequest
