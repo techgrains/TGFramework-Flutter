@@ -1,6 +1,6 @@
 ## 1.3.9
 * TGNetUtil
-  * Check Api Endpoint Health
+  * Check api endpoint health
   
 ## 1.3.8
 * Service
