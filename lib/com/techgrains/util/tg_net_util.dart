@@ -22,7 +22,8 @@ class TGNetUtil {
     } on SocketException catch (_) {
       isAvailable = false;
     }
-    TGLog.d("TGNetUtil.isReachable('" + site + "') = " + isAvailable.toString());
+    TGLog.d(
+        "TGNetUtil.isReachable('" + site + "') = " + isAvailable.toString());
     return isAvailable;
   }
 

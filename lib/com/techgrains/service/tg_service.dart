@@ -35,7 +35,7 @@ class TGService<T extends TGResponse, E extends TGError> {
 
     // For Mock
     TGMockService.applyMock = applyMock;
-    if (mockMappingsFile != null) TGMockService.loadMockMappings(mockMappingsFile);
+    if (mockMappingsFile != null && applyMock) TGMockService.loadMockMappings(mockMappingsFile);
 
     // For HTTP Client
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
