@@ -1,3 +1,10 @@
+## 1.3.10
+* Service
+  * TGService
+    * Introduced "getSync" method
+    * Introduced "postSync" method
+    * Introduced "uploadFileSync" method
+
 ## 1.3.9+1
 * TGNetUtil
   * Check internet and api health
