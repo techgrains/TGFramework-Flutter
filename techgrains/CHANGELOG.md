@@ -1,3 +1,8 @@
+## 1.3.11
+* Service
+  * TGService
+    * Set read mock files only when applyMock is true
+
 ## 1.3.10
 * Service
   * TGService

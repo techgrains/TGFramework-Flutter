@@ -28,6 +28,8 @@ class TGMockService {
   }
 
   static Future _saveMockMapping(TGMockMappingVO mockMappingVO) async {
+    if (mockMappingVO.applyMock == null && !mockMappingVO.applyMock!) return;
+
     mockMappingVO.successString = "";
     mockMappingVO.errorString = "";
     if (mockMappingVO.successFile != null)
