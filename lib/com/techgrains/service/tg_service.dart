@@ -48,7 +48,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     return _performCallback(httpRes, onError, onSuccess);
   }
 
-  Future<T> getSync({required TGPostRequest request}) async {
+  Future<T> getSync({required TGGetRequest request}) async {
     Uri uri = Uri.parse(request.getUrl());
     TGLog.t("GET", uri);
     final httpRes = await _getClient(request.getUri(), "GET").get(uri, headers: request.headers());

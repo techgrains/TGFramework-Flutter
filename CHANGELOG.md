@@ -1,3 +1,8 @@
+## 1.3.12
+* Service
+  * TGService
+    * Resolved TGGetRequest issue in "getSync" method
+
 ## 1.3.11
 * Service
   * TGService
