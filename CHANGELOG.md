@@ -1,3 +1,9 @@
+## 1.3.13
+* TGView
+  * Additional supportive method for ColorScheme in TGView
+  * Deprecated color reference methods. Need to use ColorScheme.
+* Versions upgrades for dependency plugins
+
 ## 1.3.12
 * Service
   * TGService
