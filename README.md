@@ -1,7 +1,7 @@
 # TGFramework-Flutter
 Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation during every mobile app development. 
 
-TGFramework includes following areas as part of its framework. Further in this document, all of them explained with example.
+TGFramework includes following areas as part of its framework. Further, in this document, all of them explained with example.
 
 * Common
   * TGLog
@@ -59,13 +59,15 @@ TGFramework includes following areas as part of its framework. Further in this d
     * Popup Menu Item
     * Loading Indicator
     * Refresh Indicator  
+  * TGText
+    * Render Text
   
 ## Common
 ### TGLog
 ##### Logging mechanism levels
 * `ALL`, `TAG`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `OFF`
 
-By default, Log Level is `ALL`. If wants to change, set in your app's initState().
+By default, Log Level is `ALL`. If it needs to be changed, set in your app's initState().
 ```
 [main.dart]
     @override
@@ -475,7 +477,7 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
     }
 ```
 
-##### Error represents common service error attributes which can be used common accross all the services which extends TGError
+##### Error represents common service error attributes which can be used common across all the services which extends TGError
 ```
 [service-error.dart]
     class ServiceError extends TGError {
@@ -745,4 +747,14 @@ Supports N number of columns.
 #### Refresh Indicator  
 ```
     TGView.refreshIndicator(widgets: widgets, onRefresh: onRefresh);
+```
+
+
+### TGText
+Text related implementation based on various styles of TextTheme
+
+#### Render Text
+```
+    TGText.bodyMedium("Thanking You!");
+    TGText.bodySmall("Be in touch.", color: TGView.colorScheme().primary);
 ```
