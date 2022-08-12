@@ -756,5 +756,6 @@ Text related implementation based on various styles of TextTheme
 #### Render Text
 ```
     TGText.bodyMedium("Thanking You!");
-    TGText.bodySmall("Be in touch.", color: TGView.colorScheme().primary);
+    TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary);
+    TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, textAlign: TextAlign.center);
 ```

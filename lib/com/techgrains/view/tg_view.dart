@@ -72,8 +72,6 @@ class TGView {
   // ***   Divider   *** //
 
   /// Standard Divider
-  @Deprecated(
-      "Moving to colorScheme for all color references. Use TGView.colorScheme()...")
   static Widget divider({double? height}) {
     return Divider(height: height, color: theme()!.dividerColor);
   }

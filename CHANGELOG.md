@@ -1,3 +1,7 @@
+## 1.4.1
+* TGText
+  * Added textAlign attribute for text rendering
+
 ## 1.4.0
 * TGText
   * Text related implementation based on various styles of TextTheme
