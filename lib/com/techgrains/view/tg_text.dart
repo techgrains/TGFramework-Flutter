@@ -6,129 +6,171 @@ import 'package:techgrains/com/techgrains/view/tg_view.dart';
 class TGText {
   // ***   Typography   *** //
 
+  /// "custom" style text
+  static Text withStyle(String text, TextStyle textStyle) {
+    return Text(text, style: textStyle);
+  }
+
   /// "displayLarge" style text
   static Text displayLarge(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().displayLarge, color),
+        style: _merge(TGView.textTheme().displayLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "displayMedium" style text
   static Text displayMedium(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().displayMedium, color),
+        style: _merge(TGView.textTheme().displayMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "displaySmall" style text
   static Text displaySmall(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().displaySmall, color),
+        style: _merge(TGView.textTheme().displaySmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "headlineLarge" style text
   static Text headlineLarge(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().headlineLarge, color),
+        style: _merge(TGView.textTheme().headlineLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "headlineMedium" style text
   static Text headlineMedium(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().headlineMedium, color),
+        style: _merge(TGView.textTheme().headlineMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "headlineSmall" style text
   static Text headlineSmall(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().headlineSmall, color),
+        style: _merge(TGView.textTheme().headlineSmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "titleLarge" style text
   static Text titleLarge(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().titleLarge, color),
+        style: _merge(TGView.textTheme().titleLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "titleMedium" style text
   static Text titleMedium(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().titleMedium, color),
+        style: _merge(TGView.textTheme().titleMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "titleSmall" style text
   static Text titleSmall(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().titleSmall, color),
+        style: _merge(TGView.textTheme().titleSmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "bodyLarge" style text
   static Text bodyLarge(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().bodyLarge, color),
+        style: _merge(TGView.textTheme().bodyLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "bodyMedium" style text
   static Text bodyMedium(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().bodyMedium, color),
+        style: _merge(TGView.textTheme().bodyMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "bodySmall" style text
   static Text bodySmall(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().bodySmall, color),
+        style: _merge(TGView.textTheme().bodySmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "labelLarge" style text
   static Text labelLarge(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().labelLarge, color),
+        style: _merge(TGView.textTheme().labelLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "labelMedium" style text
   static Text labelMedium(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().labelMedium, color),
+        style: _merge(TGView.textTheme().labelMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "labelSmall" style text
   static Text labelSmall(String text,
-      {Color? color, TextAlign textAlign = TextAlign.start}) {
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start}) {
     return Text(text,
-        style: _merge(TGView.textTheme().labelSmall, color),
+        style: _merge(TGView.textTheme().labelSmall, color, fontWeight),
         textAlign: textAlign);
   }
 
-  static TextStyle? _merge(TextStyle? textStyle, Color? color) {
+  static TextStyle? _merge(
+      TextStyle? textStyle, Color? color, FontWeight? fontWeight) {
+    if (color != null && fontWeight != null) {
+      return textStyle?.merge(TextStyle(color: color, fontWeight: fontWeight));
+    }
     if (color != null) {
-      textStyle = textStyle?.merge(TextStyle(color: color));
+      return textStyle?.merge(TextStyle(color: color));
+    }
+    if (fontWeight != null) {
+      return textStyle?.merge(TextStyle(fontWeight: fontWeight));
     }
     return textStyle;
   }

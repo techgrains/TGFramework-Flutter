@@ -1,13 +1,18 @@
+## 1.4.2
+* TGText
+  * Added fontWeight attribute for text rendering
+
 ## 1.4.1
 * TGText
   * Added textAlign attribute for text rendering
 
 ## 1.4.0
-* TGText
-  * Text related implementation based on various styles of TextTheme
-* TGView
-  * Additional supportive method for ColorScheme in TGView
-  * Deprecated color reference methods. Need to use ColorScheme.
+* View
+  * TGText
+    * Text related implementation based on various styles of TextTheme
+  * TGView
+    * Additional supportive method for ColorScheme in TGView
+    * Deprecated color reference methods. Need to use ColorScheme.
 * Versions upgrades for dependency plugins
 
 ## 1.3.12
