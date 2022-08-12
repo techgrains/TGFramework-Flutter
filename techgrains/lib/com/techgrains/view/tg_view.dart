@@ -56,13 +56,15 @@ class TGView {
   // ***   Colors   *** //
 
   /// Body Color: TextTheme applies `bodyColor` to headline5, headline6, subtitle1, subtitle2, button, bodyText1, bodyText2 and overline.
-  @Deprecated("Moving to colorScheme for all color references. Use TGView.colorScheme()...")
+  @Deprecated(
+      "Moving to colorScheme for all color references. Use TGView.colorScheme()...")
   static Color? bodyColor() {
     return textTheme().bodyText1!.color;
   }
 
   /// Display Color: TextTheme applies `displayColor` is applied to headline1, headline2, headline3, headline4 and caption.
-  @Deprecated("Moving to colorScheme for all color references. Use TGView.colorScheme()...")
+  @Deprecated(
+      "Moving to colorScheme for all color references. Use TGView.colorScheme()...")
   static Color? displayColor() {
     return textTheme().caption!.color;
   }
@@ -70,7 +72,8 @@ class TGView {
   // ***   Divider   *** //
 
   /// Standard Divider
-  @Deprecated("Moving to colorScheme for all color references. Use TGView.colorScheme()...")
+  @Deprecated(
+      "Moving to colorScheme for all color references. Use TGView.colorScheme()...")
   static Widget divider({double? height}) {
     return Divider(height: height, color: theme()!.dividerColor);
   }

@@ -1,4 +1,6 @@
-## 1.3.13
+## 1.4.0
+* TGText
+  * Text related implementation based on various styles of TextTheme
 * TGView
   * Additional supportive method for ColorScheme in TGView
   * Deprecated color reference methods. Need to use ColorScheme.
