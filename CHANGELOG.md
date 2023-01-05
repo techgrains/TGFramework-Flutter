@@ -1,3 +1,7 @@
+## 1.4.3
+* TGText
+  * Added fontFamily, textAlign, maxLine, and textOverflow attribute for text rendering
+
 ## 1.4.2
 * TGText
   * Added fontWeight attribute for text rendering

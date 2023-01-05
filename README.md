@@ -1,73 +1,79 @@
 # TGFramework-Flutter
-Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation during every mobile app development. 
+
+Purpose of TGFramework is to provide developer friendly library, that can help to improve feature development rather focusing on common structure creation
+during every mobile app development.
 
 TGFramework includes following areas as part of its framework. Further, in this document, all of them explained with example.
 
 * Common
-  * TGLog
-    * Levels: Debug, Info, Error, Warn, Tag, All, Off  
+    * TGLog
+        * Levels: Debug, Info, Error, Warn, Tag, All, Off
 * Memory
-  * TGSession: In memory Session throughout the app 
-  * TGSharedPreference: Shared Preferences (Android), User Defaults (iOS)
-  * TGAccessMatrix: In memory Access Matrix based on Access Key with Roles
+    * TGSession: In memory Session throughout the app
+    * TGSharedPreference: Shared Preferences (Android), User Defaults (iOS)
+    * TGAccessMatrix: In memory Access Matrix based on Access Key with Roles
 * Localization (i18n)
-  * TGLocale: Supported, default and current locale holders with locale related supporting features
-  * TGLocalization: Localization for each locale loads values from json file
-  * TGLocalizationsDelegate: Extended implementation of LocalizationsDelegate which Flutter uses internally
+    * TGLocale: Supported, default and current locale holders with locale related supporting features
+    * TGLocalization: Localization for each locale loads values from json file
+    * TGLocalizationsDelegate: Extended implementation of LocalizationsDelegate which Flutter uses internally
 * Util
-  * TGFlavor
-    * Supports name, baseUrl, logLevel, applyMock, mockMappingsFile & custom params as part of configuration
-  * TGDateUtil
-    * Format DateTime
-    * Parse DateTime
-  * TGNetUtil
-    * Check Internet Availability
-    * Check internet And Api Health
-  * TGFileUtil
-    * Read Local File
-  * TGPlatformUtil
-    * Check platform related properties like iOS, Android, Mobile, Package Config, Local Host Name, Operating System etc.
-  * TGValidate
-    * Validate Email, Alphabets, Numeric, Alphanumeric
+    * TGFlavor
+        * Supports name, baseUrl, logLevel, applyMock, mockMappingsFile & custom params as part of configuration
+    * TGDateUtil
+        * Format DateTime
+        * Parse DateTime
+    * TGNetUtil
+        * Check Internet Availability
+        * Check internet And Api Health
+    * TGFileUtil
+        * Read Local File
+    * TGPlatformUtil
+        * Check platform related properties like iOS, Android, Mobile, Package Config, Local Host Name, Operating System etc.
+    * TGValidate
+        * Validate Email, Alphabets, Numeric, Alphanumeric
 
 * Service
-  * TGService
-    * TGRequest
-      * TGPostRequest, TGGetRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest, TGUploadFileRequest
-    * TGResponse
-    * TGError
-    * Mock
+    * TGService
+        * TGRequest
+            * TGPostRequest, TGGetRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest, TGUploadFileRequest
+        * TGResponse
+        * TGError
+        * Mock
 * View
-  * TGView
-    * Theme
-    * Scaffold Container
-    * Custom Scroll View using Sliver List
-    * Empty Sized Box
-    * Row Container
-    * Column Container
-    * Columns Container
-    * Box Container
-    * Clear Focus
-    * Clear Focus with Gesture
-    * Banner
-    * Body Color
-    * Display Color
-    * Divider
-    * App Bar Back Button
-    * Show Snack Bar
-    * Show Alert Dialog
-    * Popup Menu Item
-    * Loading Indicator
-    * Refresh Indicator  
-  * TGText
-    * Render Text
-  
+    * TGView
+        * Theme
+        * Scaffold Container
+        * Custom Scroll View using Sliver List
+        * Empty Sized Box
+        * Row Container
+        * Column Container
+        * Columns Container
+        * Box Container
+        * Clear Focus
+        * Clear Focus with Gesture
+        * Banner
+        * Body Color
+        * Display Color
+        * Divider
+        * App Bar Back Button
+        * Show Snack Bar
+        * Show Alert Dialog
+        * Popup Menu Item
+        * Loading Indicator
+        * Refresh Indicator
+    * TGText
+        * Render Text
+
 ## Common
+
 ### TGLog
+
 ##### Logging mechanism levels
+
 * `ALL`, `TAG`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `OFF`
 
 By default, Log Level is `ALL`. If it needs to be changed, set in your app's initState().
+
 ```
 [main.dart]
     @override
@@ -77,7 +83,9 @@ By default, Log Level is `ALL`. If it needs to be changed, set in your app's ini
         ...
     }
 ```
+
 How to Log which prints output in the console.
+
 ```
 [Log]
     TGLog.t("TAG", "Tag log");  // Tag
@@ -93,17 +101,22 @@ How to Log which prints output in the console.
     2020-04-30 12:48:09.958964[WARN] Warning log
     2020-04-30 12:48:09.959226[ERROR] Error log
 ```
+
 ## Memory
+
 ### TGSession
+
 Single Session instance in memory to hold values in memory as Key-Value pair. No need to inherit or initialize anything.
 
 #### Where to use:
+
 - Whenever data is common across layers
 - Managing data in memory without any disk-io
 - When data become invalid after app close
 
-Between Screens: 
+Between Screens:
 Just straight put things in one screen and use it in another one.
+
 ```
 [Profile Screen]
     TGSession.getInstance().set("Designation","Developer");
@@ -111,7 +124,9 @@ Just straight put things in one screen and use it in another one.
 [Home Screen]
     String designation = TGSession.getInstance().get("Designation");
 ```
+
 Between service and view layer: Just put in service and have it in view. (Easy to put any object.)
+
 ```
 [Service]
     TGSession.getInstance().put("Person",Person);
@@ -119,28 +134,38 @@ Between service and view layer: Just put in service and have it in view. (Easy t
 [Screen] 
     Person person = TGSession.getInstance().get("Person");
 ``` 
+
 Thinking to manage piled up objects in session?
+
 ```
     TGSession.getInstance().remove("Person");
 ```
-##### Custom TGSession Listener 
+
+##### Custom TGSession Listener
+
 Use TGSessionListener with custom implementation to listen whenever any key has been set/removed to/from TGSession.
 
-
 ### TGSharedPreference
-Access local disk storage mechanism through TGSharedPreference. Its uses Shared Preferences for Android, User Defaults for iOS internally. No need to inherit or initialize anything.
+
+Access local disk storage mechanism through TGSharedPreference. Its uses Shared Preferences for Android, User Defaults for iOS internally. No need to inherit or
+initialize anything.
+
 ```
     TGSharedPreferences.getInstance().set("Designation", "Developer"); // Set
     await TGSharedPreferences.getInstance().get("Designation"); // Get
 ```  
-##### Custom TGSharedPreferences Listener 
+
+##### Custom TGSharedPreferences Listener
+
 Use TGSharedPreferencesListener with custom implementation to listen whenever any key has been set/removed to/from TGSharedPreferences.
 
-
 ### TGAccessMatrix
-In memory Access Matrix based on Access Key with Roles. No need to put business logic based on Roles in various parts of the application. Centralised common structure of access gives full flexibility to manage with multiple roles from api. 
+
+In memory Access Matrix based on Access Key with Roles. No need to put business logic based on Roles in various parts of the application. Centralised common
+structure of access gives full flexibility to manage with multiple roles from api.
 
 #### Create access matrix for each role and add them into TGAccessMatrix
+
 ```
     TGAccessMatrixVO employeeAccess = TGAccessMatrixVO(key: "Profile", roleId: 1, read: true, update: true, delete: false, create: false);
     TGAccessMatrixVO editorAccess = TGAccessMatrixVO(key: "Profile", roleId: 2, read: true, update: true, delete: false, create: false);
@@ -148,12 +173,14 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
     TGAccessMatrix.getInstance().addAll([employeeAccess, editorAccess]);
 ```
 
-#### Apply roles whenever user login (or scope of change in roles) 
+#### Apply roles whenever user login (or scope of change in roles)
+
 ```
     TGAccessMatrix.getInstance().applyRoles([1,2]);
 ```  
 
 #### Use access matrix from anywhere (Uses default applied roles from above)
+
 ```
     TGAccessMatrix.getInstance().hasRead("Profile");
     TGAccessMatrix.getInstance().hasUpdate("Profile");
@@ -162,6 +189,7 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```  
 
 #### How to override default roles by providing roleIds explicitly
+
 ```
     TGAccessMatrix.getInstance().hasRead("Profile", roleIds: [3]);
     TGAccessMatrix.getInstance().hasUpdate("Profile", roleIds: [3]);
@@ -170,16 +198,21 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```  
 
 ## Localization (i18n)
-  ### TGLocale
-  Supported, default and current locale holders with a locale related supporting features
-  
-  ### TGLocalization
-  Localization for each locale loads values from json file
-  
-  ### TGLocalizationsDelegate
-  Extended implementation of LocalizationsDelegate which Flutter uses internally
+
+### TGLocale
+
+Supported, default and current locale holders with a locale related supporting features
+
+### TGLocalization
+
+Localization for each locale loads values from json file
+
+### TGLocalizationsDelegate
+
+Extended implementation of LocalizationsDelegate which Flutter uses internally
 
 ##### Configuration dependencies in pubspec.yaml
+
 ```
 [pubspec.yaml]
     dependencies:
@@ -191,14 +224,18 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
   assets:
     - assets/locale/
 ```
+
 ##### Put locale files at "assets/locale/"
+
 ```
 [assets/locale/en_US.json]
     {
       "button.login": "Login"
     }
 ```
+
 ##### Setup locale in your main dart
+
 ```
 [main.dart]
     @override
@@ -224,7 +261,9 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
     ...
     )
 ```
+
 ##### How to get text from locale
+
 ```
 [Without arguments]
     TGLocale.text("button.login"); // Having "button.login": "Login"
@@ -232,7 +271,9 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 [With arguments]
     TGLocale.text("message.hello", args: ["Amit Patel"]); // Having "message.hello": "Welcome {0} to our team!"
 ```
+
 ##### How to change locale
+
 ```
 [set locale]
     setLocale("en_US");
@@ -251,6 +292,7 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 
 ##### Helper methods just in case needed anywhere
+
 ```
 [Find locale by code]
     Locale locale = TGLocale.findLocaleByCode("en_US");
@@ -261,17 +303,18 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 
 ```
 
-
 ## Util
 
 ### TGFlavor
 
 #### Initialize
+
 ```
   TGFlavor.init("assets/config/flavors.json");
 ```
 
 #### flavors.json
+
 ```
 [
   {
@@ -304,7 +347,9 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
   }
 ]
 ```
+
 #### Access
+
 ```
     TGFlavor.name();
     TGFlavor.baseUrl();
@@ -315,6 +360,7 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 
 #### Run app with flavor name
+
 ```
   flutter run --dart-define=flavor=dev
 ```
@@ -322,6 +368,7 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ### TGDateUtil
 
 #### Format
+
 ```
 [Default Pattern]
     TGDateUtil.formatDate(date); //"2020-05-16"
@@ -331,7 +378,9 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
     TGDateUtil.formatDate(date, datePattern: "dd/MM/yyyy"); //"16/05/2020"
     TGDateUtil.formatDateTime(dateTime, dateTimePattern: "dd/MM/yyyy HH:mm:ss"); //"16/05/2020 12:47:52"
 ```
+
 #### Parse
+
 ```
 [Default Pattern]
     DateTime date = TGDateUtil.parseDate("2020-05-16");
@@ -343,7 +392,9 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 
 ### TGNetUtil
+
 #### Check internet availability
+
 ```
     if(await TGNetUtil.isInternetAvailable()) {
         ...
@@ -351,13 +402,17 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 
 ### TGFileUtil
+
 #### Read File as String
+
 ```
     String content = await TGFileUtil.readFileAsString("assets/files/company.txt");
 ```
 
 ### TGPlatformUtil
+
 #### Check isApp, isDesktop, isWeb, isIOS, isAndroid, operatingSystem etc
+
 ```
     bool isApp = TGPlatformUtil.isApp();
     bool isDesktop = TGPlatformUtil.isDesktop();
@@ -368,7 +423,9 @@ In memory Access Matrix based on Access Key with Roles. No need to put business 
 ```
 
 ### TGValidate
+
 Validators like email, alphabets, numeric, alphanumeric.
+
 ```
 [Has Value]
     TGValidate.hasValue(anything);
@@ -390,9 +447,11 @@ Validators like email, alphabets, numeric, alphanumeric.
 
 ### TGService
 
-HTTP wrapper implementation having Request and Response as objects. JSon is Api standard so converting json string response into provided response object. In case of error, also converting json error string response into provided error object.
+HTTP wrapper implementation having Request and Response as objects. JSon is Api standard so converting json string response into provided response object. In
+case of error, also converting json error string response into provided error object.
 
 #### Initialize
+
 ```
     await TGService.init(
       baseUrl: "https://api.company.com/v1",
@@ -408,7 +467,9 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
       return headers;
     }
 ```
+
 #### HTTP Request (Example: Login)
+
 ```
     TGPostRequest request = LoginRequest(
       email: _email,
@@ -426,6 +487,7 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
 #### Request, Response & Error (Example: Login)
 
 ##### Request extends type of request TGGetRequest, TGPostRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest, TGUploadFileRequest
+
 ```
 [login-request.dart]
     class LoginRequest extends TGPostRequest {
@@ -451,6 +513,7 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
 ```
 
 ##### Response extends standard TGResponse
+
 ```
 [login-response.dart]
     class LoginResponse extends TGResponse {
@@ -478,6 +541,7 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
 ```
 
 ##### Error represents common service error attributes which can be used common across all the services which extends TGError
+
 ```
 [service-error.dart]
     class ServiceError extends TGError {
@@ -506,7 +570,9 @@ HTTP wrapper implementation having Request and Response as objects. JSon is Api 
 ```
 
 #### Mock Service (Example: Login)
-Mapping file holds all the success and error files for each combination of request uri and method. Framework decides based on httpStatus code weather to take success or error file.
+
+Mapping file holds all the success and error files for each combination of request uri and method. Framework decides based on httpStatus code weather to take
+success or error file.
 
 One can simply bypass the entry by making `applyMock` as false which triggers live service call instead of relying on mock.
 
@@ -543,13 +609,14 @@ One can simply bypass the entry by making `applyMock` as false which triggers li
     }
 ```
 
-
 ## View
 
 ### TGView
+
 Common view object creation and helper.
 
 #### Theme
+
 ```
 [main.dart] 
     @override
@@ -575,6 +642,7 @@ Common view object creation and helper.
 ```
 
 ##### Options to load theme different ways
+
 ```
     TGView.loadLightTheme(); // Default Light
     TGView.loadDarkTheme(); // Default Dark
@@ -582,6 +650,7 @@ Common view object creation and helper.
 ```
 
 ##### Refer Theme references directly
+
 ```
     TGView.textTheme()... for TextTheme
     TGView.appBarTheme()... for AppBarTheme
@@ -590,7 +659,9 @@ Common view object creation and helper.
 ```
 
 #### Scaffold Container
+
 Provide custom background and list of widgets to render.
+
 ```
 [Without Background]
     List<Widget> widgets = ...; // Initialise
@@ -603,18 +674,23 @@ Provide custom background and list of widgets to render.
 ```
 
 #### Custom Scroll View having Sliver List
-Custom Scroll View 
+
+Custom Scroll View
+
 ```
     Container container = TGView.sliverScrollView();
 ```
 
 #### Empty Sized Box
+
 To create empty box by providing height, width or both.
+
 ```
     TGView.emptySizedBox(height: 50);
 ```
 
 #### Row Container
+
 ```
     // Some icon and text as left and right aligned widgets for example
     TGView.rowContainer (
@@ -632,6 +708,7 @@ To create empty box by providing height, width or both.
 ```
 
 #### Column Container
+
 ```
     // Some icon and text as children widgets for example
     TGView.columnContainer (
@@ -643,8 +720,10 @@ To create empty box by providing height, width or both.
    );
 ```
 
-#### Columns Container 
+#### Columns Container
+
 Supports N number of columns.
+
 ```
     // Some icon and text as children widgets for example
     TGView.columnsContainer (
@@ -662,6 +741,7 @@ Supports N number of columns.
 ```
 
 #### Box Container
+
 ```
     // Some icon and text as children widgets for example
     TGView.boxContainer(
@@ -678,12 +758,14 @@ Supports N number of columns.
 ```
 
 #### Clear Focus Gesture
+
 ```
     GestureDetector gestureDetector = TGView.clearFocusGesture(context, child);
     // ... Utilize gestureDetector in appropriate heirarchy of widgets
 ```
 
 #### Banner
+
 ```
     GestureDetector gestureDetector = TGView.banner(
       child, // Material App in most of the cases
@@ -695,26 +777,31 @@ Supports N number of columns.
 ```
 
 #### Clear Focus (Hide Keyboard)
+
 ```
     TGView.clearFocus(context); 
 ```
 
 #### Body Color
+
 ```
     TGView.bodyColor();
 ```
 
 #### Display Color
+
 ```
     TGView.displayColor();
 ```
 
 #### Divider
+
 ```
     TGView.divider();
 ```
 
 #### App Bar Back Button
+
 ```
     // With standrd icon
     TGView.appBarBackButton(context: context);
@@ -724,39 +811,46 @@ Supports N number of columns.
 ```
 
 #### Show Snack Bar
+
 ```
     // By default it picks theme's accent color as background color.
     TGView.showSnackBar(context: context, message: "Email has been sent successfully!", backgroundColor: Colors.green, duration: Duration(seconds: 2)); 
 ```
 
 #### Show Alert Dialog
+
 ```
     TGView.showAlertDialog(context: context, actions: actions, onDismiss: onDismiss, content: content, titleRowWidgets: titleRowWidgets);
 ```
 
 #### Popup Menu Item
+
 ```
     TGView.popupMenuItem(icon: Icons.expand_more, value: 1, text: "Expand All");
 ```
 
 #### Loading Indicator
+
 ```
     TGView.loadingIndicator(Colors.blue);
 ```
 
-#### Refresh Indicator  
+#### Refresh Indicator
+
 ```
     TGView.refreshIndicator(widgets: widgets, onRefresh: onRefresh);
 ```
 
-
 ### TGText
+
 Text related implementation based on various styles of TextTheme
 
 #### Render Text
+
 ```
     TGText.bodyMedium("Thanking You!");
     TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary);
     TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, fontWeight: FontWeight.bold, textAlign: TextAlign.center);
     TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, textAlign: TextAlign.center);
+    TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, textAlign: TextAlign.center, maxLine: 2, overflow: TextOverflow.ellipsis, fontFamily: "Montez");
 ```
