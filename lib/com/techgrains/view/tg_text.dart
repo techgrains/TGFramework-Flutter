@@ -7,15 +7,11 @@ class TGText {
   // ***   Typography   *** //
 
   /// "custom" style text
-  static Text withStyle(
-    String text,
-    TextStyle textStyle, {
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text withStyle(String text, TextStyle textStyle,
+      {FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(
       text,
       textAlign: textAlign,
@@ -30,15 +26,12 @@ class TGText {
   }
 
   /// "displayLarge" style text
-  static Text displayLarge(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text displayLarge(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -46,21 +39,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().displayLarge, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().displayLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "displayMedium" style text
-  static Text displayMedium(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text displayMedium(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -68,21 +57,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().displayMedium, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().displayMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "displaySmall" style text
-  static Text displaySmall(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text displaySmall(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -90,21 +75,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().displaySmall, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().displaySmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "headlineLarge" style text
-  static Text headlineLarge(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text headlineLarge(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -112,21 +93,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().headlineLarge, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().headlineLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "headlineMedium" style text
-  static Text headlineMedium(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text headlineMedium(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -134,8 +111,7 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().headlineMedium, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().headlineMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
@@ -147,7 +123,6 @@ class TGText {
     TextAlign textAlign = TextAlign.start,
     TextOverflow? overflow,
     int? maxLine,
-    String? fontFamily,
   }) {
     return Text(text,
         overflow: (overflow != null
@@ -156,21 +131,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().headlineSmall, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().headlineSmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "titleLarge" style text
-  static Text titleLarge(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text titleLarge(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -178,21 +149,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().titleLarge, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().titleLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "titleMedium" style text
-  static Text titleMedium(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text titleMedium(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -200,21 +167,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().titleMedium, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().titleMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "titleSmall" style text
-  static Text titleSmall(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text titleSmall(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -222,8 +185,7 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().titleSmall, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().titleSmall, color, fontWeight),
 
         //style: TextStyle(fontFamily: fontFamily, color: Colors.red, fontWeight: FontWeight.bold),
 
@@ -238,7 +200,6 @@ class TGText {
     TextAlign textAlign = TextAlign.start,
     TextOverflow? overflow,
     int? maxLine,
-    String? fontFamily,
   }) {
     return Text(text,
         overflow: (overflow != null
@@ -247,8 +208,7 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style:
-            _merge(TGView.textTheme().bodyLarge, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().bodyLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
@@ -260,7 +220,6 @@ class TGText {
     TextAlign textAlign = TextAlign.start,
     TextOverflow? overflow,
     int? maxLine,
-    String? fontFamily,
   }) {
     return Text(text,
         overflow: (overflow != null
@@ -269,21 +228,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().bodyMedium, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().bodyMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "bodySmall" style text
-  static Text bodySmall(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text bodySmall(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -291,21 +246,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style:
-            _merge(TGView.textTheme().bodySmall, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().bodySmall, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "labelLarge" style text
-  static Text labelLarge(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text labelLarge(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -313,21 +264,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().labelLarge, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().labelLarge, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "labelMedium" style text
-  static Text labelMedium(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text labelMedium(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -335,21 +282,17 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().labelMedium, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().labelMedium, color, fontWeight),
         textAlign: textAlign);
   }
 
   /// "labelSmall" style text
-  static Text labelSmall(
-    String text, {
-    Color? color,
-    FontWeight? fontWeight,
-    TextAlign textAlign = TextAlign.start,
-    TextOverflow? overflow,
-    int? maxLine,
-    String? fontFamily,
-  }) {
+  static Text labelSmall(String text,
+      {Color? color,
+      FontWeight? fontWeight,
+      TextAlign textAlign = TextAlign.start,
+      TextOverflow? overflow,
+      int? maxLine}) {
     return Text(text,
         overflow: (overflow != null
             ? overflow
@@ -357,24 +300,21 @@ class TGText {
                 ? TextOverflow.ellipsis
                 : TextOverflow.visible)),
         maxLines: maxLine,
-        style: _merge(
-            TGView.textTheme().labelSmall, color, fontWeight, fontFamily),
+        style: _merge(TGView.textTheme().labelSmall, color, fontWeight),
         textAlign: textAlign);
   }
 
-  static TextStyle? _merge(TextStyle? textStyle, Color? color,
-      FontWeight? fontWeight, String? fontFamily) {
-    return textStyle?.merge(TextStyle(
-        fontFamily: fontFamily, color: color, fontWeight: fontWeight));
-    // if (color != null && fontWeight != null) {
-    //    textStyle?.merge(TextStyle(color: color, fontWeight: fontWeight));
-    // }
-    // if (color != null) {
-    //    textStyle?.merge(TextStyle(color: color));
-    // }
-    // if (fontWeight != null) {
-    //    textStyle?.merge(TextStyle(fontWeight: fontWeight));
-    // }
-    // return textStyle;
+  static TextStyle? _merge(
+      TextStyle? textStyle, Color? color, FontWeight? fontWeight) {
+    if (color != null && fontWeight != null) {
+      textStyle?.merge(TextStyle(color: color, fontWeight: fontWeight));
+    }
+    if (color != null) {
+      textStyle?.merge(TextStyle(color: color));
+    }
+    if (fontWeight != null) {
+      textStyle?.merge(TextStyle(fontWeight: fontWeight));
+    }
+    return textStyle;
   }
 }

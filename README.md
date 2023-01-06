@@ -852,5 +852,5 @@ Text related implementation based on various styles of TextTheme
     TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary);
     TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, fontWeight: FontWeight.bold, textAlign: TextAlign.center);
     TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, textAlign: TextAlign.center);
-    TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, textAlign: TextAlign.center, maxLine: 2, overflow: TextOverflow.ellipsis, fontFamily: "Montez");
+    TGText.bodySmall("Thanking You!", color: TGView.colorScheme().primary, textAlign: TextAlign.center, maxLine: 2, overflow: TextOverflow.ellipsis);
 ```
