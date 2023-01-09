@@ -307,13 +307,13 @@ class TGText {
   static TextStyle? _merge(
       TextStyle? textStyle, Color? color, FontWeight? fontWeight) {
     if (color != null && fontWeight != null) {
-      textStyle?.merge(TextStyle(color: color, fontWeight: fontWeight));
+      return textStyle?.merge(TextStyle(color: color, fontWeight: fontWeight));
     }
     if (color != null) {
-      textStyle?.merge(TextStyle(color: color));
+      return textStyle?.merge(TextStyle(color: color));
     }
     if (fontWeight != null) {
-      textStyle?.merge(TextStyle(fontWeight: fontWeight));
+      return textStyle?.merge(TextStyle(fontWeight: fontWeight));
     }
     return textStyle;
   }

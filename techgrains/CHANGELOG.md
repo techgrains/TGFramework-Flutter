@@ -1,4 +1,7 @@
-## 1.4.4
+## 1.4.5
+* TGText
+  * Update textColor attribute for text rendering
+
 * TGText
   * Removed fontFamily attribute for text rendering
 
