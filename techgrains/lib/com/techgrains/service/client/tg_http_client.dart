@@ -1,7 +1,8 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
+import 'package:universal_io/io.dart';
 
 class TGHttpClient extends http.BaseClient {
   static bool badCertificateCallbackEnabled = false;
