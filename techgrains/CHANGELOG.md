@@ -1,3 +1,10 @@
+## 1.4.7
+* Service
+  * TGService
+    * Resolved Exception while no active internet in service methods
+* Memory
+  * TGSharedPreference: key check added in 'remove' method
+  
 ## 1.4.6
 * Service
   * TGService
