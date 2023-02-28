@@ -63,11 +63,16 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> getSync({required TGGetRequest request}) async {
-    Uri uri = Uri.parse(request.getUrl());
-    TGLog.t("GET", uri);
-    final httpRes = await _getClient(request.getUri(), "GET")
-        .get(uri, headers: request.headers());
-    return Future.value(_prepareResponse(httpRes));
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("GET", uri);
+      final httpRes = await _getClient(request.getUri(), "GET")
+          .get(uri, headers: request.headers());
+      return Future.value(_prepareResponse(httpRes));
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      return Future.value(t);
+    }
   }
 
   Future<T> post(
@@ -89,14 +94,19 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> postSync({required TGPostRequest request}) async {
-    Uri uri = Uri.parse(request.getUrl());
-    TGLog.t("POST", uri);
-    final httpRes = await _getClient(request.getUri(), "POST").post(
-      uri,
-      body: request.body(),
-      headers: request.headers(),
-    );
-    return Future.value(_prepareResponse(httpRes));
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("POST", uri);
+      final httpRes = await _getClient(request.getUri(), "POST").post(
+        uri,
+        body: request.body(),
+        headers: request.headers(),
+      );
+      return Future.value(_prepareResponse(httpRes));
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      return Future.value(t);
+    }
   }
 
   Future<T> put(
@@ -174,15 +184,20 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> uploadFileSync({required TGUploadFileRequest request}) async {
-    var multipartRequest = http.MultipartRequest(
-        "POST",
-        Uri.parse(
-            TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
-    multipartRequest.headers.addAll(request.headers()!);
-    multipartRequest.fields.addAll(request.body());
-    multipartRequest.files.add(request.file());
-    StreamedResponse httpRes = await multipartRequest.send();
-    return Future.value(_performCallbackForUploadFileSyncResponse(httpRes));
+    try {
+      var multipartRequest = http.MultipartRequest(
+          "POST",
+          Uri.parse(TGRequest.prepareUrl(
+              TGRequest.defaultBaseUrl, request.getUri())));
+      multipartRequest.headers.addAll(request.headers()!);
+      multipartRequest.fields.addAll(request.body());
+      multipartRequest.files.add(request.file());
+      StreamedResponse httpRes = await multipartRequest.send();
+      return Future.value(_performCallbackForUploadFileSyncResponse(httpRes));
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      return Future.value(t);
+    }
   }
 
   T _performCallback(

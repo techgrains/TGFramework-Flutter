@@ -73,6 +73,9 @@ class TGSharedPreferences {
   /// Removes content for given key
   Future<bool> _remove(String key) async {
     SharedPreferences prefs = await _getSharedPreferences();
+    if (!prefs.containsKey(key)) {
+      return false;
+    }
     TGLog.d('TGSharedPreferences.remove - key:[$key]');
     return prefs.remove(key);
   }
@@ -93,7 +96,9 @@ class TGSharedPreferences {
   /// Removes content for given key
   Future<bool> remove(String key) async {
     _listeners.forEach((listener) {
-      listener.keyRemove(key);
+      if (_listeners.contains(key)) {
+        listener.keyRemove(key);
+      }
     });
     return _remove(key);
   }
