@@ -61,6 +61,10 @@ class TGSharedPreferences {
   /// Fetches value for given key
   dynamic _fetch(String key) async {
     SharedPreferences prefs = await _getSharedPreferences();
+    if (!prefs.containsKey(key)) {
+      return null;
+    }
+
     final content = prefs.get(key);
     TGLog.d('TGSharedPreferences.get - key:[$key], value:[$content]');
     return content;
