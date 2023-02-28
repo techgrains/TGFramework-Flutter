@@ -1,3 +1,11 @@
+## 1.4.6
+* Service
+  * TGService
+    * Resolved Exception while no active internet in service methods
+    * Added "universal_io" for web support in HTTPClient
+* Memory
+  * TGSharedPreference: key check added in 'get' method
+
 ## 1.4.5
 * TGText
   * Update textColor attribute for text rendering

@@ -49,11 +49,17 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   Future<T> get(
       {required TGGetRequest request, onSuccess(T)?, onError(T)?}) async {
-    Uri uri = Uri.parse(request.getUrl());
-    TGLog.t("GET", uri);
-    final httpRes = await _getClient(request.getUri(), "GET")
-        .get(uri, headers: request.headers());
-    return _performCallback(httpRes, onError, onSuccess);
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("GET", uri);
+      final httpRes = await _getClient(request.getUri(), "GET")
+          .get(uri, headers: request.headers());
+      return _performCallback(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
   }
 
   Future<T> getSync({required TGGetRequest request}) async {
@@ -66,14 +72,20 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   Future<T> post(
       {required TGPostRequest request, onSuccess(T)?, onError(T)?}) async {
-    Uri uri = Uri.parse(request.getUrl());
-    TGLog.t("POST", uri);
-    final httpRes = await _getClient(request.getUri(), "POST").post(
-      uri,
-      body: request.body(),
-      headers: request.headers(),
-    );
-    return _performCallback(httpRes, onError, onSuccess);
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("POST", uri);
+      final httpRes = await _getClient(request.getUri(), "POST").post(
+        uri,
+        body: request.body(),
+        headers: request.headers(),
+      );
+      return _performCallback(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
   }
 
   Future<T> postSync({required TGPostRequest request}) async {
@@ -89,52 +101,76 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   Future<T> put(
       {required TGPutRequest request, onSuccess(T)?, onError(T)?}) async {
-    Uri uri = Uri.parse(request.getUrl());
-    TGLog.t("PUT", uri);
-    final httpRes = await _getClient(request.getUri(), "PUT").put(
-      uri,
-      body: request.body(),
-      headers: request.headers(),
-    );
-    return _performCallback(httpRes, onError, onSuccess);
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("PUT", uri);
+      final httpRes = await _getClient(request.getUri(), "PUT").put(
+        uri,
+        body: request.body(),
+        headers: request.headers(),
+      );
+      return _performCallback(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
   }
 
   Future<T> delete(
       {required TGDeleteRequest request, onSuccess(T)?, onError(T)?}) async {
-    Uri uri = Uri.parse(request.getUrl());
-    TGLog.t("DELETE", uri);
-    final httpRes = await _getClient(request.getUri(), "DELETE").delete(
-      uri,
-      body: request.body(),
-      headers: request.headers(),
-    );
-    return _performCallback(httpRes, onError, onSuccess);
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("DELETE", uri);
+      final httpRes = await _getClient(request.getUri(), "DELETE").delete(
+        uri,
+        body: request.body(),
+        headers: request.headers(),
+      );
+      return _performCallback(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
   }
 
   Future<T> upload(
       {required TGUploadRequest request, onSuccess(T)?, onError(T)?}) async {
-    var multipartRequest = http.MultipartRequest(
-        "POST",
-        Uri.parse(
-            TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
-    multipartRequest.files.add(request.file());
-    StreamedResponse httpRes = await multipartRequest.send();
-    return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
+    try {
+      var multipartRequest = http.MultipartRequest(
+          "POST",
+          Uri.parse(TGRequest.prepareUrl(
+              TGRequest.defaultBaseUrl, request.getUri())));
+      multipartRequest.files.add(request.file());
+      StreamedResponse httpRes = await multipartRequest.send();
+      return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
   }
 
   Future<T> uploadFile(
       {required TGUploadFileRequest request,
       onSuccess(T)?,
       onError(E)?}) async {
-    var multipartRequest = http.MultipartRequest(
-        "POST",
-        Uri.parse(
-            TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
-    multipartRequest.headers.addAll(request.headers()!);
-    multipartRequest.fields.addAll(request.body());
-    multipartRequest.files.add(request.file());
-    StreamedResponse httpRes = await multipartRequest.send();
-    return _performCallbackForUploadFileResponse(httpRes, onError, onSuccess);
+    try {
+      var multipartRequest = http.MultipartRequest(
+          "POST",
+          Uri.parse(TGRequest.prepareUrl(
+              TGRequest.defaultBaseUrl, request.getUri())));
+      multipartRequest.headers.addAll(request.headers()!);
+      multipartRequest.fields.addAll(request.body());
+      multipartRequest.files.add(request.file());
+      StreamedResponse httpRes = await multipartRequest.send();
+      return _performCallbackForUploadFileResponse(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
   }
 
   Future<T> uploadFileSync({required TGUploadFileRequest request}) async {
@@ -225,6 +261,17 @@ class TGService<T extends TGResponse, E extends TGError> {
       TGLog.e(e);
       // Ignores error if not able to populate response, validate response or decode json. Populated response must be returned.
     }
+    return t;
+  }
+
+  T _populateExceptionResponse(error) {
+    T t = creatorT();
+    t.timestamp = new DateTime.now().millisecondsSinceEpoch;
+    t.httpStatus = 0;
+    t.contentLength = 0;
+    t.error = error.message;
+    t.body = error.message;
+    t.hasError = true;
     return t;
   }
 
