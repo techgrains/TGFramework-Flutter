@@ -173,7 +173,7 @@ class TGService<T extends TGResponse, E extends TGError> {
               TGRequest.defaultBaseUrl, request.getUri())));
       multipartRequest.headers.addAll(request.headers()!);
       multipartRequest.fields.addAll(request.body());
-      multipartRequest.files.add(request.file());
+      multipartRequest.files.addAll(request.files());
       StreamedResponse httpRes = await multipartRequest.send();
       return _performCallbackForUploadFileResponse(httpRes, onError, onSuccess);
     } catch (error) {
@@ -191,7 +191,7 @@ class TGService<T extends TGResponse, E extends TGError> {
               TGRequest.defaultBaseUrl, request.getUri())));
       multipartRequest.headers.addAll(request.headers()!);
       multipartRequest.fields.addAll(request.body());
-      multipartRequest.files.add(request.file());
+      multipartRequest.files.addAll(request.files());
       StreamedResponse httpRes = await multipartRequest.send();
       return Future.value(_performCallbackForUploadFileSyncResponse(httpRes));
     } catch (error) {
