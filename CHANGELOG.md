@@ -1,3 +1,9 @@
+## 1.4.8
+* Service
+  * TGService
+    * Add multi file upload support in "uploadFile" method
+    * Add multi file upload support in "uploadFileSync" method
+
 ## 1.4.7
 * Service
   * TGService
