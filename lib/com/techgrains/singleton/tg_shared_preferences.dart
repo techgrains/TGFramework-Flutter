@@ -13,7 +13,7 @@ class TGSharedPreferences {
   /// Created At timestamp
   DateTime? _createdAt;
 
-  /// Gets TGSharedPreferences's instance reference
+  /// Gets TGSharedPreferences' instance reference
   static TGSharedPreferences getInstance() {
     return _instance;
   }

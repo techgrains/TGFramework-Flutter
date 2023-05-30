@@ -16,63 +16,63 @@ void main() {
   tearDown(() {});
 
   test('null', () async {
-    await TGSharedPreferences.getInstance()!.set("keyNull", null);
-    expect(await TGSharedPreferences.getInstance()!.get("keyNull"), null);
+    await TGSharedPreferences.getInstance().set("keyNull", null);
+    expect(await TGSharedPreferences.getInstance().get("keyNull"), null);
 
-    expect(await TGSharedPreferences.getInstance()!.get("someKey"), null);
+    expect(await TGSharedPreferences.getInstance().get("someKey"), null);
   });
 
   test('bool', () async {
-    await TGSharedPreferences.getInstance()!.set("keyBool", true);
-    expect(await TGSharedPreferences.getInstance()!.get("keyBool"), true);
+    await TGSharedPreferences.getInstance().set("keyBool", true);
+    expect(await TGSharedPreferences.getInstance().get("keyBool"), true);
   });
 
   test('int', () async {
-    await TGSharedPreferences.getInstance()!.set("keyInt", 1);
-    expect(await TGSharedPreferences.getInstance()!.get("keyInt"), 1);
+    await TGSharedPreferences.getInstance().set("keyInt", 1);
+    expect(await TGSharedPreferences.getInstance().get("keyInt"), 1);
   });
 
   test('double', () async {
-    await TGSharedPreferences.getInstance()!.set("keyDouble", 2.0);
-    expect(await TGSharedPreferences.getInstance()!.get("keyDouble"), 2.0);
+    await TGSharedPreferences.getInstance().set("keyDouble", 2.0);
+    expect(await TGSharedPreferences.getInstance().get("keyDouble"), 2.0);
   });
 
   test('string', () async {
-    await TGSharedPreferences.getInstance()!.set("keyString", "String");
-    expect(await TGSharedPreferences.getInstance()!.get("keyString"), "String");
+    await TGSharedPreferences.getInstance().set("keyString", "String");
+    expect(await TGSharedPreferences.getInstance().get("keyString"), "String");
   });
 
   test('stringList', () async {
     List<String> list = ["A", "B", "C", "D"];
-    await TGSharedPreferences.getInstance()!.set("keyStringList", list);
-    expect(await TGSharedPreferences.getInstance()!.get("keyStringList"), list);
+    await TGSharedPreferences.getInstance().set("keyStringList", list);
+    expect(await TGSharedPreferences.getInstance().get("keyStringList"), list);
   });
 
   test('listener', () async {
-    TGSharedPreferences.getInstance()!
+    TGSharedPreferences.getInstance()
         .addListener(TGSharedPreferencesListenerForTest());
 
-    await TGSharedPreferences.getInstance()!.set("keyString", "String");
-    expect(await TGSharedPreferences.getInstance()!.get("keyString"), "String");
+    await TGSharedPreferences.getInstance().set("keyString", "String");
+    expect(await TGSharedPreferences.getInstance().get("keyString"), "String");
   });
 
   test('listener', () async {
-    TGSharedPreferences.getInstance()!
+    TGSharedPreferences.getInstance()
         .addListener(TGSharedPreferencesListenerForTest());
-    TGSharedPreferences.getInstance()!.set("key", "value");
-    expect(TGSharedPreferences.getInstance()!.get("key"), "value");
-    TGSharedPreferences.getInstance()!.remove("key");
-    TGSharedPreferences.getInstance()!.removeAllListeners();
+    TGSharedPreferences.getInstance().set("key", "value");
+    expect(TGSharedPreferences.getInstance().get("key"), "value");
+    TGSharedPreferences.getInstance().remove("key");
+    TGSharedPreferences.getInstance().removeAllListeners();
   });
 
   test('timestamp', () async {
     TGLog.d("createdAt = " +
-        TGSharedPreferences.getInstance()!.createdAt().toString());
+        TGSharedPreferences.getInstance().createdAt().toString());
     TGLog.d("validSince = " +
-        TGSharedPreferences.getInstance()!.validSince().toString());
+        TGSharedPreferences.getInstance().validSince().toString());
     sleep(Duration(seconds: 1));
     TGLog.d("validSince = " +
-        TGSharedPreferences.getInstance()!.validSince().toString());
+        TGSharedPreferences.getInstance().validSince().toString());
   });
 }
 

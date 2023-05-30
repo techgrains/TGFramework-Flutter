@@ -1,3 +1,7 @@
+## 1.5.0
+* Upgraded environment sdk and flutter from version 2 to version 3
+* Versions upgrades for dependency plugins
+
 ## 1.4.8
 * Service
   * TGService
@@ -115,7 +119,7 @@
   * Initializes locale property files upon startup for better performance
 
 ## 1.2.0
-* Enabled support for Linux, MacOS & Windows
+* Enabled support for Linux, macOS & Windows
 * Upgraded versions of dependencies
 
 ## 1.1.10+2
