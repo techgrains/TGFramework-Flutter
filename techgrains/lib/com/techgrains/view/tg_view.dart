@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// TGFramework's View related implementation
@@ -295,7 +294,8 @@ class TGView {
       Color? backgroundColor,
       SnackBarBehavior behavior = SnackBarBehavior.floating}) {
     if (duration == null) duration = Duration(seconds: 2);
-    if (backgroundColor == null) backgroundColor = theme()!.accentColor;
+    if (backgroundColor == null)
+      backgroundColor = theme()!.secondaryHeaderColor;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       backgroundColor: backgroundColor,

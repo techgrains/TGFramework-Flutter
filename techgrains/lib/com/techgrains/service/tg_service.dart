@@ -227,7 +227,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
-      await httpRes.stream.transform(utf8.decoder).listen((value) {
+      httpRes.stream.transform(utf8.decoder).listen((value) {
         t.body = value;
       });
       _validateResponse(t);
@@ -255,7 +255,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
-      await httpRes.stream.transform(utf8.decoder).listen((value) {
+      httpRes.stream.transform(utf8.decoder).listen((value) {
         t.body = value;
       });
       _validateResponse(t);

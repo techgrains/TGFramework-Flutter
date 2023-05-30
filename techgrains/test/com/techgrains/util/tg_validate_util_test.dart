@@ -33,7 +33,7 @@ void main() {
   });
 
   test('alphabets', () async {
-    expect(TGValidate.alphabets("abcPQRxyz"), true);
+    expect(TGValidate.alphabets("abcPQRXyz"), true);
     expect(TGValidate.alphabets(""), false);
     expect(TGValidate.alphabets(" "), false);
     expect(TGValidate.alphabets("0"), false);
