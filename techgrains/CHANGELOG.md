@@ -1,6 +1,10 @@
+## 1.5.2
+* Service
+  * TGRequest
+    * Inclusion of customised headers in TGRequest as addition to default headers
+
 ## 1.5.1
 * Included example as quick reference for the plugin
-* Corrected improper 'intl' plugin dependency and moved to 0.18.0 instead of 0.18.1
 
 ## 1.5.0
 * Upgraded environment sdk and flutter from version 2 to version 3

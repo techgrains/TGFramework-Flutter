@@ -18,9 +18,11 @@ class TechgrainsExampleApp extends StatefulWidget {
   const TechgrainsExampleApp({super.key});
 
   @override
-  _TechgrainsExampleAppState createState() => _state = _TechgrainsExampleAppState();
+  _TechgrainsExampleAppState createState() =>
+      _state = _TechgrainsExampleAppState();
 
-  static void buildTheme(BuildContext context, bool? flagDarkTheme, String textSize) async {
+  static void buildTheme(
+      BuildContext context, bool? flagDarkTheme, String textSize) async {
     TGLog.d("TGPortalApp.buildTheme : flagDarkTheme = $flagDarkTheme");
     _state?.buildTheme(flagDarkTheme);
   }
@@ -66,7 +68,9 @@ class _TechgrainsExampleAppState extends State<TechgrainsExampleApp> {
   }
 
   void _initLocale() {
-    TGLocale.init(defaultLocale: const Locale("en", "US"), otherLocales: [const Locale("gu", "IN"), const Locale("hi", "IN")]);
+    TGLocale.init(
+        defaultLocale: const Locale("en", "US"),
+        otherLocales: [const Locale("gu", "IN"), const Locale("hi", "IN")]);
   }
 
   @override
@@ -95,7 +99,8 @@ class _TechgrainsExampleAppState extends State<TechgrainsExampleApp> {
         supportedLocales: TGLocale.supportedLocales,
         locale: TGLocale.currentLocale,
         localizationsDelegates: const [TGLocalizationsDelegate()],
-        localeResolutionCallback: (locale, supportedLocales) => TGLocale.localeResolutionCallback(locale, supportedLocales),
+        localeResolutionCallback: (locale, supportedLocales) =>
+            TGLocale.localeResolutionCallback(locale, supportedLocales),
         initialRoute: ROUTE_SPLASH,
         routes: <String, WidgetBuilder>{
           ROUTE_SPLASH: (BuildContext context) => const SomeScreen(),
@@ -106,7 +111,6 @@ class _TechgrainsExampleAppState extends State<TechgrainsExampleApp> {
           ROUTE_DASHBOARD: (BuildContext context) => const SomeScreen(),
           ROUTE_PROFILE: (BuildContext context) => const SomeScreen(),
           ROUTE_CHANGE_PASSWORD: (BuildContext context) => const SomeScreen(),
-
         });
   }
 }
