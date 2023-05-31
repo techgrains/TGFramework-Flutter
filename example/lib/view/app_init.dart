@@ -44,8 +44,7 @@ Future<void> initProfile() async {
   String? profileAsJson =
       await TGSharedPreferences.getInstance().get(KEY_OBJ_PROFILE);
   profileAsJson != null
-      ? TGSession.getInstance()
-          .set(KEY_OBJ_PROFILE, null) // Set Profile Object
+      ? TGSession.getInstance().set(KEY_OBJ_PROFILE, null) // Set Profile Object
       : TGSession.getInstance().remove(KEY_OBJ_PROFILE);
 }
 

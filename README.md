@@ -468,6 +468,8 @@ case of error, also converting json error string response into provided error ob
     }
 ```
 
+All the attributes provided during TGService.init(...) remains same across the entire lifecycle of TGService and all the requests. (Stored as static attributes which will be used for all the requests - TGRequest.) 
+
 #### HTTP Request (Example: Login)
 
 ```
@@ -482,6 +484,14 @@ case of error, also converting json error string response into provided error ob
         onSuccess: (response) => _onSuccess(response),
         onError: (error) => _onError(error)
     );
+```
+
+Custom headers can also be set to the specific request as well. It will override default headers which were being set in TGService.init before.
+```
+    TGPostRequest request = ...
+    request.customHeaders = {
+      'Content-Encoding': 'gzip'
+    };
 ```
 
 #### Request, Response & Error (Example: Login)

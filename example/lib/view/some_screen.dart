@@ -69,5 +69,4 @@ class _SplashState extends State<_SplashBody> {
       backgroundColor: TGView.colorScheme().inversePrimary,
     );
   }
-
 }

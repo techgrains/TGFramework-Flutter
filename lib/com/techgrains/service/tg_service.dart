@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -80,10 +81,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
+      String body = request.body();
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
-        body: request.body(),
-        headers: request.headers(),
+        body: body,
+        headers: _headersWithContentLengthForGZip(request.headers(), body),
       );
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
@@ -97,10 +99,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
+      String body = request.body();
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
-        body: request.body(),
-        headers: request.headers(),
+        body: body,
+        headers: _headersWithContentLengthForGZip(request.headers(), body),
       );
       return Future.value(_prepareResponse(httpRes));
     } catch (error) {
@@ -114,10 +117,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("PUT", uri);
+      String body = request.body();
       final httpRes = await _getClient(request.getUri(), "PUT").put(
         uri,
-        body: request.body(),
-        headers: request.headers(),
+        body: body,
+        headers: _headersWithContentLengthForGZip(request.headers(), body),
       );
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
@@ -316,5 +320,19 @@ class TGService<T extends TGResponse, E extends TGError> {
         print(t.body);
       }
     }
+  }
+
+  Map<String, String> _headersWithContentLengthForGZip(
+      Map<String, String>? headers, String body) {
+    if (headers!.containsKey('Content-Encoding')) {
+      if (headers['Content-Encoding'] == 'gzip') {
+        List<int> compressedData = [];
+        GZipCodec gzip = GZipCodec();
+        compressedData = gzip.encode(body.codeUnits);
+        compressedData = gzip.encode(utf8.encode(body));
+        headers.addAll({'Content-Length': compressedData.length.toString()});
+      }
+    }
+    return headers;
   }
 }
