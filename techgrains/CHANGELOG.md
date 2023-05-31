@@ -1,3 +1,8 @@
+## 1.5.3
+* Service
+  * TGRequest
+    * GZip support with content compression and content-length header value
+
 ## 1.5.2
 * Service
   * TGRequest
