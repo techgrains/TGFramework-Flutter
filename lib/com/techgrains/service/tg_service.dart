@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -13,6 +12,7 @@ import 'package:techgrains/com/techgrains/service/request/tg_get_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_post_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_put_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_request.dart';
+import 'package:techgrains/com/techgrains/service/request/tg_request_content.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_upload_file_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_upload_request.dart';
 import 'package:techgrains/com/techgrains/service/response/tg_response.dart';
@@ -81,11 +81,12 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
-      String body = request.body();
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
-        body: body,
-        headers: _headersWithContentLengthForGZip(request.headers(), body),
+        body: content.body,
+        headers: content.headers,
       );
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
@@ -99,11 +100,12 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
-      String body = request.body();
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
-        body: body,
-        headers: _headersWithContentLengthForGZip(request.headers(), body),
+        body: content.body,
+        headers: content.headers,
       );
       return Future.value(_prepareResponse(httpRes));
     } catch (error) {
@@ -117,11 +119,12 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("PUT", uri);
-      String body = request.body();
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "PUT").put(
         uri,
-        body: body,
-        headers: _headersWithContentLengthForGZip(request.headers(), body),
+        body: content.body,
+        headers: content.headers,
       );
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
@@ -320,19 +323,5 @@ class TGService<T extends TGResponse, E extends TGError> {
         print(t.body);
       }
     }
-  }
-
-  Map<String, String> _headersWithContentLengthForGZip(
-      Map<String, String>? headers, String body) {
-    if (headers!.containsKey('Content-Encoding')) {
-      if (headers['Content-Encoding'] == 'gzip') {
-        List<int> compressedData = [];
-        GZipCodec gzip = GZipCodec();
-        compressedData = gzip.encode(body.codeUnits);
-        compressedData = gzip.encode(utf8.encode(body));
-        headers.addAll({'Content-Length': compressedData.length.toString()});
-      }
-    }
-    return headers;
   }
 }
