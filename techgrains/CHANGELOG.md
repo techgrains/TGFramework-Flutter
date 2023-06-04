@@ -1,3 +1,8 @@
+## 1.5.4
+* Service
+  * TGRequest
+    * Customized http request timeout can be setup during TGService.init (default value is 15 seconds)
+
 ## 1.5.3
 * Service
   * TGRequest
