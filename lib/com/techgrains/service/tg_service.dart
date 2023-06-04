@@ -34,7 +34,8 @@ class TGService<T extends TGResponse, E extends TGError> {
       Map<String, String>? headers,
       String? mockMappingsFile,
       bool applyMock = false,
-      bool badCertificateCallbackEnabled = false}) {
+      bool badCertificateCallbackEnabled = false,
+      int connectionTimeoutInSeconds = 15}) {
     // For HTTP Request
     TGRequest.defaultBaseUrl = baseUrl;
     TGRequest.defaultHeaders = headers;
@@ -46,6 +47,7 @@ class TGService<T extends TGResponse, E extends TGError> {
 
     // For HTTP Client
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
+    TGHttpClient.connectionTimeoutInSeconds = connectionTimeoutInSeconds;
   }
 
   Future<T> get(

@@ -458,7 +458,8 @@ case of error, also converting json error string response into provided error ob
       headers: defaultHeaders(),
       applyMock: true,
       mockMappingsFile: "assets/mocks/_mappings.json",
-      badCertificateCallbackEnabled: false
+      badCertificateCallbackEnabled: false,
+      connectionTimeoutInSeconds: 30
     );
 
     Map<String, String> defaultHeaders() {
