@@ -1,4 +1,3 @@
-# Miscellaneous
 *.class
 *.log
 *.pyc
@@ -22,22 +21,19 @@
 #.vscode/
 
 # Flutter/Dart/Pub related
-techgrains/doc/api/
-techgrains/.dart_tool/
-techgrains/.flutter-plugins
-techgrains/.flutter-plugins-depedencies
-techgrains/.packages
-techgrains/.pub-cache/
-techgrains/.pub/
-techgrains/build/
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
 
 # Android related
-techgrains/android/
+android/
 
 # iOS/XCode related
-techgrains/ios/
-techgrains/ios_iphone/
-techgrains/ios_simulator/
-
-# Exceptions to above rules.
-#!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+ios/
+ios_iphone/
+ios_simulator/
