@@ -20,10 +20,10 @@ class TGLocalization {
     TGLog.d("TGLocalization.load : " + fileName);
     if (localeCustomPath == TGLocalization.LOCALE_PATH) {
       _entries =
-          await TGFileUtil.readJsonFileAsMap("${localeCustomPath}${fileName}");
+          await TGFileUtil.readJsonFileAsMap("$localeCustomPath$fileName");
     } else {
       _entries = await TGFileUtil.readJsonFileAsMapFromUrl(
-          "${localeCustomPath}${fileName}");
+          "$localeCustomPath$fileName");
     }
     TGLocale.localizations[locale.toString()] = this;
     return true;

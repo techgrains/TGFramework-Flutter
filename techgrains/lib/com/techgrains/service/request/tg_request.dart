@@ -1,8 +1,12 @@
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 
 abstract class TGRequest {
-  static Map<String, String>? defaultHeaders;
+  // Common across all the requests
   static String? defaultBaseUrl;
+  static Map<String, String>? defaultHeaders;
+
+  // Specific to the request and overrides overlapped default header
+  Map<String, String>? customHeaders;
 
   String? getBaseUrl() {
     return defaultBaseUrl;
@@ -11,7 +15,14 @@ abstract class TGRequest {
   String getUri();
 
   Map<String, String>? headers() {
-    return defaultHeaders;
+    Map<String, String> headers = new Map();
+    if (defaultHeaders != null) {
+      headers.addAll(defaultHeaders!);
+    }
+    if (customHeaders != null) {
+      headers.addAll(customHeaders!);
+    }
+    return headers;
   }
 
   String getUrl() {

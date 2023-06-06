@@ -12,6 +12,7 @@ import 'package:techgrains/com/techgrains/service/request/tg_get_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_post_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_put_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_request.dart';
+import 'package:techgrains/com/techgrains/service/request/tg_request_content.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_upload_file_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_upload_request.dart';
 import 'package:techgrains/com/techgrains/service/response/tg_response.dart';
@@ -33,7 +34,8 @@ class TGService<T extends TGResponse, E extends TGError> {
       Map<String, String>? headers,
       String? mockMappingsFile,
       bool applyMock = false,
-      bool badCertificateCallbackEnabled = false}) {
+      bool badCertificateCallbackEnabled = false,
+      int connectionTimeoutInSeconds = 15}) {
     // For HTTP Request
     TGRequest.defaultBaseUrl = baseUrl;
     TGRequest.defaultHeaders = headers;
@@ -45,6 +47,7 @@ class TGService<T extends TGResponse, E extends TGError> {
 
     // For HTTP Client
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
+    TGHttpClient.connectionTimeoutInSeconds = connectionTimeoutInSeconds;
   }
 
   Future<T> get(
@@ -80,10 +83,12 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
-        body: request.body(),
-        headers: request.headers(),
+        body: content.body,
+        headers: content.headers,
       );
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
@@ -97,10 +102,12 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
-        body: request.body(),
-        headers: request.headers(),
+        body: content.body,
+        headers: content.headers,
       );
       return Future.value(_prepareResponse(httpRes));
     } catch (error) {
@@ -114,10 +121,12 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("PUT", uri);
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "PUT").put(
         uri,
-        body: request.body(),
-        headers: request.headers(),
+        body: content.body,
+        headers: content.headers,
       );
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
@@ -227,7 +236,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
-      await httpRes.stream.transform(utf8.decoder).listen((value) {
+      httpRes.stream.transform(utf8.decoder).listen((value) {
         t.body = value;
       });
       _validateResponse(t);
@@ -255,7 +264,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
-      await httpRes.stream.transform(utf8.decoder).listen((value) {
+      httpRes.stream.transform(utf8.decoder).listen((value) {
         t.body = value;
       });
       _validateResponse(t);

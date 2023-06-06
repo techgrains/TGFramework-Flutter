@@ -1,3 +1,25 @@
+## 1.5.4
+* Service
+  * TGRequest
+    * Customized http request timeout can be setup during TGService.init (default value is 15 seconds)
+
+## 1.5.3
+* Service
+  * TGRequest
+    * GZip support with content compression and content-length header value
+
+## 1.5.2
+* Service
+  * TGRequest
+    * Inclusion of customised headers in TGRequest as addition to default headers
+
+## 1.5.1
+* Included example as quick reference for the plugin
+
+## 1.5.0
+* Upgraded environment sdk and flutter from version 2 to version 3
+* Versions upgrades for dependency plugins
+
 ## 1.4.8
 * Service
   * TGService
@@ -115,7 +137,7 @@
   * Initializes locale property files upon startup for better performance
 
 ## 1.2.0
-* Enabled support for Linux, MacOS & Windows
+* Enabled support for Linux, macOS & Windows
 * Upgraded versions of dependencies
 
 ## 1.1.10+2
