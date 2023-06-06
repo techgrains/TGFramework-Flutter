@@ -26,8 +26,7 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   TGService(this.creatorT, this.creatorE);
 
-  Client _getClient(String url, String method) =>
-      TGClientFactory.getClient(url, method);
+  Client _getClient(String url, String method) => TGClientFactory.getClient(url, method);
 
   static init(
       {required String baseUrl,
@@ -42,21 +41,18 @@ class TGService<T extends TGResponse, E extends TGError> {
 
     // For Mock
     TGMockService.applyMock = applyMock;
-    if (mockMappingsFile != null && applyMock)
-      TGMockService.loadMockMappings(mockMappingsFile);
+    if (mockMappingsFile != null && applyMock) TGMockService.loadMockMappings(mockMappingsFile);
 
     // For HTTP Client
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;
     TGHttpClient.connectionTimeoutInSeconds = connectionTimeoutInSeconds;
   }
 
-  Future<T> get(
-      {required TGGetRequest request, onSuccess(T)?, onError(T)?}) async {
+  Future<T> get({required TGGetRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("GET", uri);
-      final httpRes = await _getClient(request.getUri(), "GET")
-          .get(uri, headers: request.headers());
+      final httpRes = await _getClient(request.getUri(), "GET").get(uri, headers: request.headers());
       return _performCallback(httpRes, onError, onSuccess);
     } catch (error) {
       T t = _populateExceptionResponse(error);
@@ -69,8 +65,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("GET", uri);
-      final httpRes = await _getClient(request.getUri(), "GET")
-          .get(uri, headers: request.headers());
+      final httpRes = await _getClient(request.getUri(), "GET").get(uri, headers: request.headers());
       return Future.value(_prepareResponse(httpRes));
     } catch (error) {
       T t = _populateExceptionResponse(error);
@@ -78,13 +73,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  Future<T> post(
-      {required TGPostRequest request, onSuccess(T)?, onError(T)?}) async {
+  Future<T> post({required TGPostRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
-      TGRequestContent content =
-          TGRequestContent(request.body(), request.headers());
+      TGRequestContent content = TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
         body: content.body,
@@ -102,8 +95,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("POST", uri);
-      TGRequestContent content =
-          TGRequestContent(request.body(), request.headers());
+      TGRequestContent content = TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "POST").post(
         uri,
         body: content.body,
@@ -116,13 +108,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  Future<T> put(
-      {required TGPutRequest request, onSuccess(T)?, onError(T)?}) async {
+  Future<T> put({required TGPutRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("PUT", uri);
-      TGRequestContent content =
-          TGRequestContent(request.body(), request.headers());
+      TGRequestContent content = TGRequestContent(request.body(), request.headers());
       final httpRes = await _getClient(request.getUri(), "PUT").put(
         uri,
         body: content.body,
@@ -136,8 +126,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  Future<T> delete(
-      {required TGDeleteRequest request, onSuccess(T)?, onError(T)?}) async {
+  Future<T> delete({required TGDeleteRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("DELETE", uri);
@@ -154,13 +143,9 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  Future<T> upload(
-      {required TGUploadRequest request, onSuccess(T)?, onError(T)?}) async {
+  Future<T> upload({required TGUploadRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
-      var multipartRequest = http.MultipartRequest(
-          "POST",
-          Uri.parse(TGRequest.prepareUrl(
-              TGRequest.defaultBaseUrl, request.getUri())));
+      var multipartRequest = http.MultipartRequest("POST", Uri.parse(TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
       multipartRequest.files.add(request.file());
       StreamedResponse httpRes = await multipartRequest.send();
       return _performCallbackForStreamedResponse(httpRes, onError, onSuccess);
@@ -171,15 +156,9 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  Future<T> uploadFile(
-      {required TGUploadFileRequest request,
-      onSuccess(T)?,
-      onError(E)?}) async {
+  Future<T> uploadFile({required TGUploadFileRequest request, onSuccess(T)?, onError(E)?}) async {
     try {
-      var multipartRequest = http.MultipartRequest(
-          "POST",
-          Uri.parse(TGRequest.prepareUrl(
-              TGRequest.defaultBaseUrl, request.getUri())));
+      var multipartRequest = http.MultipartRequest("POST", Uri.parse(TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
       multipartRequest.headers.addAll(request.headers()!);
       multipartRequest.fields.addAll(request.body());
       multipartRequest.files.addAll(request.files());
@@ -194,10 +173,7 @@ class TGService<T extends TGResponse, E extends TGError> {
 
   Future<T> uploadFileSync({required TGUploadFileRequest request}) async {
     try {
-      var multipartRequest = http.MultipartRequest(
-          "POST",
-          Uri.parse(TGRequest.prepareUrl(
-              TGRequest.defaultBaseUrl, request.getUri())));
+      var multipartRequest = http.MultipartRequest("POST", Uri.parse(TGRequest.prepareUrl(TGRequest.defaultBaseUrl, request.getUri())));
       multipartRequest.headers.addAll(request.headers()!);
       multipartRequest.fields.addAll(request.body());
       multipartRequest.files.addAll(request.files());
@@ -209,15 +185,13 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  T _performCallback(
-      Response httpRes, onError(dynamic T)?, onSuccess(dynamic T)?) {
+  T _performCallback(Response httpRes, onError(dynamic T)?, onSuccess(dynamic T)?) {
     T t = _prepareResponse(httpRes);
     t.hasError ? onError!(t) : onSuccess!(t);
     return t;
   }
 
-  T _performCallbackForStreamedResponse(
-      StreamedResponse httpRes, onError(dynamic T)?, onSuccess(dynamic T)?) {
+  T _performCallbackForStreamedResponse(StreamedResponse httpRes, onError(dynamic T)?, onSuccess(dynamic T)?) {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
@@ -231,12 +205,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     return t;
   }
 
-  Future<T> _performCallbackForUploadFileResponse(StreamedResponse httpRes,
-      onError(dynamic E)?, onSuccess(dynamic T)?) async {
+  Future<T> _performCallbackForUploadFileResponse(StreamedResponse httpRes, onError(dynamic E)?, onSuccess(dynamic T)?) async {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
-      httpRes.stream.transform(utf8.decoder).listen((value) {
+      await httpRes.stream.transform(utf8.decoder).listen((value) {
         t.body = value;
       });
       _validateResponse(t);
@@ -247,11 +220,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     if (t.hasError) {
       E e = creatorE();
       final timestamp = new DateTime.now().millisecondsSinceEpoch;
-      final errorResponse = {
-        "httpStatus": httpRes.statusCode,
-        "timestamp": timestamp,
-        "message": t.body!
-      };
+      final errorResponse = {"httpStatus": httpRes.statusCode, "timestamp": timestamp, "message": t.body!};
       onError!(e.fromJson(errorResponse));
     } else {
       onSuccess!(t);
@@ -259,12 +228,11 @@ class TGService<T extends TGResponse, E extends TGError> {
     return t;
   }
 
-  Future<T> _performCallbackForUploadFileSyncResponse(
-      StreamedResponse httpRes) async {
+  Future<T> _performCallbackForUploadFileSyncResponse(StreamedResponse httpRes) async {
     T t = creatorT();
     try {
       _populateResponse(t, httpRes);
-      httpRes.stream.transform(utf8.decoder).listen((value) {
+      await httpRes.stream.transform(utf8.decoder).listen((value) {
         t.body = value;
       });
       _validateResponse(t);
@@ -316,10 +284,8 @@ class TGService<T extends TGResponse, E extends TGError> {
           t.fromJson(jsonDecode(t.body!));
         }
       } catch (e) {
-        TGLog.e("Unable to prepare - " +
-            (t.hasError ? E.toString() : T.toString()));
-        TGLog.e("Please check 'fromJson(dynamic json)' implementation of - " +
-            (t.hasError ? E.toString() : T.toString()));
+        TGLog.e("Unable to prepare - " + (t.hasError ? E.toString() : T.toString()));
+        TGLog.e("Please check 'fromJson(dynamic json)' implementation of - " + (t.hasError ? E.toString() : T.toString()));
         TGLog.e(e);
         t.hasError = true;
         print(t.body);
