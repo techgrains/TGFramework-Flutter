@@ -1,8 +1,7 @@
 ## 1.5.5
 * Service
   * TGService
-    * Fixed stream response issue in "uploadFile" method
-    * Fixed stream response issue in "uploadFileSync" method
+    * Fixed stream response issue in "uploadFile" & "uploadFileSync"
     
 * Service
   * TGRequest
