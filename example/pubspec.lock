@@ -318,10 +318,10 @@ packages:
     dependency: "direct main"
     description:
       name: techgrains
-      sha256: bed511a4bab42de06cf7a2eb1737953b92b384137ccf2c7f9daba7ef43a7ced1
+      sha256: a186c619899371b5931ff7e40b2920f00998d9dfc6c6a8cf93c25f158265ed42
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.2"
+    version: "1.5.4"
   term_glyph:
     dependency: transitive
     description:

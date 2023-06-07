@@ -1,4 +1,8 @@
-## 1.5.4
+## 1.5.5
+* Service
+  * TGService
+    * Fixed stream response issue in "uploadFile" & "uploadFileSync"
+    
 * Service
   * TGRequest
     * Customized http request timeout can be setup during TGService.init (default value is 15 seconds)
