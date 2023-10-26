@@ -13,6 +13,9 @@ class TGFlavor {
   static List<TGFlavorVO>? _flavors;
   static TGFlavorVO? _current;
 
+  /// Holds all custom params key-values as Map
+  static Map<String, dynamic>? _params;
+
   /// Initialize
   static void init(String flavorsConfigFile) {
     TGLog.d("TGFlavor : init");
@@ -121,8 +124,29 @@ class TGFlavor {
 
   /// Gets param value for given key
   static dynamic param(String key) {
-    Map<String, dynamic>? params = _current!.params;
+    /// First preference to customised params
+    Object? value = _params?[key];
+    if(value != null) return value;
+
+    /// Second preference to file based params
+    Map<String, dynamic>? params = _current?.params;
     if (params == null) return null;
     return params[key];
+  }
+
+  /// Sets param value for given key
+  static void setParam(String key, dynamic value) {
+    if(_params == null) _params = new Map();
+    _params?[key] = value;
+  }
+
+  /// Removes all params
+  static dynamic removeAllParams() {
+    return _params?.clear();
+  }
+
+  /// Removes param value for given key
+  static dynamic removeParam(String key) {
+    return _params?.remove(key);
   }
 }

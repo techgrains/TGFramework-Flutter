@@ -365,6 +365,19 @@ Extended implementation of LocalizationsDelegate which Flutter uses internally
   flutter run --dart-define=flavor=dev
 ```
 
+#### Custom flavor params on top of flavors.json 
+
+```
+[Splash]
+    TGFlavor.setParam("secretKey", "key");
+    
+[Other Screen]
+    String secretKey = TGFlavor.param("secretKey");
+    
+[Remove Param]
+    TGFlavor.removeParam("secretKey");
+```
+
 ### TGDateUtil
 
 #### Format
