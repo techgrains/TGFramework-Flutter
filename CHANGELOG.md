@@ -1,3 +1,8 @@
+## 1.5.6
+* Util
+  * TGFlavor
+    * Introduced custom flavor params to be set which overrides default flavors.json
+
 ## 1.5.5
 * Service
   * TGService
