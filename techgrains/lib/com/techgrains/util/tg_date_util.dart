@@ -335,6 +335,7 @@ class TGDateUtil {
       case TGTimeZone.SGT:
       case TGTimeZone.ULAT:
       case TGTimeZone.WITA:
+      case TGTimeZone.CST_CHINA:
         return const Duration(hours: 8);
       case TGTimeZone.AWDT:
       case TGTimeZone.I_INDIA:
@@ -492,10 +493,10 @@ class TGDateUtil {
     }
   }
 
-  static DateTime convertBetweenTimezoneForDateTime(String inputTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
+  static DateTime convertTimezoneWithDateTime(DateTime fromTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
       {String dateTimePattern = _DATE_TIME_PATTERN}) {
     // Parse the input datetime
-    final originalTime = DateTime.parse(inputTime);
+    final originalTime = DateTime.parse(DateFormat(dateTimePattern).format(fromTime));
 
     // Get the offset for the source and target timezones
     Duration? fromOffset = _getTimeZoneOffsets(fromTimeZone);
@@ -515,12 +516,12 @@ class TGDateUtil {
     return convertedTime;
   }
 
-  static String convertBetweenTimezoneForDateTimeString(String inputTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
+  static String convertTimezoneWithString(String fromTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
       {String dateTimePattern = _DATE_TIME_PATTERN}) {
     final DateFormat dateFormat = DateFormat(dateTimePattern);
 
     // Parse the input datetime
-    final originalTime = DateTime.parse(inputTime);
+    final originalTime = DateTime.parse(fromTime);
 
     // Get the offset for the source and target timezones
     Duration? fromOffset = _getTimeZoneOffsets(fromTimeZone);
