@@ -239,22 +239,26 @@ class TGDateUtil {
   static const String _DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
   /// Formats Date
-  static String formatDate(DateTime dateTime, {String datePattern = _DATE_PATTERN}) {
+  static String formatDate(DateTime dateTime,
+      {String datePattern = _DATE_PATTERN}) {
     return DateFormat(datePattern).format(dateTime);
   }
 
   /// Formats DateTime
-  static String formatDateTime(DateTime dateTime, {String dateTimePattern = _DATE_TIME_PATTERN}) {
+  static String formatDateTime(DateTime dateTime,
+      {String dateTimePattern = _DATE_TIME_PATTERN}) {
     return DateFormat(dateTimePattern).format(dateTime);
   }
 
   /// Parse Date
-  static DateTime parseDate(String dateTime, {String datePattern = _DATE_PATTERN}) {
+  static DateTime parseDate(String dateTime,
+      {String datePattern = _DATE_PATTERN}) {
     return DateFormat(datePattern).parse(dateTime);
   }
 
   /// Parse DateTime
-  static DateTime parseDateTime(String dateTime, {String dateTimePattern = _DATE_TIME_PATTERN}) {
+  static DateTime parseDateTime(String dateTime,
+      {String dateTimePattern = _DATE_TIME_PATTERN}) {
     return DateFormat(dateTimePattern).parse(dateTime);
   }
 
@@ -493,10 +497,12 @@ class TGDateUtil {
     }
   }
 
-  static DateTime convertTimezoneWithDateTime(DateTime fromTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
+  static DateTime convertTimezoneWithDateTime(
+      DateTime fromTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
       {String dateTimePattern = _DATE_TIME_PATTERN}) {
     // Parse the input datetime
-    final originalTime = DateTime.parse(DateFormat(dateTimePattern).format(fromTime));
+    final originalTime =
+        DateTime.parse(DateFormat(dateTimePattern).format(fromTime));
 
     // Get the offset for the source and target timezones
     Duration? fromOffset = _getTimeZoneOffsets(fromTimeZone);
@@ -516,7 +522,8 @@ class TGDateUtil {
     return convertedTime;
   }
 
-  static String convertTimezoneWithString(String fromTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
+  static String convertTimezoneWithString(
+      String fromTime, TGTimeZone fromTimeZone, TGTimeZone toTimeZone,
       {String dateTimePattern = _DATE_TIME_PATTERN}) {
     final DateFormat dateFormat = DateFormat(dateTimePattern);
 

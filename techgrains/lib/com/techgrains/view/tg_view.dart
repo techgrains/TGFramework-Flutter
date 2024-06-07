@@ -62,12 +62,15 @@ class TGView {
   // ***   Container   *** //
 
   /// Common Scaffold Container
-  static Scaffold scaffoldContainer(List<Widget> widgets, {Container? backgroundContainer}) {
+  static Scaffold scaffoldContainer(List<Widget> widgets,
+      {Container? backgroundContainer}) {
     return Scaffold(
       body: Container(
         child: new Stack(
           children: <Widget>[
-            backgroundContainer != null ? backgroundContainer : emptyContainer(),
+            backgroundContainer != null
+                ? backgroundContainer
+                : emptyContainer(),
             sliverScrollView(widgets),
           ],
         ),
@@ -169,7 +172,8 @@ class TGView {
       MainAxisSize mainAxisSize = MainAxisSize.max,
       required List<Widget> children}) {
     if (margin == null) margin = EdgeInsets.all(0);
-    if (crossAxisAlignment == null) crossAxisAlignment = CrossAxisAlignment.center;
+    if (crossAxisAlignment == null)
+      crossAxisAlignment = CrossAxisAlignment.center;
     if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
 
     return Container(
@@ -196,15 +200,19 @@ class TGView {
     MainAxisSize mainAxisSize = MainAxisSize.max,
   }) {
     if (margin == null) margin = EdgeInsets.all(0);
-    if (crossAxisAlignment == null) crossAxisAlignment = CrossAxisAlignment.center;
+    if (crossAxisAlignment == null)
+      crossAxisAlignment = CrossAxisAlignment.center;
     if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
 
     List<Widget> children = [];
     columns.forEach((column) {
       children.add(
         Expanded(
-            child:
-                Column(crossAxisAlignment: crossAxisAlignment!, mainAxisAlignment: mainAxisAlignment!, mainAxisSize: mainAxisSize, children: column)),
+            child: Column(
+                crossAxisAlignment: crossAxisAlignment!,
+                mainAxisAlignment: mainAxisAlignment!,
+                mainAxisSize: mainAxisSize,
+                children: column)),
       );
     });
     return Container(
@@ -238,7 +246,8 @@ class TGView {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(width: borderWidth, color: borderColor, style: BorderStyle.solid),
+          border: Border.all(
+              width: borderWidth, color: borderColor, style: BorderStyle.solid),
         ),
         child: Column(
           crossAxisAlignment: crossAxisAlignment,
@@ -249,7 +258,8 @@ class TGView {
   // ***   App Bar   *** //
 
   /// App Bar Back Button
-  static IconButton appBarBackButton({required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
+  static IconButton appBarBackButton(
+      {required BuildContext context, IconData icon = Icons.arrow_back_ios}) {
     return IconButton(
       icon: Icon(icon),
       onPressed: () {
@@ -268,7 +278,8 @@ class TGView {
       Color? backgroundColor,
       SnackBarBehavior behavior = SnackBarBehavior.floating}) {
     if (duration == null) duration = Duration(seconds: 2);
-    if (backgroundColor == null) backgroundColor = theme()!.secondaryHeaderColor;
+    if (backgroundColor == null)
+      backgroundColor = theme()!.secondaryHeaderColor;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       backgroundColor: backgroundColor,
@@ -281,11 +292,18 @@ class TGView {
   static Widget loadingIndicator(Color color) {
     return Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(color))));
+        child: Center(
+            child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(color))));
   }
 
   /// Show alert dialog with various components
-  static void showAlertDialog({required BuildContext context, List<Widget>? titleRowWidgets, Widget? content, List<Widget>? actions, onDismiss}) {
+  static void showAlertDialog(
+      {required BuildContext context,
+      List<Widget>? titleRowWidgets,
+      Widget? content,
+      List<Widget>? actions,
+      onDismiss}) {
     if (titleRowWidgets == null) titleRowWidgets = [];
     showDialog(
         context: context,
@@ -293,11 +311,21 @@ class TGView {
               title: Row(children: titleRowWidgets!),
               content: content,
               actions: actions,
-            )).then((value) => {if (onDismiss != null) onDismiss() else Navigator.of(context).pop(false)});
+            )).then((value) => {
+          if (onDismiss != null)
+            onDismiss()
+          else
+            Navigator.of(context).pop(false)
+        });
   }
 
   /// Popup Menu Item
-  static PopupMenuItem popupMenuItem({IconData? icon, String? text, dynamic value, Color? iconColor, Color? textColor}) {
+  static PopupMenuItem popupMenuItem(
+      {IconData? icon,
+      String? text,
+      dynamic value,
+      Color? iconColor,
+      Color? textColor}) {
     return PopupMenuItem(
         value: value,
         child: rowContainer(margin: EdgeInsets.all(0), left: [
@@ -308,9 +336,13 @@ class TGView {
   }
 
   /// Refresh Indicator
-  static RefreshIndicator refreshIndicator({required List<Widget> widgets, required onRefresh, Color backgroundContainerColor = Colors.transparent}) {
+  static RefreshIndicator refreshIndicator(
+      {required List<Widget> widgets,
+      required onRefresh,
+      Color backgroundContainerColor = Colors.transparent}) {
     return RefreshIndicator(
-      child: scaffoldContainer(widgets, backgroundContainer: Container(color: backgroundContainerColor)),
+      child: scaffoldContainer(widgets,
+          backgroundContainer: Container(color: backgroundContainerColor)),
       onRefresh: onRefresh as Future<void> Function(),
     );
   }
