@@ -1,3 +1,8 @@
+## 1.5.7
+* Util
+  * TGDateUtil
+    * Introduced date-time conversion between different timezones
+
 ## 1.5.6
 * Util
   * TGFlavor

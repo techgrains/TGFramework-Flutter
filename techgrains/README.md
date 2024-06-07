@@ -404,6 +404,19 @@ Extended implementation of LocalizationsDelegate which Flutter uses internally
     DateTime dateTime = TGDateUtil.parseDateTime("16/05/2020T12:47:52", dateTimePattern: "dd/MM/yyyyTHH:mm:ss");
 ```
 
+#### Convert date Between Timezones
+
+```
+[String input]
+    String dateTime = TGDateUtil.convertBetweenTimezoneForDateTimeString("16/05/2020 12:47:52", , TGTimeZone.IST_INDIA, TGTimeZone.CST_CHINA, dateTimePattern: 
+    "dd/MM/yyyyTHH:mm:ss");
+
+[Datetime input]
+    DateTime dateTimeParsed = TGDateUtil.parseDateTime("16/05/2020 12:47:52", dateTimePattern: "dd/MM/yyyy HH:mm:ss");
+    DateTime dateTime = TGDateUtil.convertBetweenTimezoneForDateTime(dateTimeParsed, TGTimeZone.IST_INDIA, TGTimeZone.CST_CHINA, dateTimePattern: 
+    "dd/MM/yyyy HH:mm:ss");
+```
+
 ### TGNetUtil
 
 #### Check internet availability
