@@ -1,3 +1,6 @@
+## 1.5.8
+* Formatted & improved code, based on Dart Analysis report
+
 ## 1.5.7
 * Util
   * TGDateUtil

@@ -152,7 +152,7 @@ Access local disk storage mechanism through TGSharedPreference. Its uses Shared 
 initialize anything.
 
 ```
-    TGSharedPreferences.getInstance().set("Designation", "Developer"); // Set
+    await TGSharedPreferences.getInstance().set("Designation", "Developer"); // Set
     await TGSharedPreferences.getInstance().get("Designation"); // Get
 ```  
 

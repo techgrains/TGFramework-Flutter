@@ -17,8 +17,8 @@ import 'package:techgrains/com/techgrains/service/request/tg_upload_file_request
 import 'package:techgrains/com/techgrains/service/request/tg_upload_request.dart';
 import 'package:techgrains/com/techgrains/service/response/tg_response.dart';
 
-typedef T CreatorT<T>();
-typedef E CreatorE<E>();
+typedef CreatorT<T> = T Function();
+typedef CreatorE<E> = E Function();
 
 class TGService<T extends TGResponse, E extends TGError> {
   CreatorT<T> creatorT;
@@ -42,8 +42,9 @@ class TGService<T extends TGResponse, E extends TGError> {
 
     // For Mock
     TGMockService.applyMock = applyMock;
-    if (mockMappingsFile != null && applyMock)
+    if (mockMappingsFile != null && applyMock) {
       TGMockService.loadMockMappings(mockMappingsFile);
+    }
 
     // For HTTP Client
     TGHttpClient.badCertificateCallbackEnabled = badCertificateCallbackEnabled;

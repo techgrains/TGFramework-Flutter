@@ -28,7 +28,7 @@ abstract class TGRequest {
   String getUrl() {
     String uri = getUri();
     String? url = defaultBaseUrl;
-    if (url == null || url.length == 0) {
+    if (url == null || url.isEmpty) {
       TGLog.e(
           "Set baseUrl once: TGService.init(baseUrl: 'https://api.product.com/v1')");
     }

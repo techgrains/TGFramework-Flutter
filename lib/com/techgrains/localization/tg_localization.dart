@@ -47,6 +47,6 @@ class TGLocalization {
   /// Text related to localised key. In case of entry won't found, will return back key as text.
   String text(String key) {
     dynamic value = _entries![key];
-    return (value != null && value.toString().length > 0) ? value : key;
+    return (value != null && value.toString().isNotEmpty) ? value : key;
   }
 }

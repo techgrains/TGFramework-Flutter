@@ -365,7 +365,6 @@ class TGDateUtil {
       case TGTimeZone.LHST:
         return const Duration(hours: 10, minutes: 30);
       case TGTimeZone.AEDT:
-      case TGTimeZone.EDT:
       case TGTimeZone.L_LIMA:
       case TGTimeZone.LHDT:
       case TGTimeZone.NCT:
@@ -414,7 +413,6 @@ class TGDateUtil {
       case TGTimeZone.HAT:
         return const Duration(hours: -2, minutes: 30);
       case TGTimeZone.ADT:
-      case TGTimeZone.HAT:
       case TGTimeZone.AMST_AMAZON:
       case TGTimeZone.BRT:
       case TGTimeZone.CLST:

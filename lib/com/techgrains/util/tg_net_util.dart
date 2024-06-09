@@ -30,10 +30,11 @@ class TGNetUtil {
   /// Checks internet and api health
   static Future<bool> apiHealthCheck(String site, {int timeout = 5}) async {
     try {
-      if (site.indexOf("?") > -1)
+      if (site.indexOf("?") > -1) {
         site = site + "&";
-      else
+      } else {
         site = site + "?";
+      }
 
       site = site + "t=" + DateTime.now().millisecondsSinceEpoch.toString();
       http.Response response = await http.get(Uri.parse(site)).timeout(

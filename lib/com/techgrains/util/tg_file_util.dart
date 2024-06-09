@@ -58,20 +58,23 @@ class TGFileUtil {
       String fileAsString = await TGFileUtil.readFile(yamlFile);
       final Map? map = loadYaml(fileAsString);
 
-      if (group == null || group.length == 0)
+      if (group == null || group.isEmpty) {
         return map as FutureOr<Map<String, dynamic>>;
+      }
 
       // Group entries
       Map<String, dynamic> groupMap = <String, dynamic>{};
-      for (MapEntry<String, dynamic> entry in map![group].entries)
+      for (MapEntry<String, dynamic> entry in map![group].entries) {
         groupMap[entry.key] = entry.value;
+      }
 
-      if (subGroup == null || subGroup.length == 0) return groupMap;
+      if (subGroup == null || subGroup.isEmpty) return groupMap;
 
       // Sub Group entries
       Map<String, dynamic> subGroupMap = <String, dynamic>{};
-      for (MapEntry<String, dynamic> entry in groupMap[subGroup].entries)
+      for (MapEntry<String, dynamic> entry in groupMap[subGroup].entries) {
         subGroupMap[entry.key] = entry.value;
+      }
 
       return subGroupMap;
     } catch (e) {

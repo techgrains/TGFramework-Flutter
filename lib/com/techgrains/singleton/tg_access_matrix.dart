@@ -103,7 +103,7 @@ class TGAccessMatrix {
   /// Gets flag for given key, roles and flag type
   bool _has(String key, List<int>? roleIds, int flagType) {
     List<int> checkRoles = roleIds != null ? roleIds : this.roleIds!;
-    if (checkRoles.length == 0) return false;
+    if (checkRoles.isEmpty) return false;
     for (int roleId in checkRoles) {
       String mapKey = _mapKey(key, roleId);
       if (flags.containsKey(mapKey)) if (flags[mapKey]![flagType]!) return true;

@@ -172,8 +172,9 @@ class TGView {
       MainAxisSize mainAxisSize = MainAxisSize.max,
       required List<Widget> children}) {
     if (margin == null) margin = EdgeInsets.all(0);
-    if (crossAxisAlignment == null)
+    if (crossAxisAlignment == null) {
       crossAxisAlignment = CrossAxisAlignment.center;
+    }
     if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
 
     return Container(
@@ -200,8 +201,9 @@ class TGView {
     MainAxisSize mainAxisSize = MainAxisSize.max,
   }) {
     if (margin == null) margin = EdgeInsets.all(0);
-    if (crossAxisAlignment == null)
+    if (crossAxisAlignment == null) {
       crossAxisAlignment = CrossAxisAlignment.center;
+    }
     if (mainAxisAlignment == null) mainAxisAlignment = MainAxisAlignment.start;
 
     List<Widget> children = [];
@@ -278,8 +280,9 @@ class TGView {
       Color? backgroundColor,
       SnackBarBehavior behavior = SnackBarBehavior.floating}) {
     if (duration == null) duration = Duration(seconds: 2);
-    if (backgroundColor == null)
+    if (backgroundColor == null) {
       backgroundColor = theme()!.secondaryHeaderColor;
+    }
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       backgroundColor: backgroundColor,

@@ -17,8 +17,9 @@ class TGValidate {
   static bool? hasValue(dynamic value) {
     if (value == null) return false;
     if (value is num) return value != 0;
-    if (value is String || value is Iterable || value is Map)
+    if (value is String || value is Iterable || value is Map) {
       return value.length > 0;
+    }
     if (value is bool) return value;
     return true;
   }

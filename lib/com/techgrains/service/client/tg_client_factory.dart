@@ -6,10 +6,11 @@ import 'package:techgrains/com/techgrains/service/mock/tg_mock_service.dart';
 
 class TGClientFactory {
   static Client getClient(String uri, String method) {
-    if (TGMockService.shouldApplyMock(uri, method)!)
+    if (TGMockService.shouldApplyMock(uri, method)!) {
       return new TGMockClient(getMockClientHandler);
-    else
+    } else {
       return new TGHttpClient();
+    }
   }
 
   static Future<Response> getMockClientHandler(Request request) async {
