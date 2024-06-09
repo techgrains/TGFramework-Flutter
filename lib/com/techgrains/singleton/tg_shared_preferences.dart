@@ -96,7 +96,7 @@ class TGSharedPreferences {
   /// Removes content for given key
   Future<bool> remove(String key) async {
     _listeners.forEach((listener) {
-      if (_listeners.contains(key)) {
+      if (_listeners.contains(key as Object)) {
         listener.keyRemove(key);
       }
     });

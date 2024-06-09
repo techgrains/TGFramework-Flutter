@@ -1,3 +1,6 @@
+## 1.5.9
+* Avoided types as parameter names to allow <T> across TGService
+
 ## 1.5.8
 * Formatted & improved code, based on Dart Analysis report
 
