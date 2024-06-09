@@ -14,7 +14,8 @@ class TGAccessMatrix {
 
   /// Holds all Access Matrix as List
   late List<TGAccessMatrixVO> list;
-  late Map<String, Map<int, bool?>> flags; // String: key~roleId, int: Flag Type, bool: flag
+  late Map<String, Map<int, bool?>>
+      flags; // String: key~roleId, int: Flag Type, bool: flag
   List<int>? roleIds;
 
   /// Created At timestamp
