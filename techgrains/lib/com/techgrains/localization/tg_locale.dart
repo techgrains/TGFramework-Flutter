@@ -35,8 +35,9 @@ class TGLocale {
       String customPath = ""}) {
     List<Locale> supportedLocales = [];
     supportedLocales.add(defaultLocale);
-    if (otherLocales != null && otherLocales.isNotEmpty)
+    if (otherLocales != null && otherLocales.isNotEmpty) {
       supportedLocales.addAll(otherLocales);
+    }
     TGLocale.supportedLocales = supportedLocales;
     TGLocale.defaultLocale = defaultLocale;
     TGLocale.currentLocale = defaultLocale;
