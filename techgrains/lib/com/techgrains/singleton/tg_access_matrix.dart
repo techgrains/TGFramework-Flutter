@@ -34,6 +34,10 @@ class TGAccessMatrix {
   /// Initialize
   void _init() {
     TGLog.d("TGAccessMatrix : init");
+    list = [];
+    flags = {};
+    roleIds = [];
+    _createdAt = DateTime.now();
   }
 
   /// Add to Access Matrix list
