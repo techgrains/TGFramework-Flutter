@@ -14,14 +14,17 @@ class TGLocale {
   /// Callback for locale resolution
   static Locale? localeResolutionCallback(
       Locale? locale, Iterable<Locale> supportedLocales) {
-    if (locale != null)
-      for (var supportedLocale in supportedLocales)
+    if (locale != null) {
+      for (var supportedLocale in supportedLocales) {
         if (supportedLocale.languageCode == locale.languageCode) {
-          if (locale.countryCode == null)
+          if (locale.countryCode == null) {
             return supportedLocale;
-          else if (supportedLocale.countryCode == locale.countryCode)
+          } else if (supportedLocale.countryCode == locale.countryCode) {
             return supportedLocale;
+          }
         }
+      }
+    }
     return defaultLocale;
   }
 
@@ -32,7 +35,7 @@ class TGLocale {
       String customPath = ""}) {
     List<Locale> supportedLocales = [];
     supportedLocales.add(defaultLocale);
-    if (otherLocales != null && otherLocales.length > 0)
+    if (otherLocales != null && otherLocales.isNotEmpty)
       supportedLocales.addAll(otherLocales);
     TGLocale.supportedLocales = supportedLocales;
     TGLocale.defaultLocale = defaultLocale;
@@ -53,7 +56,7 @@ class TGLocale {
         localizations[currentLocale.toString()];
     if (currentLocalization == null) return key;
     String value = currentLocalization.text(key);
-    if (args == null || args.length == 0) return value;
+    if (args == null || args.isEmpty) return value;
     return _replaceArgs(value, args);
   }
 
@@ -68,15 +71,16 @@ class TGLocale {
   /// Generate code for provided locale
   static String generateCode(Locale locale) {
     return locale.languageCode +
-        ((locale.countryCode != null && locale.countryCode!.length > 0)
+        ((locale.countryCode != null && locale.countryCode!.isNotEmpty)
             ? "_" + locale.countryCode!
             : "");
   }
 
   /// Find locale from supported list based on provided code. i.e. Locale ("en", "US") = "en_US"
   static Locale findLocaleByCode(String code) {
-    for (Locale locale in supportedLocales)
+    for (Locale locale in supportedLocales) {
       if (code == generateCode(locale)) return locale;
+    }
     return defaultLocale;
   }
 }

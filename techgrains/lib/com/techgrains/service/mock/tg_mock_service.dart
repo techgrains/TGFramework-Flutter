@@ -14,7 +14,7 @@ class TGMockService {
     TGLog.d("Loading... " + mockMappingsFile);
     _mockMappings = {};
 
-    if (mockMappingsFile.length >= 0) {
+    if (mockMappingsFile.isNotEmpty) {
       List jsonList = await TGFileUtil.readJsonFileAsList(mockMappingsFile);
       List<TGMockMappingVO> mappingList = jsonList
           .map<TGMockMappingVO>((json) => TGMockMappingVO.fromJson(json))
@@ -32,12 +32,14 @@ class TGMockService {
 
     mockMappingVO.successString = "";
     mockMappingVO.errorString = "";
-    if (mockMappingVO.successFile != null)
+    if (mockMappingVO.successFile != null) {
       mockMappingVO.successString =
           await TGFileUtil.readFile(mockMappingVO.successFile!);
-    if (mockMappingVO.errorFile != null)
+    }
+    if (mockMappingVO.errorFile != null) {
       mockMappingVO.errorString =
           await TGFileUtil.readFile(mockMappingVO.errorFile!);
+    }
     _mockMappings[_generateHash(
         TGRequest.prepareUrl(TGRequest.defaultBaseUrl, mockMappingVO.uri),
         mockMappingVO.method!)] = mockMappingVO;

@@ -32,7 +32,7 @@ class TGFlavor {
   static Future<void> _loadFlavors(String flavorsConfigFile) async {
     TGLog.d("TGFlavor._loadFlavors");
     TGLog.d("Loading... $flavorsConfigFile");
-    if (flavorsConfigFile.length >= 0) {
+    if (flavorsConfigFile.isNotEmpty) {
       try {
         List jsonList = await TGFileUtil.readJsonFileAsList(flavorsConfigFile);
         _flavors = jsonList
@@ -56,16 +56,17 @@ class TGFlavor {
   static void _loadCurrentFlavor() {
     TGLog.d("TGFlavor._loadCurrentFlavor");
     String paramFlavor =
-        TGEnvConfig.ENV_FLAVOR.length > 0 ? TGEnvConfig.ENV_FLAVOR : "";
+        TGEnvConfig.ENV_FLAVOR.isNotEmpty ? TGEnvConfig.ENV_FLAVOR : "";
     TGLog.d("Argument for flavor = $paramFlavor");
 
-    if (paramFlavor.length == 0) {
+    if (paramFlavor.isEmpty) {
       _current = _flavors![0];
     } else {
       // Iterate flavors and match it with provided app flavor
       _flavors!.forEach((flavor) {
-        if (paramFlavor.toUpperCase() == flavor.name!.toUpperCase())
+        if (paramFlavor.toUpperCase() == flavor.name!.toUpperCase()) {
           _current = flavor;
+        }
       });
 
       // If app flavor doesn't match with provided flavors, take the first flavor from the list as default
@@ -81,8 +82,9 @@ class TGFlavor {
       TGLog.i(" baseUrl = " + _current!.baseUrl.toString());
       TGLog.i(" logLevel = " + _current!.logLevel.toString());
       TGLog.i(" applyMock = " + _current!.applyMock.toString());
-      if (_current!.applyMock == true)
+      if (_current!.applyMock == true) {
         TGLog.i(" mockMappingsFile = " + _current!.mockMappingsFile.toString());
+      }
       TGLog.i(" params = " + _current!.params.toString());
       TGLog.i("- - - - - - - - - - - - - - - - - - - - - - -");
       if (_current!.logLevel != null) TGLog.setLogLevel(_current!.logLevel!);
