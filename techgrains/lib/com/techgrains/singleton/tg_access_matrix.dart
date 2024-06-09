@@ -13,13 +13,12 @@ class TGAccessMatrix {
   static const int CREATE = 8;
 
   /// Holds all Access Matrix as List
-  late List<TGAccessMatrixVO> list = [];
-  late Map<String, Map<int, bool?>> flags =
-      {}; // String: key~roleId, int: Flag Type, bool: flag
-  List<int>? roleIds = [];
+  late List<TGAccessMatrixVO> list;
+  late Map<String, Map<int, bool?>> flags; // String: key~roleId, int: Flag Type, bool: flag
+  List<int>? roleIds;
 
   /// Created At timestamp
-  DateTime? _createdAt = DateTime.now();
+  DateTime? _createdAt;
 
   /// Gets TGAccessMatrix's instance reference
   static TGAccessMatrix getInstance() {
