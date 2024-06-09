@@ -60,7 +60,7 @@ void main() {
     TGSharedPreferences.getInstance()
         .addListener(TGSharedPreferencesListenerForTest());
     TGSharedPreferences.getInstance().set("key", "value");
-    expect(TGSharedPreferences.getInstance().get("key"), "value");
+    expect(TGSharedPreferences.getInstance().get("key").toString(), "value");
     TGSharedPreferences.getInstance().remove("key");
     TGSharedPreferences.getInstance().removeAllListeners();
   });
