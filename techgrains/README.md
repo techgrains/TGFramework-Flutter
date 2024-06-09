@@ -22,6 +22,7 @@ TGFramework includes following areas as part of its framework. Further, in this 
     * TGDateUtil
         * Format DateTime
         * Parse DateTime
+        * Convert DateTime between Timezones
     * TGNetUtil
         * Check Internet Availability
         * Check internet And Api Health
@@ -408,12 +409,12 @@ Extended implementation of LocalizationsDelegate which Flutter uses internally
 
 ```
 [String input]
-    String dateTime = TGDateUtil.convertBetweenTimezoneForDateTimeString("16/05/2020 12:47:52", , TGTimeZone.IST_INDIA, TGTimeZone.CST_CHINA, dateTimePattern: 
+    String dateTime = TGDateUtil.convertTimezoneWithString("16/05/2020 12:47:52", TGTimeZone.IST_INDIA, TGTimeZone.CST_CHINA, dateTimePattern: 
     "dd/MM/yyyyTHH:mm:ss");
 
 [Datetime input]
     DateTime dateTimeParsed = TGDateUtil.parseDateTime("16/05/2020 12:47:52", dateTimePattern: "dd/MM/yyyy HH:mm:ss");
-    DateTime dateTime = TGDateUtil.convertBetweenTimezoneForDateTime(dateTimeParsed, TGTimeZone.IST_INDIA, TGTimeZone.CST_CHINA, dateTimePattern: 
+    DateTime dateTime = TGDateUtil.convertTimezoneWithDateTime(dateTimeParsed, TGTimeZone.IST_INDIA, TGTimeZone.CST_CHINA, dateTimePattern: 
     "dd/MM/yyyy HH:mm:ss");
 ```
 
@@ -763,6 +764,7 @@ Supports N number of columns.
 
 ```
     // Some icon and text as children widgets for example
+    TGView.columnsContainer (
     TGView.columnsContainer (
       children: [
         [
