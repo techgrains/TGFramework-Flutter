@@ -1,6 +1,6 @@
 name: techgrains
 description: Developer friendly app library having various commonly used functionality.
-version: 1.5.6
+version: 1.5.7
 homepage: https://github.com/techgrains/TGFramework-Flutter
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  intl: ^0.18.0
+  intl: ^0.19.0
   yaml: ^3.1.2
   shared_preferences: ^2.1.1
   http: ^1.0.0
@@ -21,6 +21,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lints: ^4.0.0
 
 # The following section is specific to Flutter.
 flutter:

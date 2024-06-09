@@ -67,4 +67,28 @@ void main() {
     expect(dateTime.minute, 47);
     expect(dateTime.second, 52);
   });
+
+  test('convertTimezoneWithDateTime', () async {
+    DateTime dateTime = DateTime(2024, 06, 07, 19, 35, 00);
+    DateTime convertedDateTime = TGDateUtil.convertTimezoneWithDateTime(
+        dateTime, TGTimeZone.CST_CHINA, TGTimeZone.IST_INDIA);
+    expect(convertedDateTime.year, 2024);
+    expect(convertedDateTime.month, 6);
+    expect(convertedDateTime.day, 7);
+    expect(convertedDateTime.hour, 17);
+    expect(convertedDateTime.minute, 05);
+    expect(convertedDateTime.second, 00);
+  });
+
+  test('convertTimezoneWithString', () async {
+    String convertedDateTime = TGDateUtil.convertTimezoneWithString(
+        "2024-06-07 21:10:00", TGTimeZone.CST_CHINA, TGTimeZone.IST_INDIA);
+    DateTime dateTimeParsed = DateTime.parse(convertedDateTime);
+    expect(dateTimeParsed.year, 2024);
+    expect(dateTimeParsed.month, 6);
+    expect(dateTimeParsed.day, 7);
+    expect(dateTimeParsed.hour, 18);
+    expect(dateTimeParsed.minute, 40);
+    expect(dateTimeParsed.second, 00);
+  });
 }

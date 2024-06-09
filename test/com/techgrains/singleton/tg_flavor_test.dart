@@ -57,5 +57,4 @@ void main() {
     TGFlavor.removeAllParams();
     expect(TGFlavor.param("keyString"), null);
   });
-
 }

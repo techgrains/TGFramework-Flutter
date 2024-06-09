@@ -126,7 +126,7 @@ class TGFlavor {
   static dynamic param(String key) {
     /// First preference to customised params
     Object? value = _params?[key];
-    if(value != null) return value;
+    if (value != null) return value;
 
     /// Second preference to file based params
     Map<String, dynamic>? params = _current?.params;
@@ -136,7 +136,7 @@ class TGFlavor {
 
   /// Sets param value for given key
   static void setParam(String key, dynamic value) {
-    if(_params == null) _params = new Map();
+    if (_params == null) _params = new Map();
     _params?[key] = value;
   }
 

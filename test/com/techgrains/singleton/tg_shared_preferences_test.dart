@@ -59,8 +59,8 @@ void main() {
   test('listener', () async {
     TGSharedPreferences.getInstance()
         .addListener(TGSharedPreferencesListenerForTest());
-    TGSharedPreferences.getInstance().set("key", "value");
-    expect(TGSharedPreferences.getInstance().get("key"), "value");
+    await TGSharedPreferences.getInstance().set("key", "value");
+    expect(await TGSharedPreferences.getInstance().get("key"), "value");
     TGSharedPreferences.getInstance().remove("key");
     TGSharedPreferences.getInstance().removeAllListeners();
   });

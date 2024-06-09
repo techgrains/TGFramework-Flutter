@@ -25,11 +25,11 @@ void main() {
         create: create);
   }
 
-  test('has on empty ', () async {
+  test('has on empty ', () {
     expect(TGAccessMatrix.getInstance().hasCreate("key1", roleIds: [1]), false);
   });
 
-  test('CRUD check for 1 role', () async {
+  test('CRUD check for 1 role', () {
     TGAccessMatrix.getInstance()
         .add(createMatrix("1", 1, true, true, false, false));
     TGAccessMatrix.getInstance().applyRoles([1]);
@@ -45,7 +45,7 @@ void main() {
     expect(TGAccessMatrix.getInstance().hasCreate("0"), false);
   });
 
-  test('CRUD check for multiple roles', () async {
+  test('CRUD check for multiple roles', () {
     TGAccessMatrix.getInstance()
         .add(createMatrix("1", 1, true, true, false, false));
     TGAccessMatrix.getInstance()
@@ -57,7 +57,7 @@ void main() {
     expect(TGAccessMatrix.getInstance().hasCreate("1"), false);
   });
 
-  test('Default roles', () async {
+  test('Default roles', () {
     TGAccessMatrix.getInstance()
         .add(createMatrix("1", 1, true, true, false, false));
     TGAccessMatrix.getInstance()
@@ -96,7 +96,7 @@ void main() {
     expect(TGAccessMatrix.getInstance().hasCreate("1", roleIds: [1]), false);
   });
 
-  test('remove', () async {
+  test('remove', () {
     TGAccessMatrix.getInstance()
         .add(createMatrix("1", 1, true, true, false, false));
     expect(TGAccessMatrix.getInstance().size(), 1);
@@ -108,7 +108,7 @@ void main() {
     expect(TGAccessMatrix.getInstance().size(), 0);
   });
 
-  test('invalidate', () async {
+  test('invalidate', () {
     expect(TGAccessMatrix.getInstance().size(), 0);
     TGAccessMatrix.getInstance()
         .add(createMatrix("1", 1, true, true, false, false));
@@ -117,7 +117,7 @@ void main() {
     expect(TGAccessMatrix.getInstance().size(), 0);
   });
 
-  test('timestamp', () async {
+  test('timestamp', () {
     TGLog.d(
         "createdAt = " + TGAccessMatrix.getInstance().createdAt().toString());
     TGLog.d(
