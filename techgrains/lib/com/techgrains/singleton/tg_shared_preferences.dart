@@ -13,6 +13,9 @@ class TGSharedPreferences {
   /// Created At timestamp
   DateTime? _createdAt;
 
+  /// Created At timestamp
+  static const String _validSuffix = 'ValidUntil';
+
   /// Gets TGSharedPreferences' instance reference
   static TGSharedPreferences getInstance() {
     return _instance;
@@ -80,11 +83,21 @@ class TGSharedPreferences {
     return prefs.remove(key);
   }
 
-  /// Sets content for given key
-  Future<bool> set(String key, dynamic value) async {
+  String _withValidSuffix(String key) => key + _validSuffix;
+
+  /// Sets content for given key with Duration
+  Future<bool> set(String key, dynamic value, {Duration? validFor}) async {
     _listeners.forEach((listener) {
       listener.keySet(key);
     });
+    if (validFor != null) {
+      _save[_withValidSuffix(key)] = DateTime.now().add(validFor).toIso8601String();
+    } else {
+      if (this._map.containsKey(_withValidSuffix(key))) {
+        this._map.remove(_withValidSuffix(key));
+      }
+    }
+
     return _save(key, value);
   }
 
@@ -101,6 +114,12 @@ class TGSharedPreferences {
       }
     });
     return _remove(key);
+  }
+
+  /// Reloads Shared Preference
+  Future<void> reload() async {
+    SharedPreferences prefs = await _getSharedPreferences();
+    prefs.reload();
   }
 
   /// Add listener
