@@ -28,6 +28,18 @@ void main() {
     expect(TGSession.getInstance().get("keyRemove"), null);
   });
 
+  test('validForSuccess', () async {
+    TGSession.getInstance()
+        .set("keyValid", "value", validFor: Duration(minutes: 1));
+    expect(TGSession.getInstance().get("keyValid"), "value");
+  });
+
+  test('validForExpired', () async {
+    TGSession.getInstance()
+        .set("keyValid", "value", validFor: Duration(minutes: -1));
+    expect(TGSession.getInstance().get("keyValid"), null);
+  });
+
   test('invalidate', () async {
     TGSession.getInstance().set("key", "value");
     expect(TGSession.getInstance().get("key"), "value");

@@ -136,6 +136,11 @@ Between service and view layer: Just put in service and have it in view. (Easy t
     Person person = TGSession.getInstance().get("Person");
 ``` 
 
+Time sensitive key-value setup via future Duration. After validity duration, won't return value through get.
+```
+    TGSession.getInstance().set("allowPayment", true, validFor: Duration(minutes: 1));
+``` 
+
 Thinking to manage piled up objects in session?
 
 ```
@@ -155,6 +160,11 @@ initialize anything.
     await TGSharedPreferences.getInstance().set("Designation", "Developer"); // Set
     await TGSharedPreferences.getInstance().get("Designation"); // Get
 ```  
+
+Time sensitive key-value setup via future Duration. After validity duration, won't return value through get.
+```
+    await TGSharedPreferences.getInstance().set("allowPayment", true, validFor: Duration(minutes: 1));
+``` 
 
 ##### Custom TGSharedPreferences Listener
 

@@ -15,6 +15,9 @@ class TGSession {
   /// Created At timestamp
   DateTime? _createdAt;
 
+  /// Created At timestamp
+  static const String _validSuffix = 'ValidUntil';
+
   /// Gets TGSession's instance reference
   static TGSession getInstance() {
     return _instance;
@@ -33,16 +36,34 @@ class TGSession {
     _listeners = Set();
   }
 
-  /// Sets value for given key
-  void set(String key, dynamic value) {
+  String _withValidSuffix(String key) => key + _validSuffix;
+
+  /// Sets value for given key with Duration
+  void set(String key, dynamic value, {Duration? validFor}) {
     _listeners.forEach((listener) {
       listener.keySet(key);
     });
+
     this._map[key] = value;
+    if (validFor != null) {
+      this._map[_withValidSuffix(key)] =
+          DateTime.now().add(validFor).toIso8601String();
+    } else {
+      if (this._map.containsKey(_withValidSuffix(key))) {
+        this._map.remove(_withValidSuffix(key));
+      }
+    }
   }
 
-  /// Gets value for given key
+  /// Gets value for given key if not expired
   dynamic get(String key) {
+    if (this._map.containsKey(_withValidSuffix(key))) {
+      String? validTimeStr = this._map[_withValidSuffix(key)] as String?;
+      if (validTimeStr != null &&
+          DateTime.parse(validTimeStr).isBefore(DateTime.now())) {
+        this._map.remove(key);
+      }
+    }
     return this._map[key];
   }
 
@@ -51,6 +72,10 @@ class TGSession {
     _listeners.forEach((listener) {
       listener.keyRemove(key);
     });
+
+    if (this._map.containsKey(_withValidSuffix(key))) {
+      this._map.remove(_withValidSuffix(key));
+    }
     return this._map.remove(key);
   }
 

@@ -74,6 +74,18 @@ void main() {
     TGLog.d("validSince = " +
         TGSharedPreferences.getInstance().validSince().toString());
   });
+
+  test('validForSuccess', () async {
+    await TGSharedPreferences.getInstance()
+        .set("keyValid", "value", validFor: Duration(minutes: 1));
+    expect(await TGSharedPreferences.getInstance().get("keyValid"), "value");
+  });
+
+  test('validForExpired', () async {
+    await TGSharedPreferences.getInstance()
+        .set("keyValid", "value", validFor: Duration(minutes: -1));
+    expect(await TGSharedPreferences.getInstance().get("keyValid"), null);
+  });
 }
 
 class TGSharedPreferencesListenerForTest extends TGSharedPreferencesListener {
