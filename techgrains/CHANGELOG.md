@@ -1,3 +1,6 @@
+## 1.6.0
+* Introduced Duration validity while setting key-value in TGSession and TGSharedPreferences
+
 ## 1.5.9
 * Avoided types as parameter names to allow <T> across TGService
 

@@ -38,6 +38,8 @@ class TGSharedPreferences {
     return SharedPreferences.getInstance();
   }
 
+  String _withValidSuffix(String key) => key + _validSuffix;
+
   /// Saves content for given key
   Future<bool> _save<T>(String key, T content) async {
     SharedPreferences prefs = await _getSharedPreferences();
@@ -83,26 +85,33 @@ class TGSharedPreferences {
     return prefs.remove(key);
   }
 
-  String _withValidSuffix(String key) => key + _validSuffix;
-
   /// Sets content for given key with Duration
   Future<bool> set(String key, dynamic value, {Duration? validFor}) async {
     _listeners.forEach((listener) {
       listener.keySet(key);
     });
     if (validFor != null) {
-      _save[_withValidSuffix(key)] = DateTime.now().add(validFor).toIso8601String();
+      _save(_withValidSuffix(key),
+          DateTime.now().add(validFor).toIso8601String());
     } else {
-      if (this._map.containsKey(_withValidSuffix(key))) {
-        this._map.remove(_withValidSuffix(key));
+      SharedPreferences prefs = await _getSharedPreferences();
+      if (prefs.containsKey(_withValidSuffix(key))) {
+        prefs.remove(_withValidSuffix(key));
       }
     }
-
     return _save(key, value);
   }
 
   /// Gets content for given key
   Future<dynamic> get(String key) async {
+    SharedPreferences prefs = await _getSharedPreferences();
+    if (prefs.containsKey(_withValidSuffix(key))) {
+      String? validTimeStr = prefs.getString(_withValidSuffix(key));
+      if (validTimeStr != null &&
+          DateTime.parse(validTimeStr).isBefore(DateTime.now())) {
+        prefs.remove(key);
+      }
+    }
     return await _fetch(key);
   }
 
@@ -113,6 +122,11 @@ class TGSharedPreferences {
         listener.keyRemove(key);
       }
     });
+
+    SharedPreferences prefs = await _getSharedPreferences();
+    if (prefs.containsKey(_withValidSuffix(key))) {
+      prefs.remove(_withValidSuffix(key));
+    }
     return _remove(key);
   }
 

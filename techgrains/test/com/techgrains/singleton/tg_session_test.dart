@@ -29,12 +29,14 @@ void main() {
   });
 
   test('validForSuccess', () async {
-    TGSession.getInstance().set("keyValid", "value", validFor: Duration(minutes: 1));
+    TGSession.getInstance()
+        .set("keyValid", "value", validFor: Duration(minutes: 1));
     expect(TGSession.getInstance().get("keyValid"), "value");
   });
 
   test('validForExpired', () async {
-    TGSession.getInstance().set("keyValid", "value", validFor: Duration(minutes: -1));
+    TGSession.getInstance()
+        .set("keyValid", "value", validFor: Duration(minutes: -1));
     expect(TGSession.getInstance().get("keyValid"), null);
   });
 

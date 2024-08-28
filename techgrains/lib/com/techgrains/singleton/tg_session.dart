@@ -46,7 +46,8 @@ class TGSession {
 
     this._map[key] = value;
     if (validFor != null) {
-      this._map[_withValidSuffix(key)] = DateTime.now().add(validFor).toIso8601String();
+      this._map[_withValidSuffix(key)] =
+          DateTime.now().add(validFor).toIso8601String();
     } else {
       if (this._map.containsKey(_withValidSuffix(key))) {
         this._map.remove(_withValidSuffix(key));
@@ -58,11 +59,9 @@ class TGSession {
   dynamic get(String key) {
     if (this._map.containsKey(_withValidSuffix(key))) {
       String? validTimeStr = this._map[_withValidSuffix(key)] as String?;
-      if (validTimeStr != null) {
-        DateTime validTill = DateTime.parse(validTimeStr);
-        if (validTill.isBefore(DateTime.now())) {
-          this._map.remove(key);
-        }
+      if (validTimeStr != null &&
+          DateTime.parse(validTimeStr).isBefore(DateTime.now())) {
+        this._map.remove(key);
       }
     }
     return this._map[key];
