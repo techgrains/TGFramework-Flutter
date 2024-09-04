@@ -1,3 +1,9 @@
+## 1.6.1
+* Service
+  * TGService
+    * Introduced "putSync" method
+    * Introduced "deleteSync" method
+
 ## 1.6.0
 * Introduced Duration validity while setting key-value in TGSession and TGSharedPreferences
 

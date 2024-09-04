@@ -137,6 +137,24 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
+  Future<T> putSync({required TGPutRequest request}) async {
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("PUT", uri);
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
+      final httpRes = await _getClient(request.getUri(), "PUT").put(
+        uri,
+        body: content.body,
+        headers: content.headers,
+      );
+      return Future.value(_prepareResponse(httpRes));
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      return Future.value(t);
+    }
+  }
+
   Future<T> delete(
       {required TGDeleteRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
@@ -152,6 +170,22 @@ class TGService<T extends TGResponse, E extends TGError> {
       T t = _populateExceptionResponse(error);
       onError!(t);
       return t;
+    }
+  }
+
+  Future<T> deleteSync({required TGDeleteRequest request}) async {
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("DELETE", uri);
+      final httpRes = await _getClient(request.getUri(), "DELETE").delete(
+        uri,
+        body: request.body(),
+        headers: request.headers(),
+      );
+      return Future.value(_prepareResponse(httpRes));
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      return Future.value(t);
     }
   }
 
