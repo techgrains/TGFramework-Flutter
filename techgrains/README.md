@@ -869,7 +869,11 @@ Supports N number of columns.
 #### Show Alert Dialog
 
 ```
-    TGView.showAlertDialog(context: context, actions: actions, onDismiss: onDismiss, content: content, titleRowWidgets: titleRowWidgets);
+    TGView.showAlertDialog(context: context, actions: actions, onDismiss: onDismiss, content: content, titleRowWidgets: titleRowWidgets, barrierColor: barrierColor, 
+      backgroundColor: backgroundColor,
+      barrierDismissible : barrierDismissible,
+      insetPadding: insetPadding,
+    );
 ```
 
 #### Popup Menu Item
