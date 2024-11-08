@@ -1,3 +1,8 @@
+## 1.6.2
+* TGView
+  * Alert Dialog
+    * Added barrierColor, backgroundColor, barrierDismissible, insetPadding   
+    
 ## 1.6.1
 * Service
   * TGService

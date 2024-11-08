@@ -306,14 +306,22 @@ class TGView {
       List<Widget>? titleRowWidgets,
       Widget? content,
       List<Widget>? actions,
+      Color? barrierColor,
+      Color? backgroundColor,
+      bool barrierDismissible = true,
+      EdgeInsets? insetPadding,
       onDismiss}) {
     if (titleRowWidgets == null) titleRowWidgets = [];
     showDialog(
         context: context,
+        barrierDismissible: barrierDismissible,
+        barrierColor: barrierColor,
         builder: (context) => new AlertDialog(
               title: Row(children: titleRowWidgets!),
               content: content,
               actions: actions,
+              backgroundColor: backgroundColor,
+              insetPadding: insetPadding,
             )).then((value) => {
           if (onDismiss != null)
             onDismiss()
