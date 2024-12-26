@@ -29,8 +29,8 @@ class AppTheme {
         useMaterial3: true,
         colorScheme: colorScheme,
         brightness: colorScheme.brightness,
-        canvasColor: colorScheme.onBackground,
-        dialogBackgroundColor: colorScheme.onBackground,
+        canvasColor: colorScheme.onSurface,
+        dialogBackgroundColor: colorScheme.onSurface,
         scaffoldBackgroundColor: colorScheme.inversePrimary,
         primaryColor: colorScheme.primary,
         primaryColorLight: colorScheme.primaryContainer,
@@ -41,20 +41,19 @@ class AppTheme {
         highlightColor: colorScheme.error,
         splashColor: colorScheme.surface,
         dividerColor: colorScheme.onSurface,
-        disabledColor: colorScheme.surfaceVariant,
+        disabledColor: colorScheme.surfaceContainerHighest,
         cardColor: colorScheme.inversePrimary,
-        focusColor: Colors.white.withOpacity(0.12),
-        hoverColor: Colors.white.withOpacity(0.04),
+        focusColor: Colors.white.withValues(alpha: 0.12),
+        hoverColor: Colors.white.withValues(alpha: 0.04),
         unselectedWidgetColor: Colors.white70,
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all(colorScheme.secondaryContainer),
-          shape:
-              MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+              WidgetStateProperty.all(colorScheme.secondaryContainer),
+          shape: WidgetStateProperty.all<OutlinedBorder>(const StadiumBorder()),
         )),
         textTheme: textTheme.apply(
-          bodyColor: colorScheme.surfaceVariant,
+          bodyColor: colorScheme.surfaceContainerHighest,
           displayColor: colorScheme.surfaceTint,
         ));
   }
@@ -77,11 +76,9 @@ class AppTheme {
         onError: Color(0xFFFF9E12),
         errorContainer: Color(0xFFFF9E12),
         onErrorContainer: Color(0xff410001),
-        background: Color(0xfffbfbfb),
-        onBackground: Color(0xFF2D2D2D),
         surface: Color(0xFF2D2D2D),
         onSurface: Color(0xFF7B7B7B),
-        surfaceVariant: Color(0xFF707070),
+        surfaceContainerHighest: Color(0xFF707070),
         onSurfaceVariant: Color(0xFFD1D1D1),
         outline: Color(0xff6f7978),
         inverseSurface: Color(0xff313131),
@@ -97,7 +94,7 @@ class AppTheme {
         useMaterial3: true,
         colorScheme: colorScheme,
         brightness: colorScheme.brightness,
-        canvasColor: colorScheme.background,
+        canvasColor: colorScheme.surface,
         dialogBackgroundColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
         primaryColor: colorScheme.primary,
@@ -109,20 +106,19 @@ class AppTheme {
         highlightColor: colorScheme.error,
         splashColor: colorScheme.surface,
         dividerColor: colorScheme.onSurface,
-        disabledColor: colorScheme.surfaceVariant,
+        disabledColor: colorScheme.surfaceContainerHighest,
         cardColor: Colors.white,
-        focusColor: Colors.black.withOpacity(0.12),
-        hoverColor: Colors.black.withOpacity(0.04),
+        focusColor: Colors.black.withValues(alpha: 0.12),
+        hoverColor: Colors.black.withValues(alpha: 0.04),
         unselectedWidgetColor: Colors.black54,
         outlinedButtonTheme: OutlinedButtonThemeData(
             style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all(colorScheme.secondaryContainer),
-          shape:
-              MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+              WidgetStateProperty.all(colorScheme.secondaryContainer),
+          shape: WidgetStateProperty.all<OutlinedBorder>(const StadiumBorder()),
         )),
         textTheme: textTheme.apply(
-          bodyColor: colorScheme.surfaceVariant,
+          bodyColor: colorScheme.surfaceContainerHighest,
           displayColor: colorScheme.surfaceTint,
         ));
   }
@@ -145,11 +141,9 @@ class AppTheme {
         onError: Color(0xFFFF9E12),
         errorContainer: Color(0xFFFF9E12),
         onErrorContainer: Color(0xff410001),
-        background: Color(0xfffbfbfb),
-        onBackground: Color(0xFF1864AD),
         surface: Color(0xFFF2F2F2),
         onSurface: Color(0xFFCBCBCB),
-        surfaceVariant: Color(0xFF363636),
+        surfaceContainerHighest: Color(0xFF363636),
         onSurfaceVariant: Color(0xFF646464),
         outline: Color(0xff6f7978),
         inverseSurface: Color(0xff313131),
