@@ -702,7 +702,7 @@ Common view object creation and helper.
 ```
     TGView.textTheme()... for TextTheme
     TGView.appBarTheme()... for AppBarTheme
-    TGView.tabBarTheme()... for TabBarTheme
+    TGView.tabBarTheme()... for TabBarThemeData
     TGView.platform()... for TargetPlatform
 ```
 

@@ -1,3 +1,7 @@
+## 1.6.3
+* TGView
+  * Update tabBarTheme with TabBarThemeData   
+    
 ## 1.6.2
 * TGView
   * Alert Dialog

@@ -42,8 +42,8 @@ class TGView {
     return theme()!.appBarTheme;
   }
 
-  /// Reference of TabBarTheme
-  static TabBarTheme tabBarTheme() {
+  /// Reference of TabBarThemeData
+  static TabBarThemeData tabBarTheme() {
     return theme()!.tabBarTheme;
   }
 

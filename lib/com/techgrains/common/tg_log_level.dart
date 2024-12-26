@@ -19,8 +19,6 @@ extension TGLogLevelExtension on TGLogLevel {
         return 1;
       case TGLogLevel.OFF:
         return 0;
-      default:
-        return 0;
     }
   }
 
