@@ -7,9 +7,13 @@ class TGHttpClient extends http.BaseClient {
   static int connectionTimeoutInSeconds = 15;
 
   final Map<String, String> headers;
-  http.Client _client = new http.Client();
+  static http.Client _client = new IOClient();
+  static bool _isClientInitialized = false;
 
   TGHttpClient({this.headers = const {}}) {
+    if (_isClientInitialized) {
+      return;
+    }
     HttpClient webHttpClient = new HttpClient();
     if (badCertificateCallbackEnabled) {
       webHttpClient.badCertificateCallback =
@@ -19,6 +23,7 @@ class TGHttpClient extends http.BaseClient {
       webHttpClient.connectionTimeout =
           Duration(seconds: connectionTimeoutInSeconds);
     }
+    _isClientInitialized = true;
     _client = new IOClient(webHttpClient);
   }
 
