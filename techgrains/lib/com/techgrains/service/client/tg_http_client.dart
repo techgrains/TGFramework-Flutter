@@ -16,10 +16,12 @@ class TGHttpClient extends http.BaseClient {
     }
     HttpClient webHttpClient = new HttpClient();
     if (badCertificateCallbackEnabled) {
-      webHttpClient.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+      webHttpClient.badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
     }
     if (connectionTimeoutInSeconds > 0) {
-      webHttpClient.connectionTimeout = Duration(seconds: connectionTimeoutInSeconds);
+      webHttpClient.connectionTimeout =
+          Duration(seconds: connectionTimeoutInSeconds);
     }
     _isClientInitialized = true;
     _client = new IOClient(webHttpClient);
