@@ -1,11 +1,16 @@
+## 1.6.4
+* Service
+  * TGHttpClient
+    * Fixed instance issue
+
 ## 1.6.3
 * TGView
-  * Update tabBarTheme with TabBarThemeData   
+  * Update tabBarTheme with TabBarThemeData
     
 ## 1.6.2
 * TGView
   * Alert Dialog
-    * Added barrierColor, backgroundColor, barrierDismissible, insetPadding   
+    * Added barrierColor, backgroundColor, barrierDismissible, insetPadding
     
 ## 1.6.1
 * Service
