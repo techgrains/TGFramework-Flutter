@@ -38,7 +38,7 @@ class TGView {
   }
 
   /// Reference of AppBarTheme
-  static AppBarTheme appBarTheme() {
+  static AppBarThemeData appBarThemeData() {
     return theme()!.appBarTheme;
   }
 
