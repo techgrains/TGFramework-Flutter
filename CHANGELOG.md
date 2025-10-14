@@ -1,3 +1,8 @@
+## 1.6.5
+* Service
+  * TGHttpClient
+    * For Web, used BrowserClient
+
 ## 1.6.4
 * Service
   * TGHttpClient
