@@ -1,3 +1,8 @@
+## 1.6.7
+* Service
+  * TGHttpClient
+    * For Web, used BrowserClient
+
 ## 1.6.6
 * TGView
   * Update AppBarThemeData with AppBarTheme
