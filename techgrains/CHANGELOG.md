@@ -1,3 +1,12 @@
+## 1.6.8
+* Service
+  * TGRequest
+    * Introduced TGPatchRequest
+  * TGService
+    * Introduced "patch" and "patchSync"
+  * TGHttpClient
+    * For Web, used BrowserClient
+
 ## 1.6.7+1
 * Service
   * TGHttpClient

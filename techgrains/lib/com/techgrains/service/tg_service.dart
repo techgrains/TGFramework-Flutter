@@ -117,6 +117,44 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
+  Future<T> patch(
+      {required TGPostRequest request, onSuccess(T)?, onError(T)?}) async {
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("PATCH", uri);
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
+      final httpRes = await _getClient(request.getUri(), "PATCH").patch(
+        uri,
+        body: content.body,
+        headers: content.headers,
+      );
+      return _performCallback(httpRes, onError, onSuccess);
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      onError!(t);
+      return t;
+    }
+  }
+
+  Future<T> patchSync({required TGPostRequest request}) async {
+    try {
+      Uri uri = Uri.parse(request.getUrl());
+      TGLog.t("PATCH", uri);
+      TGRequestContent content =
+          TGRequestContent(request.body(), request.headers());
+      final httpRes = await _getClient(request.getUri(), "PATCH").patch(
+        uri,
+        body: content.body,
+        headers: content.headers,
+      );
+      return Future.value(_prepareResponse(httpRes));
+    } catch (error) {
+      T t = _populateExceptionResponse(error);
+      return Future.value(t);
+    }
+  }
+
   Future<T> put(
       {required TGPutRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
