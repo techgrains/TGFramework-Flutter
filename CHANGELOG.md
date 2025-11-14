@@ -1,3 +1,8 @@
+## 1.6.8+1
+* Service
+  * TGHttpClient
+    * For Web, remove BrowserClient
+
 ## 1.6.8
 * Service
   * TGRequest
