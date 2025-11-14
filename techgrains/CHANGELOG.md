@@ -1,3 +1,8 @@
+## 1.6.9
+* Service
+  * TGService
+    * Introduced "patch" and "patchSync" - request issue fixed
+
 ## 1.6.8+1
 * Service
   * TGHttpClient
