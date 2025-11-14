@@ -9,6 +9,7 @@ import 'package:techgrains/com/techgrains/service/error/tg_error.dart';
 import 'package:techgrains/com/techgrains/service/mock/tg_mock_service.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_delete_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_get_request.dart';
+import 'package:techgrains/com/techgrains/service/request/tg_patch_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_post_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_put_request.dart';
 import 'package:techgrains/com/techgrains/service/request/tg_request.dart';
@@ -118,7 +119,7 @@ class TGService<T extends TGResponse, E extends TGError> {
   }
 
   Future<T> patch(
-      {required TGPostRequest request, onSuccess(T)?, onError(T)?}) async {
+      {required TGPatchRequest request, onSuccess(T)?, onError(T)?}) async {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("PATCH", uri);
@@ -137,7 +138,7 @@ class TGService<T extends TGResponse, E extends TGError> {
     }
   }
 
-  Future<T> patchSync({required TGPostRequest request}) async {
+  Future<T> patchSync({required TGPatchRequest request}) async {
     try {
       Uri uri = Uri.parse(request.getUrl());
       TGLog.t("PATCH", uri);
