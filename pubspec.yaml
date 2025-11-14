@@ -1,6 +1,6 @@
 name: techgrains
 description: Developer friendly app library having various commonly used functionality.
-version: 1.6.7+1
+version: 1.6.8
 homepage: https://github.com/techgrains/TGFramework-Flutter
 
 environment:
