@@ -36,7 +36,7 @@ TGFramework includes following areas as part of its framework. Further, in this 
 * Service
     * TGService
         * TGRequest
-            * TGPostRequest, TGGetRequest, TGPutRequest, TGDeleteRequest, TGUploadRequest, TGUploadFileRequest
+            * TGPostRequest, TGGetRequest, TGPutRequest, TGDeleteRequest, TGPatchRequest, TGUploadRequest, TGUploadFilesRequest
         * TGResponse
         * TGError
         * Mock

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app/common/keys.dart';
+import 'package:app/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:techgrains/com/techgrains/common/tg_log.dart';
 import 'package:techgrains/com/techgrains/localization/tg_locale.dart';
@@ -9,43 +10,40 @@ import 'package:techgrains/com/techgrains/singleton/tg_session.dart';
 import 'package:techgrains/com/techgrains/singleton/tg_shared_preferences.dart';
 import 'package:techgrains/com/techgrains/util/tg_flavor.dart';
 
-import '../main.dart';
-
 initTheme(BuildContext context) async {
   bool? flagDarkTheme =
-      await TGSharedPreferences.getInstance().get(KEY_FLAG_DARK_THEME);
+      await TGSharedPreferences.getInstance().get(keyFlagDarkTheme);
   if (flagDarkTheme == null) {
     flagDarkTheme = true;
-    TGSharedPreferences.getInstance().set(KEY_FLAG_DARK_THEME, flagDarkTheme);
+    TGSharedPreferences.getInstance().set(keyFlagDarkTheme, flagDarkTheme);
   }
-  TGSession.getInstance().set(KEY_FLAG_DARK_THEME, flagDarkTheme);
+  TGSession.getInstance().set(keyFlagDarkTheme, flagDarkTheme);
 
-  String? textSize = await TGSharedPreferences.getInstance().get(KEY_TEXT_SIZE);
+  String? textSize = await TGSharedPreferences.getInstance().get(keyTextSize);
   if (textSize == null) {
     textSize = "R";
-    TGSharedPreferences.getInstance().set(KEY_TEXT_SIZE, textSize);
+    TGSharedPreferences.getInstance().set(keyTextSize, textSize);
   }
-  TGSession.getInstance().set(KEY_TEXT_SIZE, textSize);
+  TGSession.getInstance().set(keyTextSize, textSize);
 
-  TechgrainsExampleApp.buildTheme(context, flagDarkTheme, textSize);
+  TechgrainsExampleApp.buildTheme(flagDarkTheme, textSize);
 }
 
 Future<void> initUser() async {
   TGLog.d("initUser()");
-  String? userAsJson =
-      await TGSharedPreferences.getInstance().get(KEY_OBJ_USER);
+  String? userAsJson = await TGSharedPreferences.getInstance().get(keyObjUser);
   userAsJson != null
-      ? TGSession.getInstance().set(KEY_OBJ_USER, null) // Set User Object
-      : TGSession.getInstance().remove(KEY_OBJ_USER);
+      ? TGSession.getInstance().set(keyObjUser, null) // Set User Object
+      : TGSession.getInstance().remove(keyObjUser);
 }
 
 Future<void> initProfile() async {
   TGLog.d("initProfile()");
   String? profileAsJson =
-      await TGSharedPreferences.getInstance().get(KEY_OBJ_PROFILE);
+      await TGSharedPreferences.getInstance().get(keyObjProfile);
   profileAsJson != null
-      ? TGSession.getInstance().set(KEY_OBJ_PROFILE, null) // Set Profile Object
-      : TGSession.getInstance().remove(KEY_OBJ_PROFILE);
+      ? TGSession.getInstance().set(keyObjProfile, null) // Set Profile Object
+      : TGSession.getInstance().remove(keyObjProfile);
 }
 
 Future<void> initService() async {
@@ -68,7 +66,7 @@ Map<String, String> defaultHeaders() {
 Future<void> initLocale() async {
   TGLog.d("initLocale()");
   String? storedLocaleCode =
-      await TGSharedPreferences.getInstance().get(KEY_APP_LOCALE_CODE);
+      await TGSharedPreferences.getInstance().get(keyAppLocaleCode);
   if (storedLocaleCode != null) {
     Locale? locale = TGLocale.findLocaleByCode(storedLocaleCode);
     TechgrainsExampleApp.setLocale(locale);
@@ -77,5 +75,5 @@ Future<void> initLocale() async {
 
 Future<void> initAppVersionInfo() async {
   TGLog.d("initAppVersionInfo()");
-  TGSession.getInstance().set(KEY_APP_VERSION, "v1.0");
+  TGSession.getInstance().set(keyAppVersion, "v1.0");
 }
