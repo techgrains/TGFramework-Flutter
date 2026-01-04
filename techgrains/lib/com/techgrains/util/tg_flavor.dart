@@ -115,6 +115,7 @@ class TGFlavor {
 
   /// Gets Apply Mock
   static bool applyMock() {
+    if (_current == null || _current?.applyMock == null) return false;
     return _current!.applyMock!;
   }
 

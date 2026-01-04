@@ -1,6 +1,6 @@
 name: techgrains
 description: Developer friendly app library having various commonly used functionality.
-version: 1.6.9+1
+version: 1.6.10
 homepage: https://github.com/techgrains/TGFramework-Flutter
 
 environment:
@@ -16,13 +16,78 @@ dependencies:
   yaml: ^3.1.3
   shared_preferences: ^2.5.3
   http: ^1.5.0
-  universal_io: ^2.2.2
+  universal_io: ^2.3.1
+  ffi: ^2.1.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lints: ^4.0.0
 
+
+topics:
+  - flutter
+  - dart
+  - flutter-plugin
+  - mobile
+  - cross-platform
+  - android
+  - ios
+  - framework
+  - starter-kit
+  - app-architecture
+  - library
+  - reusable-components
+  - ui-components
+  - utilities
+  - session-management
+  - shared-preferences
+  - local-storage
+  - in-memory-cache
+  - access-control
+  - access-matrix
+  - preferences
+  - http
+  - rest-api
+  - api-client
+  - mock-server
+  - mock-responses
+  - request-response
+  - i18n
+  - localization
+  - multi-language
+  - intl
+  - locale-support
+  - theming
+  - ui-kit
+  - widgets
+  - sliver
+  - scaffold
+  - snackbar
+  - dialog
+  - date-utils
+  - file-utils
+  - platform-utils
+  - validation
+  - flavor
+  - env-config
+  - dev-tools
+  - logging
+  - debug-tools
+  - testing
+  - mocks
+  - sample-app
+  - enterprise
+  - b2b
+  - internal-tools
+  - admin-dashboard
+  - ecommerce
+  - productivity
+  - performance
+  - modular
+  - configurable
+  - well-documented
+  - production-ready
+
 # The following section is specific to Flutter.
 flutter:
-

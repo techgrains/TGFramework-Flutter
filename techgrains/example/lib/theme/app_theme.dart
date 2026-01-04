@@ -26,36 +26,37 @@ class AppTheme {
   static ThemeData _createDarkTheme(TextTheme textTheme) {
     ColorScheme colorScheme = _darkColorScheme;
     return ThemeData(
-        useMaterial3: true,
-        colorScheme: colorScheme,
-        brightness: colorScheme.brightness,
-        canvasColor: colorScheme.onSurface,
-        dialogBackgroundColor: colorScheme.onSurface,
-        scaffoldBackgroundColor: colorScheme.inversePrimary,
-        primaryColor: colorScheme.primary,
-        primaryColorLight: colorScheme.primaryContainer,
-        primaryColorDark: colorScheme.onPrimaryContainer,
-        secondaryHeaderColor: colorScheme.secondary,
-        indicatorColor: colorScheme.secondary,
-        hintColor: colorScheme.error,
-        highlightColor: colorScheme.error,
-        splashColor: colorScheme.surface,
-        dividerColor: colorScheme.onSurface,
-        disabledColor: colorScheme.surfaceContainerHighest,
-        cardColor: colorScheme.inversePrimary,
-        focusColor: Colors.white.withValues(alpha: 0.12),
-        hoverColor: Colors.white.withValues(alpha: 0.04),
-        unselectedWidgetColor: Colors.white70,
-        outlinedButtonTheme: OutlinedButtonThemeData(
-            style: ButtonStyle(
-          backgroundColor:
-              WidgetStateProperty.all(colorScheme.secondaryContainer),
-          shape: WidgetStateProperty.all<OutlinedBorder>(const StadiumBorder()),
-        )),
-        textTheme: textTheme.apply(
-          bodyColor: colorScheme.surfaceContainerHighest,
-          displayColor: colorScheme.surfaceTint,
-        ));
+      useMaterial3: true,
+      colorScheme: colorScheme,
+      brightness: colorScheme.brightness,
+      canvasColor: colorScheme.onSurface,
+      dialogTheme: DialogThemeData(backgroundColor: colorScheme.onSurface),
+      scaffoldBackgroundColor: colorScheme.inversePrimary,
+      primaryColor: colorScheme.primary,
+      primaryColorLight: colorScheme.primaryContainer,
+      primaryColorDark: colorScheme.onPrimaryContainer,
+      secondaryHeaderColor: colorScheme.secondary,
+      tabBarTheme: TabBarThemeData(indicatorColor: colorScheme.secondary),
+      hintColor: colorScheme.error,
+      highlightColor: colorScheme.error,
+      splashColor: colorScheme.surface,
+      dividerColor: colorScheme.onSurface,
+      disabledColor: colorScheme.surfaceContainerHighest,
+      cardColor: colorScheme.inversePrimary,
+      focusColor: Colors.white.withValues(alpha: 0.12),
+      hoverColor: Colors.white.withValues(alpha: 0.04),
+      unselectedWidgetColor: Colors.white70,
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+        backgroundColor:
+            WidgetStateProperty.all(colorScheme.secondaryContainer),
+        shape: WidgetStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+      )),
+      textTheme: textTheme.apply(
+        bodyColor: colorScheme.surfaceContainerHighest,
+        displayColor: colorScheme.surfaceTint,
+      ),
+    );
   }
 
   static ColorScheme get _darkColorScheme => const ColorScheme(
@@ -95,13 +96,13 @@ class AppTheme {
         colorScheme: colorScheme,
         brightness: colorScheme.brightness,
         canvasColor: colorScheme.surface,
-        dialogBackgroundColor: Colors.white,
+        dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
         primaryColor: colorScheme.primary,
         primaryColorLight: colorScheme.primaryContainer,
         primaryColorDark: colorScheme.onPrimaryContainer,
         secondaryHeaderColor: colorScheme.secondary,
-        indicatorColor: colorScheme.secondary,
+        tabBarTheme: TabBarThemeData(indicatorColor: colorScheme.secondary),
         hintColor: colorScheme.error,
         highlightColor: colorScheme.error,
         splashColor: colorScheme.surface,

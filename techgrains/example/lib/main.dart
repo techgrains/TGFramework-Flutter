@@ -18,11 +18,9 @@ class TechgrainsExampleApp extends StatefulWidget {
   const TechgrainsExampleApp({super.key});
 
   @override
-  _TechgrainsExampleAppState createState() =>
-      _state = _TechgrainsExampleAppState();
+  State<TechgrainsExampleApp> createState() => _TechgrainsExampleAppState();
 
-  static void buildTheme(
-      BuildContext context, bool? flagDarkTheme, String textSize) async {
+  static void buildTheme(bool? flagDarkTheme, String textSize) async {
     TGLog.d("TGPortalApp.buildTheme : flagDarkTheme = $flagDarkTheme");
     _state?.buildTheme(flagDarkTheme);
   }
@@ -57,8 +55,12 @@ class _TechgrainsExampleAppState extends State<TechgrainsExampleApp> {
 
   @override
   void initState() {
-    TGLog.d("main.initState()");
     super.initState();
+
+    // Assign static reference
+    TechgrainsExampleApp._state = this;
+
+    TGLog.d("main.initState()");
     _initFlavor();
     _initLocale();
   }
@@ -101,16 +103,16 @@ class _TechgrainsExampleAppState extends State<TechgrainsExampleApp> {
         localizationsDelegates: const [TGLocalizationsDelegate()],
         localeResolutionCallback: (locale, supportedLocales) =>
             TGLocale.localeResolutionCallback(locale, supportedLocales),
-        initialRoute: ROUTE_SPLASH,
+        initialRoute: routeSplash,
         routes: <String, WidgetBuilder>{
-          ROUTE_SPLASH: (BuildContext context) => const SomeScreen(),
-          ROUTE_LOGIN: (BuildContext context) => const SomeScreen(),
-          ROUTE_REGISTER: (BuildContext context) => const SomeScreen(),
-          ROUTE_FORGOT_PASSWORD: (BuildContext context) => const SomeScreen(),
-          ROUTE_HOME: (BuildContext context) => const SomeScreen(),
-          ROUTE_DASHBOARD: (BuildContext context) => const SomeScreen(),
-          ROUTE_PROFILE: (BuildContext context) => const SomeScreen(),
-          ROUTE_CHANGE_PASSWORD: (BuildContext context) => const SomeScreen(),
+          routeSplash: (BuildContext context) => const SomeScreen(),
+          routeLogin: (BuildContext context) => const SomeScreen(),
+          routeRegister: (BuildContext context) => const SomeScreen(),
+          routeForgotPassword: (BuildContext context) => const SomeScreen(),
+          routeHome: (BuildContext context) => const SomeScreen(),
+          routeDashboard: (BuildContext context) => const SomeScreen(),
+          routeProfile: (BuildContext context) => const SomeScreen(),
+          routeChangePassword: (BuildContext context) => const SomeScreen(),
         });
   }
 }

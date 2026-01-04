@@ -51,10 +51,10 @@ class _SplashState extends State<_SplashBody> {
 
   void checkAutoLogin() {
     TGLog.d("Splash.checkAutoLogin()");
-    if (TGSession.getInstance().get(KEY_OBJ_USER) == null) {
-      Navigator.of(context).pushReplacementNamed(ROUTE_HOME);
+    if (TGSession.getInstance().get(keyObjUser) == null) {
+      Navigator.of(context).pushReplacementNamed(routeHome);
     } else {
-      Navigator.of(context).pushReplacementNamed(ROUTE_DASHBOARD);
+      Navigator.of(context).pushReplacementNamed(routeDashboard);
     }
   }
 

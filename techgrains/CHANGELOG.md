@@ -1,3 +1,14 @@
+## 1.6.10
+* Service
+  * TGRequest
+    * Updated TGUploadRequest with body
+    * Updated TGUploadFilesRequest
+  * TGService
+    * For Web, update "get" and "getSync" method, and code updated
+* Util
+  * TGNetUtil
+    * Added Web support in 'isInternetAvailable' and 'isReachable'    
+    
 ## 1.6.9+1
 * Service
   * TGHttpClient
